@@ -13,13 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {
-        //if((transform.eulerAngles.z > 40 && transform.eulerAngles.z < 90) || (transform.eulerAngles.z > 270 && transform.eulerAngles.z < 320))
-        //{
-        //   transform.eulerAngles = new Vector3(transform.eulerAngles.z - 25, transform.eulerAngles.y, transform.eulerAngles.x);
-        //    Debug.Log(transform.eulerAngles.z);
-        //}
-            
+    {         
         
 
         if (Input.GetKey("w"))

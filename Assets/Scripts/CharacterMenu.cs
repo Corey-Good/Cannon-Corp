@@ -14,6 +14,7 @@ public class CharacterMenu : MonoBehaviour
         allModels[0].SetActive(true);
         allModels[1].SetActive(false);
         allModels[2].SetActive(false);
+        allModels[3].SetActive(false);
 
     }
     public void ChangeCharacterRight()
