@@ -3,15 +3,21 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
+
+    public Vector3 gameCamera;
+    private Vector3 defaultCamera;
+
+
     private float Y_MIN = 2.00f;
-    private float Y_MAX = 14.00f;
+    private float Y_MAX = 16.00f;
     private float X_MIN = -10.0f;
     private float X_MAX = 10.0f;
 
-    private float x_left = (Screen.width / 2.0f) + (Screen.width / 30.0f);
-    private float x_right = (Screen.width / 2.0f) - (Screen.width / 30.0f);
-    private float y_up = (Screen.height / 2.0f) + (Screen.height / 40.0f);
-    private float y_down = (Screen.height / 2.0f) - (Screen.height / 40.0f);
+    private float x_left = (Screen.width / 2.0f) + (Screen.width * 0.12f);
+    private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
+    private float y_up = (Screen.height / 2.0f) + (Screen.height * 0.3f);
+    private float y_down = (Screen.height / 2.0f) - (Screen.height * 0.07f);
+
 
     private GameObject player;
 
@@ -25,6 +31,10 @@ public class FollowPlayer : MonoBehaviour
     private bool lookAt = true;
 
 
+    public void Start()
+    {
+        defaultCamera = gameCamera;
+    }
 
     public void Update()
     {
@@ -32,16 +42,37 @@ public class FollowPlayer : MonoBehaviour
             player = GameObject.FindWithTag("CharacterModel");
         }
     }
+
     private void LateUpdate()
     {
         Refresh();
     }
 
+    public void FixedUpdate()
+    {
+
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("CharacterModel");
+        }
+        if (Input.mouseScrollDelta[1] < 0)
+        {
+            offsetPosition.z -= 0.35f;
+        }
+
+        if (Input.mouseScrollDelta[1] > 0)
+        {
+            offsetPosition.z += 0.35f;
+        }
+
+    }
+
     public void Refresh()
     {
+
         // This part of the script adjust the camera offset based on the mouses pixel position on the screen
         // Instead of hard coding values the pixels LxW needs to be calculated in order to be accurate on all screens!
-        Debug.Log(Screen.width + "x" + Screen.height);
+
         if (Input.mousePosition.x < x_left)
         {
             if (offsetPosition.x + 0.18f < X_MAX)
@@ -72,9 +103,12 @@ public class FollowPlayer : MonoBehaviour
             
         }
 
+        if (Input.GetKey("c"))
+        {
+            offsetPosition = defaultCamera;
+        }
 
 
-        // compute position
         if (offsetPositionSpace == Space.Self)
         {
             transform.position = player.transform.TransformPoint(offsetPosition);
@@ -94,5 +128,6 @@ public class FollowPlayer : MonoBehaviour
             transform.rotation = player.transform.rotation;
         }
     }
+
 }
 
