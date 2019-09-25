@@ -1,20 +1,19 @@
 fileFormatVersion: 2
-guid: 58982c0d93d3ff94e91e7fd26410b718
+guid: f2cd84655b6605c41a8d97c2defa9af5
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Cube.001
-    100004: Sun
-    400000: //RootNode
-    400002: Cube.001
-    400004: Sun
-    2100000: Wood
-    2100002: Metal
-    2300000: Cube.001
-    3300000: Cube.001
-    4300000: Cube.001
-    10800000: Sun
+    100000: CartoonTank
+    100002: //RootNode
+    100004: ReferenceSide
+    400000: CartoonTank
+    400002: //RootNode
+    400004: ReferenceSide
+    2100000: Tank
+    2100002: Tracks
+    2300000: CartoonTank
+    3300000: CartoonTank
+    4300000: CartoonTank
   externalObjects: {}
   materials:
     importMaterials: 1
