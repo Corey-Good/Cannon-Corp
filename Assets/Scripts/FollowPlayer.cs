@@ -4,75 +4,82 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
 
-    public Vector3 gameCamera;
     private Vector3 defaultCamera;
-
+    private Vector3 offsetPosition;
 
     private float Y_MIN = 2.00f;
     private float Y_MAX = 16.00f;
     private float X_MIN = -10.0f;
     private float X_MAX = 10.0f;
 
-    private float x_left = (Screen.width / 2.0f) + (Screen.width * 0.12f);
+    private float x_left  = (Screen.width / 2.0f) + (Screen.width * 0.12f);
     private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
-    private float y_up = (Screen.height / 2.0f) + (Screen.height * 0.3f);
-    private float y_down = (Screen.height / 2.0f) - (Screen.height * 0.07f);
+    private float y_up    = (Screen.height / 2.0f) + (Screen.height * 0.3f);
+    private float y_down  = (Screen.height / 2.0f) - (Screen.height * 0.07f);
 
+    private Vector3[] modelOffsets = new Vector3[4];
 
     private GameObject player;
 
-    [SerializeField]
-    private Vector3 offsetPosition;
-
-    [SerializeField]
     private Space offsetPositionSpace = Space.Self;
 
-    [SerializeField]
     private bool lookAt = true;
-
 
     public void Start()
     {
-        defaultCamera = gameCamera;
+        // Model 1 (base model tank) default camera offset
+        modelOffsets[0].x = 0.0f;
+        modelOffsets[0].y = 3.25f;
+        modelOffsets[0].z = -12.0f;
+
+        // Model 2 (future tank) default camera offset
+        modelOffsets[1].x = 0.0f;
+        modelOffsets[1].y = 3.25f;
+        modelOffsets[1].z = -12.0f;
+
+        // Model 3 (catapult) default camera offset
+        modelOffsets[2].x = 0.0f;
+        modelOffsets[2].y = 10.0f;
+        modelOffsets[2].z = -28.0f;
+
+        // Model 4 (Cartoon Tank) default camera offset
+        modelOffsets[3].x = 0.0f;
+        modelOffsets[3].y = 10.0f;
+        modelOffsets[3].z = -26.0f;
+
+        //Sets the camera offset and the default value to the specific model 
+        offsetPosition = defaultCamera = modelOffsets[CharacterMenu.currentModelIndex];
     }
 
-    public void Update()
-    {
-        if(player == null) {
-            player = GameObject.FindWithTag("CharacterModel");
-        }
-    }
-
-    private void LateUpdate()
-    {
-        Refresh();
-    }
 
     public void FixedUpdate()
     {
-
+        // Assigns the camera to the player that spaws. Change to player ID in order to deal with multiple player later on
         if (player == null)
         {
             player = GameObject.FindWithTag("CharacterModel");
         }
+
+        // Handles the zoom of the camera based on the scroll wheel
         if (Input.mouseScrollDelta[1] < 0)
         {
             offsetPosition.z -= 0.35f;
         }
-
         if (Input.mouseScrollDelta[1] > 0)
         {
             offsetPosition.z += 0.35f;
         }
 
     }
+    private void LateUpdate()
+    {
+        Refresh();
+    }
 
     public void Refresh()
     {
 
-        // This part of the script adjust the camera offset based on the mouses pixel position on the screen
-        // Instead of hard coding values the pixels LxW needs to be calculated in order to be accurate on all screens!
-
+        // Changes the camera offset based on mouse postition in pixels
         if (Input.mousePosition.x < x_left)
         {
             if (offsetPosition.x + 0.18f < X_MAX)
@@ -103,12 +110,14 @@ public class FollowPlayer : MonoBehaviour
             
         }
 
+        // Resets the camera to the default position
         if (Input.GetKey("c"))
         {
             offsetPosition = defaultCamera;
         }
 
 
+        // Handles the camera position in the map
         if (offsetPositionSpace == Space.Self)
         {
             transform.position = player.transform.TransformPoint(offsetPosition);
@@ -118,7 +127,7 @@ public class FollowPlayer : MonoBehaviour
             transform.position = player.transform.position + offsetPosition;
         }
 
-        // compute rotation
+        // Computes the camera rotation in order to always look at the player
         if (lookAt)
         {
             transform.LookAt(player.transform);
