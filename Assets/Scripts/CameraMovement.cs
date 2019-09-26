@@ -1,16 +1,21 @@
 ﻿
 using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
 
     private Vector3 defaultCamera;
     private Vector3 offsetPosition;
 
+    static private bool isXInverted = false;
+    static private bool isYInverted = false;
+
     private float Y_MIN = 2.00f;
     private float Y_MAX = 16.00f;
     private float X_MIN = -10.0f;
     private float X_MAX = 10.0f;
+    private float cameraMovementSpeedX = (isXInverted) ? -0.18f : 0.18f;
+    private float cameraMovementSpeedY = (isYInverted) ? -0.18f : 0.18f;
 
     private float x_left  = (Screen.width / 2.0f) + (Screen.width * 0.12f);
     private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
@@ -51,7 +56,6 @@ public class FollowPlayer : MonoBehaviour
         offsetPosition = defaultCamera = modelOffsets[CharacterMenu.currentModelIndex];
     }
 
-
     public void FixedUpdate()
     {
         // Assigns the camera to the player that spaws. Change to player ID in order to deal with multiple player later on
@@ -82,30 +86,30 @@ public class FollowPlayer : MonoBehaviour
         // Changes the camera offset based on mouse postition in pixels
         if (Input.mousePosition.x < x_left)
         {
-            if (offsetPosition.x + 0.18f < X_MAX)
+            if (offsetPosition.x + cameraMovementSpeedX < X_MAX)
             {
-                offsetPosition.x += 0.18f;
+                offsetPosition.x += cameraMovementSpeedX;
             }
         }
         if (Input.mousePosition.x > x_right)
         {
-            if (offsetPosition.x - 0.18f > X_MIN)
+            if (offsetPosition.x - cameraMovementSpeedX > X_MIN)
             {
-                offsetPosition.x -= 0.18f;
+                offsetPosition.x -= cameraMovementSpeedX;
             }
         }
         if (Input.mousePosition.y < y_down)
         {
-            if (offsetPosition.y - 0.19f  > Y_MIN)
+            if (offsetPosition.y - cameraMovementSpeedY  > Y_MIN)
             { 
-                offsetPosition.y -= 0.19f;
+                offsetPosition.y -= cameraMovementSpeedY;
             }
         }
         if (Input.mousePosition.y > y_up)
         {
-            if (offsetPosition.y + 0.18f < Y_MAX)
+            if (offsetPosition.y + cameraMovementSpeedY < Y_MAX)
             {
-                offsetPosition.y += 0.18f;
+                offsetPosition.y += cameraMovementSpeedY;
             }
             
         }
@@ -136,6 +140,16 @@ public class FollowPlayer : MonoBehaviour
         {
             transform.rotation = player.transform.rotation;
         }
+    }
+
+    public void FlipXAxis()
+    {
+        isXInverted = (isXInverted) ? false : true;
+    }
+
+    public void FlipYAxis()
+    {
+        isYInverted = (isYInverted) ? false : true;
     }
 
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadCharacter : MonoBehaviour
+public class SpawnCharacter : MonoBehaviour
 {
     public GameObject location;
     public GameObject[] playerModel;
