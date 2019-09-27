@@ -31,10 +31,13 @@ public class NameGenerator : MonoBehaviour
         "Maze and Force",
         "Alphastar",
         "Attack of Logic"};
+
+
     public void randomName()
     {
         int randomNumber = Random.Range(0, 23);
         PlayerName.text = allNames[randomNumber];
         UserName = PlayerName.text;
+
     }
 }
