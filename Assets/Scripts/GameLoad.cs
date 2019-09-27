@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class GameLoad : MonoBehaviour
 {
     static public bool isXInverted = false;
     static public bool isYInverted = false;
+
 
     // Start is called before the first frame update
     public void StartGame()
