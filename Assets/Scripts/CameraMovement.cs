@@ -7,15 +7,14 @@ public class CameraMovement : MonoBehaviour
     private Vector3 defaultCamera;
     private Vector3 offsetPosition;
 
-    static private bool isXInverted = false;
-    static private bool isYInverted = false;
+
 
     private float Y_MIN = 2.00f;
     private float Y_MAX = 16.00f;
     private float X_MIN = -10.0f;
     private float X_MAX = 10.0f;
-    private float cameraMovementSpeedX = (isXInverted) ? -0.18f : 0.18f;
-    private float cameraMovementSpeedY = (isYInverted) ? -0.18f : 0.18f;
+    private float cameraMovementSpeedX = 0.18f;
+    private float cameraMovementSpeedY = 0.20f;
 
     private float x_left  = (Screen.width / 2.0f) + (Screen.width * 0.12f);
     private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
@@ -63,6 +62,10 @@ public class CameraMovement : MonoBehaviour
         {
             player = GameObject.FindWithTag("CharacterModel");
         }
+    }
+    private void LateUpdate()
+    {
+        Refresh();
 
         // Handles the zoom of the camera based on the scroll wheel
         if (Input.mouseScrollDelta[1] < 0)
@@ -74,45 +77,14 @@ public class CameraMovement : MonoBehaviour
             offsetPosition.z += 0.35f;
         }
 
-    }
-    private void LateUpdate()
-    {
-        Refresh();
+        if (GameLoad.isXInverted) { MoveXInverted(); Debug.Log("ITS ON!!!!!!!!!!!!!!!!!"); } else { MoveXNormal(); }
+        if (GameLoad.isYInverted) { MoveYInverted(); Debug.Log("ITS ON!!!!!!!!!!!!!!!!!"); } else { MoveYNormal(); }
     }
 
     public void Refresh()
     {
 
-        // Changes the camera offset based on mouse postition in pixels
-        if (Input.mousePosition.x < x_left)
-        {
-            if (offsetPosition.x + cameraMovementSpeedX < X_MAX)
-            {
-                offsetPosition.x += cameraMovementSpeedX;
-            }
-        }
-        if (Input.mousePosition.x > x_right)
-        {
-            if (offsetPosition.x - cameraMovementSpeedX > X_MIN)
-            {
-                offsetPosition.x -= cameraMovementSpeedX;
-            }
-        }
-        if (Input.mousePosition.y < y_down)
-        {
-            if (offsetPosition.y - cameraMovementSpeedY  > Y_MIN)
-            { 
-                offsetPosition.y -= cameraMovementSpeedY;
-            }
-        }
-        if (Input.mousePosition.y > y_up)
-        {
-            if (offsetPosition.y + cameraMovementSpeedY < Y_MAX)
-            {
-                offsetPosition.y += cameraMovementSpeedY;
-            }
-            
-        }
+       // Changes the camera offset based on mouse postition in pixels
 
         // Resets the camera to the default position
         if (Input.GetKey("c"))
@@ -142,15 +114,79 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
-    public void FlipXAxis()
-    {
-        isXInverted = (isXInverted) ? false : true;
-    }
 
-    public void FlipYAxis()
-    {
-        isYInverted = (isYInverted) ? false : true;
-    }
 
+    public void MoveXNormal()
+    {
+        if (Input.mousePosition.x < x_left)
+        {
+            if (offsetPosition.x + cameraMovementSpeedX < X_MAX)
+            {
+                offsetPosition.x += cameraMovementSpeedX;
+            }
+        }
+        if (Input.mousePosition.x > x_right)
+        {
+            if (offsetPosition.x - cameraMovementSpeedX > X_MIN)
+            {
+                offsetPosition.x -= cameraMovementSpeedX;
+            }
+        }
+    }
+    public void MoveYNormal()
+    {
+
+        if (Input.mousePosition.y < y_down)
+        {
+            if (offsetPosition.y - cameraMovementSpeedY > Y_MIN)
+            {
+                offsetPosition.y -= cameraMovementSpeedY;
+            }
+        }
+        if (Input.mousePosition.y > y_up)
+        {
+            if (offsetPosition.y + cameraMovementSpeedY < Y_MAX)
+            {
+                offsetPosition.y += cameraMovementSpeedY;
+            }
+        }
+    }
+    public void MoveXInverted()
+    {
+        if (Input.mousePosition.x < x_left)
+        {
+            if (offsetPosition.x - cameraMovementSpeedX > X_MIN)
+            {
+                offsetPosition.x -= cameraMovementSpeedX;
+            }
+        }
+        if (Input.mousePosition.x > x_right)
+        {
+
+            if (offsetPosition.x + cameraMovementSpeedX < X_MAX)
+            {
+                offsetPosition.x += cameraMovementSpeedX;
+            }
+        }
+
+    }
+    public void MoveYInverted()
+    {
+        if (Input.mousePosition.y < y_down)
+        {
+            if (offsetPosition.y + cameraMovementSpeedY < Y_MAX)
+            {
+                offsetPosition.y += cameraMovementSpeedY;
+            }
+        }
+        if (Input.mousePosition.y > y_up)
+        {
+
+            if (offsetPosition.y - cameraMovementSpeedY > Y_MIN)
+            {
+                offsetPosition.y -= cameraMovementSpeedY;
+            }
+        }
+    }
 }
 

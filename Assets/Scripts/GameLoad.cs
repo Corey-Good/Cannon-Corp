@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameLoad : MonoBehaviour
 {
+    static public bool isXInverted = false;
+    static public bool isYInverted = false;
+
     // Start is called before the first frame update
     public void StartGame()
     {
@@ -19,5 +22,15 @@ public class GameLoad : MonoBehaviour
     public void QuitGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void FlipXAxis()
+    {
+        isXInverted = (isXInverted) ? false : true;
+    }
+
+    public void FlipYAxis()
+    {
+        isYInverted = (isYInverted) ? false : true;
     }
 }
