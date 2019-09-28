@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody rb;
-    public float movementForce = 1000f;
-    public float rotateSpeed = 30f;
+    private float movementForce = 7.0f;
+    private float rotateSpeed = 30.0f;
 
 
 
