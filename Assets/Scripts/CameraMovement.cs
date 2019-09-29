@@ -18,10 +18,8 @@ public class CameraMovement : MonoBehaviour
 
     private float x_left  = (Screen.width / 2.0f) + (Screen.width * 0.12f);
     private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
-    private float y_up    = (Screen.height / 2.0f) + (Screen.height * 0.3f);
-    private float y_down  = (Screen.height / 2.0f) - (Screen.height * 0.07f);
-
-    private Vector3[] modelOffsets = new Vector3[5];
+    private float y_up    = (Screen.height / 2.0f) + (Screen.height * 0.25f);
+    private float y_down  = (Screen.height / 2.0f) - (Screen.height * 0.1f);
 
     private GameObject player;
 
@@ -31,33 +29,7 @@ public class CameraMovement : MonoBehaviour
 
     public void Start()
     {
-        // Model 1 (base model tank) default camera offset
-        modelOffsets[0].x = 0.0f;
-        modelOffsets[0].y = 3.25f;
-        modelOffsets[0].z = -12.0f;
-
-        // Model 2 (future tank) default camera offset
-        modelOffsets[1].x = 0.0f;
-        modelOffsets[1].y = 3.25f;
-        modelOffsets[1].z = -12.0f;
-
-        // Model 3 (catapult) default camera offset
-        modelOffsets[2].x = 0.0f;
-        modelOffsets[2].y = 10.0f;
-        modelOffsets[2].z = -28.0f;
-
-        // Model 4 (Cartoon Tank) default camera offset
-        modelOffsets[3].x = 0.0f;
-        modelOffsets[3].y = 10.0f;
-        modelOffsets[3].z = -26.0f;
-
-        // Model 5 (Box Tank) default camera offset
-        modelOffsets[4].x = 0.0f;
-        modelOffsets[4].y = 2.00f;
-        modelOffsets[4].z = -8.0f;
-
-        //Sets the camera offset and the default value to the specific model 
-        offsetPosition = defaultCamera = modelOffsets[CharacterMenu.currentModelIndex];
+        offsetPosition = defaultCamera = (Vector3)CharacterInfo.info[CharacterMenu.currentModelIndex]["modelCameraOffset"];
     }
 
     public void FixedUpdate()

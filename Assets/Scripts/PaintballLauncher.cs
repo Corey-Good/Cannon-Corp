@@ -6,13 +6,16 @@ using UnityEngine;
 public class PaintballLauncher : MonoBehaviour
 {
     public  GameObject bullet;
+    public  GameObject bulletSpawnLocation;
     private GameObject bulletCopy;
     private Rigidbody  bulletRB;
-    public  GameObject bulletSpawnLocation;
+    
     
     private float timeElapsed = 0f;
-    private float reloadSpeed = 2.75f;
     private bool  bulletActive = false;
+    private float reloadSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["reloadSpeed"];
+    private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
+    private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
 
 
     void FixedUpdate()
@@ -21,7 +24,7 @@ public class PaintballLauncher : MonoBehaviour
         {
             bulletCopy = Instantiate(bullet, bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;
             bulletRB = bulletCopy.GetComponent<Rigidbody>();
-            bulletRB.AddRelativeForce((transform.forward * 55.0f + transform.up * 2.7f), ForceMode.Impulse);
+            bulletRB.AddRelativeForce(((transform.forward * bulletSpeed) + (transform.up * bulletArch)), ForceMode.Impulse);
             bulletActive = true;
         }
 
