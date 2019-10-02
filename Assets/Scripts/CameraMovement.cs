@@ -34,7 +34,7 @@ public class CameraMovement : MonoBehaviour
 
     public void FixedUpdate()
     {
-        // Assigns the camera to the player that spaws. Change to player ID in order to deal with multiple player later on
+        // Assigns the camera to the player that spawns. Change to player ID in order to deal with multiple player later on
         if (player == null)
         {
             player = GameObject.FindWithTag("CharacterModel");

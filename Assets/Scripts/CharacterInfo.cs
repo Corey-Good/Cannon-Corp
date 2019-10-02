@@ -35,8 +35,7 @@ public class CharacterInfo : MonoBehaviour
                 }
             },
             { // Model 3, this is the catapult
-                2,
-                new Hashtable()
+                2, new Hashtable()
                 {
                     {"modelCameraOffset", new Vector3(0.0f, 10.0f, -28.0f)},
                     {"movementForce", 5.0f },
@@ -49,8 +48,7 @@ public class CharacterInfo : MonoBehaviour
                 }
             },
             { // Model 4, this is the Cartoon Tank
-                3,
-                new Hashtable()
+                3, new Hashtable()
                 {
                     {"modelCameraOffset", new Vector3(0.0f, 10.0f, -26.0f)},
                     {"movementForce", 8.0f },
@@ -63,8 +61,7 @@ public class CharacterInfo : MonoBehaviour
                 }
             },
             { // Model 5, this is the box tank
-                4,
-                new Hashtable()
+                4, new Hashtable()
                 {
                     {"modelCameraOffset", new Vector3(0.0f, 2.0f, -8.0f)},
                     {"movementForce", 6.0f },
