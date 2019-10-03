@@ -42,7 +42,7 @@ public class CharacterInfo : MonoBehaviour
                     {"rotationSpeed", 25.0f },
                     {"healthPoints", 90.0f},
                     {"reloadSpeed", 3.25f},
-                    {"bulletSpeed", 5.0f},
+                    {"bulletSpeed", 12.0f},
                     {"bulletArch", 2.0f},
                     {"bulletDamage", 25.0f}
                 }

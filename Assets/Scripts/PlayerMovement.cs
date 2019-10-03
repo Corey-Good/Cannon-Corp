@@ -31,10 +31,14 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
         }
+        else if (Input.GetKey("h"))
+        {
+            LoadUI.currentHealth -= 1.0f;
+        }
 
 
 
-        
+
 
 
 

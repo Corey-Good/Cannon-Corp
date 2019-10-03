@@ -16,6 +16,7 @@ public class PaintballLauncher : MonoBehaviour
     private float reloadSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["reloadSpeed"];
     private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
+    public static float reloadProgress = 1.0f;
 
 
     void FixedUpdate()
@@ -31,6 +32,7 @@ public class PaintballLauncher : MonoBehaviour
         if(bulletActive)
         {
             timeElapsed += Time.deltaTime;
+            reloadProgress = timeElapsed / reloadSpeed;
             if (timeElapsed >= reloadSpeed)
             {
                 Destroy(bulletCopy);
