@@ -55,7 +55,7 @@ public class CameraMovement : MonoBehaviour
         }
 
         if (GameLoad.isXInverted) { MoveXInverted();  } else { MoveXNormal(); }
-        if (GameLoad.isYInverted) { MoveYInverted(); } else { MoveYNormal(); }
+        //if (GameLoad.isYInverted) { MoveYInverted(); } else { MoveYNormal(); }
     }
 
     public void Refresh()
