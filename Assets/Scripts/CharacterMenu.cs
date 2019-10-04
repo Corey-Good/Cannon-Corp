@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CharacterMenu : MonoBehaviour
 {
-
-    public List<GameObject> allModels = new List<GameObject>(3);
+    public List<GameObject> allModels = new List<GameObject>(5);
     static public int currentModelIndex = 0;
 
     public void Awake()
@@ -15,13 +14,20 @@ public class CharacterMenu : MonoBehaviour
         allModels[1].SetActive(false);
         allModels[2].SetActive(false);
         allModels[3].SetActive(false);
-
+        allModels[4].SetActive(false);
     }
+
     public void ChangeCharacterRight()
     {
         if(currentModelIndex + 1 < allModels.Count)
         {
             allModels[currentModelIndex++].SetActive(false);
+            allModels[currentModelIndex].SetActive(true);
+        }
+        else
+        {
+            allModels[currentModelIndex].SetActive(false);
+            currentModelIndex = 0;
             allModels[currentModelIndex].SetActive(true);
         }
     }
@@ -33,9 +39,13 @@ public class CharacterMenu : MonoBehaviour
             allModels[currentModelIndex--].SetActive(false);
             allModels[currentModelIndex].SetActive(true);
         }
+        else
+        {
+            allModels[currentModelIndex].SetActive(false);
+            currentModelIndex = 4;
+            allModels[currentModelIndex].SetActive(true);
+        }
     }
-
-
 }
 
 
