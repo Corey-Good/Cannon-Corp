@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CharacterMenu : MonoBehaviour
 {
-
     public List<GameObject> allModels = new List<GameObject>(5);
     static public int currentModelIndex = 0;
 
@@ -16,8 +15,8 @@ public class CharacterMenu : MonoBehaviour
         allModels[2].SetActive(false);
         allModels[3].SetActive(false);
         allModels[4].SetActive(false);
-
     }
+
     public void ChangeCharacterRight()
     {
         if(currentModelIndex + 1 < allModels.Count)
@@ -47,8 +46,6 @@ public class CharacterMenu : MonoBehaviour
             allModels[currentModelIndex].SetActive(true);
         }
     }
-
-
 }
 
 

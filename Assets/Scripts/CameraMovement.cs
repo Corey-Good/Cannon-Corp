@@ -3,28 +3,29 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-
+    // Camera's main position and its offset
     private Vector3 defaultCamera;
-    public Vector3 offsetPosition;
+    public  Vector3 offsetPosition;
 
-
-
+    // Max value of movement for the screen
     private float Y_MIN = 2.00f;
     private float Y_MAX = 16.00f;
     private float X_MIN = -10.0f;
     private float X_MAX = 10.0f;
+
+    // Speed the camera will move
     private float cameraMovementSpeedX = 0.18f;
     private float cameraMovementSpeedY = 0.20f;
 
+    // Determines when the camera starts moving
     private float x_left  = (Screen.width / 2.0f) + (Screen.width * 0.12f);
     private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
     private float y_up    = (Screen.height / 2.0f) + (Screen.height * 0.25f);
     private float y_down  = (Screen.height / 2.0f) - (Screen.height * 0.1f);
 
+    // Deal with the technicals of camera rotation and position towards player
     private GameObject player;
-
     private Space offsetPositionSpace = Space.Self;
-
     private bool lookAt = true;
 
     public void Start()
@@ -90,8 +91,6 @@ public class CameraMovement : MonoBehaviour
             transform.rotation = player.transform.rotation;
         }
     }
-
-
 
     public void MoveXNormal()
     {

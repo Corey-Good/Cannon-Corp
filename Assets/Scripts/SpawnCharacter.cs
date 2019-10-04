@@ -9,7 +9,7 @@ public class SpawnCharacter : MonoBehaviour
     public GameObject[] location = new GameObject[15];
     public GameObject[] playerModel;
 
-    // Start is called before the first frame update
+    // On Scene Load, spawn the charcter in one of the random locations, if fails, load Main Menu
     void Awake()
     {
         try
@@ -24,5 +24,4 @@ public class SpawnCharacter : MonoBehaviour
             SceneManager.LoadScene(0);
         }; 
     }
-
 }
