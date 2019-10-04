@@ -15,7 +15,14 @@ public class LoadUI : MonoBehaviour
     void Awake()
     {
         currentHealth = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["healthPoints"];
-        playerName.text = NameGenerator.UserName;
+        if(NameGenerator.UserName == null)
+        {
+            playerName.text = "NoNameNoWin";
+        }else
+        {
+          playerName.text = NameGenerator.UserName;
+        }
+        
         healthBar.value = currentHealth / totalHealth;
 
     }

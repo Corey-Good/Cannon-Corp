@@ -19,6 +19,10 @@ public class PaintballLauncher : MonoBehaviour
     public static float reloadProgress = 1.0f;
 
 
+    private void Awake()
+    {
+        reloadProgress = 1.0f;
+    }
     void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0) && bulletActive == false)

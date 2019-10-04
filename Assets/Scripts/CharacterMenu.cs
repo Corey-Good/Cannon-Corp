@@ -25,6 +25,12 @@ public class CharacterMenu : MonoBehaviour
             allModels[currentModelIndex++].SetActive(false);
             allModels[currentModelIndex].SetActive(true);
         }
+        else
+        {
+            allModels[currentModelIndex].SetActive(false);
+            currentModelIndex = 0;
+            allModels[currentModelIndex].SetActive(true);
+        }
     }
 
     public void ChangeCharacterLeft()
@@ -32,6 +38,12 @@ public class CharacterMenu : MonoBehaviour
         if (currentModelIndex - 1 > -1)
         {
             allModels[currentModelIndex--].SetActive(false);
+            allModels[currentModelIndex].SetActive(true);
+        }
+        else
+        {
+            allModels[currentModelIndex].SetActive(false);
+            currentModelIndex = 4;
             allModels[currentModelIndex].SetActive(true);
         }
     }

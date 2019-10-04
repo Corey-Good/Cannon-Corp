@@ -9,11 +9,19 @@ public class GameLoad : MonoBehaviour
     static public bool isXInverted = false;
     static public bool isYInverted = false;
 
+    private int timeElapsed = 0;
+    private int waitTime = 400;
+
 
     // Start is called before the first frame update
     public void StartGame()
     {
+        while(timeElapsed <= waitTime) {
+            timeElapsed += 1;
+        }
         SceneManager.LoadScene(1);
+
+
     }
 
     public void PracticeMode()

@@ -5,7 +5,7 @@ public class CameraMovement : MonoBehaviour
 {
 
     private Vector3 defaultCamera;
-    private Vector3 offsetPosition;
+    public Vector3 offsetPosition;
 
 
 
@@ -54,7 +54,7 @@ public class CameraMovement : MonoBehaviour
             offsetPosition.z += 0.35f;
         }
 
-        if (GameLoad.isXInverted) { MoveXInverted();  } else { MoveXNormal(); }
+        //if (GameLoad.isXInverted) { MoveXInverted();  } else { MoveXNormal(); }
         //if (GameLoad.isYInverted) { MoveYInverted(); } else { MoveYNormal(); }
     }
 
