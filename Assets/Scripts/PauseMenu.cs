@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviourPunCallbacks
 {
     public static bool IsPaused = false;
     public GameObject pauseMenuUI;
@@ -43,5 +44,11 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
         pauseMenuUI.SetActive(true);
         IsPaused = true;
+    }
+
+    public void LeaveGame()
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LoadLevel(0);
     }
 }

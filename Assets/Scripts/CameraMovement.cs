@@ -74,7 +74,15 @@ public class CameraMovement : MonoBehaviour
         // Handles the camera position in the map
         if (offsetPositionSpace == Space.Self)
         {
-            transform.position = player.transform.TransformPoint(offsetPosition);
+            try
+            {
+                transform.position = player.transform.TransformPoint(offsetPosition);
+            }
+            catch
+            {
+                Debug.Log("Camera Failed to adjust");
+            }
+
         }
         else
         {
@@ -84,7 +92,15 @@ public class CameraMovement : MonoBehaviour
         // Computes the camera rotation in order to always look at the player
         if (lookAt)
         {
-            transform.LookAt(player.transform);
+            
+            try
+            {
+                transform.LookAt(player.transform); ;
+            }
+            catch
+            {
+                Debug.Log("Camera Failed to adjust");
+            }
         }
         else
         {
