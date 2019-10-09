@@ -1105,8 +1105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: {fileID: 954543063}
-  healthBar: {fileID: 889322540}
   playerScore: {fileID: 2126572546}
+  healthBar: {fileID: 889322540}
   reloadBar: {fileID: 1438415820}
 --- !u!1001 &701754978
 PrefabInstance:
