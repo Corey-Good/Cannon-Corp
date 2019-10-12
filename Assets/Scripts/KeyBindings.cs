@@ -10,13 +10,19 @@ public class KeyBindings : MonoBehaviour
     public static string backwardKey = "S";
     public static string leftKey = "A";
     public static string rightKey = "D";
+    public static int clickIndex = 0;
+
     public Text forwardButton;
     public Text backwardButton;
     public Text leftButton;
     public Text rightButton;
+    public Text fireButton;
+
     private string keyHit;
-    public bool lookingForKey = false;
     private string objectName;
+
+    public bool lookingForKey = false;
+
 
     private void Start()
     {
@@ -24,6 +30,10 @@ public class KeyBindings : MonoBehaviour
         backwardButton.text = backwardKey;
         leftButton.text = leftKey;
         rightButton.text = rightKey;
+        if (clickIndex == 0)
+            fireButton.text = "LeftClick";
+        else if (clickIndex == 1)
+            fireButton.text = "RightClick";
     }
 
     public void OnClick(Text text)
@@ -31,6 +41,13 @@ public class KeyBindings : MonoBehaviour
         text.text = "Hit Key";
         lookingForKey = true;
         objectName = text.name;           
+    }
+
+    public void OnMouseClick(Text text)
+    {
+        text.text = "Click Mouse";
+        lookingForKey = true;
+        objectName = text.name;
     }
 
     public void OnGUI()
@@ -57,6 +74,21 @@ public class KeyBindings : MonoBehaviour
                     rightButton.text = keyHit;
                     rightKey = rightButton.text;
                     break;
+            }
+            lookingForKey = false;
+        }
+
+        if(e.isMouse && lookingForKey)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                clickIndex = 0;
+                fireButton.text = "LeftClick";
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                clickIndex = 1;
+                fireButton.text = "RightClick";
             }
             lookingForKey = false;
         }

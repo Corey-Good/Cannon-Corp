@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
-    private float rotateSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
+    private float rotateSpeed   = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
 
     private string forwardbutton;
     private string backwardbutton;

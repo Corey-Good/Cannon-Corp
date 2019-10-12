@@ -24,7 +24,7 @@ public class PaintballLauncher : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0) && bulletActive == false)
+        if (Input.GetMouseButtonDown(KeyBindings.clickIndex) && bulletActive == false)
         {
             // Creates a copy of the bullet, and captures its Rigibody (into bulletRB)
             bulletCopy = Instantiate(bullet, bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;
