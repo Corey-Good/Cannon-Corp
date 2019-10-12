@@ -10,7 +10,7 @@ public class CharacterInfo : MonoBehaviour
             { // Model 1, this is the base model tank
                 0, new Hashtable()
                 {
-                    {"modelCameraOffset", new Vector3(0.0f, 3.75f, -10.0f)},
+                    {"modelCameraOffset", new Vector3(0.0f, 4.75f, -12.0f)},
                     {"movementForce", 7.0f },
                     {"rotationSpeed", 30.0f },
                     {"healthPoints", 65.0f},
