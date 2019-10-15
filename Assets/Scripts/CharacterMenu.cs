@@ -17,6 +17,7 @@ public class CharacterMenu : MonoBehaviour
         allModels[3].SetActive(false);
         allModels[4].SetActive(false);
     }
+
     public void ChangeCharacterRight()
     {
         if(currentModelIndex + 1 < allModels.Count)
@@ -47,7 +48,7 @@ public class CharacterMenu : MonoBehaviour
         }
     }
 
-
+  
 }
 
 

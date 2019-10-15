@@ -3,66 +3,39 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-
+    // Camera's main position and its offset
     private Vector3 defaultCamera;
-    private Vector3 offsetPosition;
+    public  Vector3 offsetPosition;
 
-
-
+    // Max value of movement for the screen
     private float Y_MIN = 2.00f;
     private float Y_MAX = 16.00f;
     private float X_MIN = -10.0f;
     private float X_MAX = 10.0f;
+
+    // Speed the camera will move
     private float cameraMovementSpeedX = 0.18f;
     private float cameraMovementSpeedY = 0.20f;
 
+    // Determines when the camera starts moving
     private float x_left  = (Screen.width / 2.0f) + (Screen.width * 0.12f);
     private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
-    private float y_up    = (Screen.height / 2.0f) + (Screen.height * 0.3f);
-    private float y_down  = (Screen.height / 2.0f) - (Screen.height * 0.07f);
+    private float y_up    = (Screen.height / 2.0f) + (Screen.height * 0.25f);
+    private float y_down  = (Screen.height / 2.0f) - (Screen.height * 0.1f);
 
-    private Vector3[] modelOffsets = new Vector3[5];
-
+    // Deal with the technicals of camera rotation and position towards player
     private GameObject player;
-
     private Space offsetPositionSpace = Space.Self;
-
     private bool lookAt = true;
 
     public void Start()
     {
-        // Model 1 (base model tank) default camera offset
-        modelOffsets[0].x = 0.0f;
-        modelOffsets[0].y = 3.25f;
-        modelOffsets[0].z = -12.0f;
-
-        // Model 2 (future tank) default camera offset
-        modelOffsets[1].x = 0.0f;
-        modelOffsets[1].y = 3.25f;
-        modelOffsets[1].z = -12.0f;
-
-        // Model 3 (catapult) default camera offset
-        modelOffsets[2].x = 0.0f;
-        modelOffsets[2].y = 10.0f;
-        modelOffsets[2].z = -28.0f;
-
-        // Model 4 (Cartoon Tank) default camera offset
-        modelOffsets[3].x = 0.0f;
-        modelOffsets[3].y = 10.0f;
-        modelOffsets[3].z = -26.0f;
-
-        // Model 5 (Box Tank) default camera offset
-        modelOffsets[4].x = 0.0f;
-        modelOffsets[4].y = 2.00f;
-        modelOffsets[4].z = -8.0f;
-
-        //Sets the camera offset and the default value to the specific model 
-        offsetPosition = defaultCamera = modelOffsets[CharacterMenu.currentModelIndex];
+        offsetPosition = defaultCamera = (Vector3)CharacterInfo.info[CharacterMenu.currentModelIndex]["modelCameraOffset"];
     }
 
     public void FixedUpdate()
     {
-        // Assigns the camera to the player that spaws. Change to player ID in order to deal with multiple player later on
+        // Assigns the camera to the player that spawns. Change to player ID in order to deal with multiple player later on
         if (player == null)
         {
             player = GameObject.FindWithTag("CharacterModel");
@@ -82,8 +55,8 @@ public class CameraMovement : MonoBehaviour
             offsetPosition.z += 0.35f;
         }
 
-        if (GameLoad.isXInverted) { MoveXInverted();  } else { MoveXNormal(); }
-        if (GameLoad.isYInverted) { MoveYInverted(); } else { MoveYNormal(); }
+        //if (GameLoad.isXInverted) { MoveXInverted();  } else { MoveXNormal(); }
+        //if (GameLoad.isYInverted) { MoveYInverted(); } else { MoveYNormal(); }
     }
 
     public void Refresh()
@@ -118,8 +91,6 @@ public class CameraMovement : MonoBehaviour
             transform.rotation = player.transform.rotation;
         }
     }
-
-
 
     public void MoveXNormal()
     {

@@ -4,44 +4,87 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody rb;
-    public float movementForce = 1000f;
-    public float rotateSpeed = 30f;
+    private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
+    private float rotateSpeed   = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
+
+    private string forwardbutton;
+    private string backwardbutton;
+    private string leftbutton;
+    private string rightbutton;
+
+    private void Start()
+    {
+        if(Equals(KeyBindings.forwardKey, "UpArrow"))
+        {
+            forwardbutton = "up";
+        }
+        else
+        { 
+            forwardbutton = KeyBindings.forwardKey.ToLower();
+        }
+
+        if (Equals(KeyBindings.backwardKey, "DownArrow"))
+        {
+            backwardbutton = "down";
+        }
+        else
+        {
+            backwardbutton = KeyBindings.backwardKey.ToLower();
+        }
+
+        if (Equals(KeyBindings.leftKey, "LeftArrow"))
+        {
+            leftbutton = "left";
+        }
+        else
+        {
+            leftbutton = KeyBindings.leftKey.ToLower();
+        }
+
+        if (Equals(KeyBindings.rightKey, "RightArrow"))
+        {
+            rightbutton = "right";
+        }
+        else
+        {
+            rightbutton = KeyBindings.rightKey.ToLower();
+        }
 
 
 
 
-    // Update is called once per frame
+    }
     void FixedUpdate()
-    {         
-        
-
-        if (Input.GetKey("w"))
+    {
+        // Move play forwards and backwards, regenerate health when no movement is detected
+        if (Input.GetKey(forwardbutton))
         {
             transform.position += transform.forward * Time.deltaTime * movementForce;
-        }
-        if (Input.GetKey("s"))
+        } 
+        else if (Input.GetKey(backwardbutton))
         {
             transform.position += -transform.forward * Time.deltaTime * movementForce;
-        }
-        if (Input.GetKey("a"))
+        } 
+        else
         {
-            transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
+            LoadUI.currentHealth += 0.01f;
         }
-        else if (Input.GetKey("d"))
+
+        // Rotate model left and right
+        if (Input.GetKey(rightbutton))
         {
             transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
         }
-
-
-
+        else if (Input.GetKey(leftbutton))
+        {
+            transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
+        }
         
-
-
-
-
-
-
+        // Decrease health, for testing purposes
+        if (Input.GetKey("h"))
+        {
+            LoadUI.currentHealth -= 1.0f;
+        }
 
     }
 
