@@ -1,4 +1,10 @@
-﻿
+﻿/*********************************************************************/
+/*         Team: Cannon Corps                                        */
+/*       Author: Corey Good                                          */
+/* Date Created: September 1, 2019                                   */
+/* Date Updated: October 14, 2019                                    */
+/*      Purpose: Handles the camera positioning                      */
+/*********************************************************************/
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
@@ -26,7 +32,7 @@ public class CameraMovement : MonoBehaviour
     // Deal with the technicals of camera rotation and position towards player
     private GameObject player;
     private Space offsetPositionSpace = Space.Self;
-    private bool lookAt = true;
+    //public bool lookAt = true;
 
     public void Start()
     {
@@ -54,9 +60,6 @@ public class CameraMovement : MonoBehaviour
         {
             offsetPosition.z += 0.35f;
         }
-
-        //if (GameLoad.isXInverted) { MoveXInverted();  } else { MoveXNormal(); }
-        //if (GameLoad.isYInverted) { MoveYInverted(); } else { MoveYNormal(); }
     }
 
     public void Refresh()
@@ -82,16 +85,20 @@ public class CameraMovement : MonoBehaviour
         }
 
         // Computes the camera rotation in order to always look at the player
-        if (lookAt)
-        {
-            transform.LookAt(player.transform);
-        }
-        else
-        {
+        //if (lookAt)
+        //{
+        //    transform.LookAt(player.transform);
+        //}
+        //else
+        //{
             transform.rotation = player.transform.rotation;
-        }
+        //}
     }
 
+
+
+    //if (GameLoad.isXInverted) { MoveXInverted();  } else { MoveXNormal(); }
+    //if (GameLoad.isYInverted) { MoveYInverted(); } else { MoveYNormal(); }
     public void MoveXNormal()
     {
         if (Input.mousePosition.x < x_left)
