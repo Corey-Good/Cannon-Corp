@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using Photon.Pun;
 
-public class CollisionDetection : MonoBehaviour
+public class CollisionDetection : MonoBehaviourPun
 {
     public GameObject objectName; // Name of the object using the CollisionDetection script
 
@@ -11,22 +12,25 @@ public class CollisionDetection : MonoBehaviour
 
     void OnCollisionEnter (Collision collisionInfo) // Called when this collider/rigidbody has begun touching another rigidbody/collider
     {
-        if (PaintballLauncher.bulletActive == true)
+        if (photonView.IsMine)
         {
-            if (collisionInfo.collider.tag == "Paintball")
+            if (PaintballLauncher.bulletActive == true)
             {
-                UnityEngine.Debug.Log("Bullet Damange: " + PaintballInfo.paintballInfo["paintballDamage"]);
+                if (collisionInfo.collider.name == "Bullet")
+                {
+                    UnityEngine.Debug.Log("Bullet Damange: " + PaintballInfo.paintballInfo["paintballDamage"]);
 
-                LoadUI.currentHealth = ((float)LoadUI.currentHealth - (float)PaintballInfo.paintballInfo["paintballDamage"]);
+                    LoadUI.currentHealth = ((float)LoadUI.currentHealth - (float)PaintballInfo.paintballInfo["paintballDamage"]);
 
-                UnityEngine.Debug.Log("Remaining Tank Health: " + LoadUI.currentHealth);
+                    UnityEngine.Debug.Log("Remaining Tank Health: " + LoadUI.currentHealth);
 
-                LoadUI.score += killPoints;
+                    LoadUI.score += killPoints;
+                }
             }
-        }
-        else 
-        {
-            UnityEngine.Debug.Log(objectName + " collided with " + collisionInfo.collider.name);
+            else
+            {
+                UnityEngine.Debug.Log(objectName + " collided with " + collisionInfo.collider.name);
+            }
         }
     }
 }
