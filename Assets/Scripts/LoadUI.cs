@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class LoadUI : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class LoadUI : MonoBehaviour
     public Slider reloadBar;
 
     public static       float score;
-    private       float totalHealth = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["healthPoints"];
+    public static       float totalHealth = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["healthPoints"];
     public static float currentHealth;
 
     void Awake()
@@ -43,7 +44,8 @@ public class LoadUI : MonoBehaviour
         // Send the player to the GameOver screen when killed
         if(currentHealth <= 0.0f)
         {
-            SceneManager.LoadScene(3);
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.LoadLevel(3);
         }
     }
 }

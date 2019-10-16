@@ -12,7 +12,7 @@ public class PaintballLauncher : MonoBehaviourPun
     private Rigidbody  bulletRB;            // Rigibody of the bullet to be launched
         
     private float timeElapsed = 0f;
-    public static bool  bulletActive = false;
+    private bool  bulletActive = false;
     private float reloadSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["reloadSpeed"];
     private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];

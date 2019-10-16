@@ -14,19 +14,17 @@ public class CollisionDetection : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            if (PaintballLauncher.bulletActive == true)
+
+            if (collisionInfo.collider.name == "Bullet(Clone)")
             {
-                if (collisionInfo.collider.name == "Bullet")
-                {
-                    UnityEngine.Debug.Log("Bullet Damange: " + PaintballInfo.paintballInfo["paintballDamage"]);
+                UnityEngine.Debug.Log("Bullet Damange: " + PaintballInfo.paintballInfo["paintballDamage"]);
 
-                    LoadUI.currentHealth = ((float)LoadUI.currentHealth - (float)PaintballInfo.paintballInfo["paintballDamage"]);
+                LoadUI.currentHealth = ((float)LoadUI.currentHealth - (float)PaintballInfo.paintballInfo["paintballDamage"]);
 
-                    UnityEngine.Debug.Log("Remaining Tank Health: " + LoadUI.currentHealth);
+                UnityEngine.Debug.Log("Remaining Tank Health: " + LoadUI.currentHealth);
 
-                    LoadUI.score += killPoints;
-                }
-            }
+                LoadUI.score += killPoints;
+            }            
             else
             {
                 UnityEngine.Debug.Log(objectName + " collided with " + collisionInfo.collider.name);
