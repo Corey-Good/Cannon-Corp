@@ -535,6 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f637737fe67b7d447abf60a7684f05a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offsetPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &1787256906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3979881083187290455, guid: 7232bc644417acf4b9943363c3dc629f,
@@ -799,6 +800,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 2.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 114635135218281658, guid: b6225b0ddfcbbf04881a2120821e0b6c,
+        type: 3}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7096581191160746484, guid: b6225b0ddfcbbf04881a2120821e0b6c,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6225b0ddfcbbf04881a2120821e0b6c, type: 3}

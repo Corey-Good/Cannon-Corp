@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 114315542688686784}
   - component: {fileID: 114969648892434676}
   - component: {fileID: 114153511110425708}
+  - component: {fileID: 114339001278318980}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: EnemyTank
+  m_TagString: Paintball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,3 +166,16 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &114339001278318980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2717774406268365404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfe544eadf9cd634cbf72bafe206a159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: {fileID: 2717774406268365404}

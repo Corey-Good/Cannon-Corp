@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3524990733760836464}
   - component: {fileID: 114842825989105334}
   - component: {fileID: 114837157887853904}
+  - component: {fileID: 114281655932549910}
   m_Layer: 0
   m_Name: FiringBoxTank
   m_TagString: CharacterModel
@@ -161,6 +162,19 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &114281655932549910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192157683055729904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df25ff1e2d92bf48abed4d091c59110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: {fileID: 192157683055729904}
 --- !u!114 &4543342501718861018
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 3205576428480072449}
   - component: {fileID: 114660849322727930}
   - component: {fileID: 114643280976995776}
+  - component: {fileID: 114541962991027246}
   m_Layer: 0
   m_Name: FiringCartoonTank
   m_TagString: CharacterModel
@@ -199,6 +200,19 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &114541962991027246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205576428407650254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df25ff1e2d92bf48abed4d091c59110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: {fileID: 3205576428407650254}
 --- !u!1001 &4204781869676942014
 PrefabInstance:
   m_ObjectHideFlags: 0
