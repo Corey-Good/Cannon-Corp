@@ -29,11 +29,6 @@ public class RoomController : MonoBehaviourPunCallbacks
             Debug.Log("Starting game! You are the master");
             PhotonNetwork.LoadLevel(multiplayerSceneIndex);
         }
-        else
-        {
-            Debug.Log("Starting game! You are the client");
-            PhotonNetwork.LoadLevel(multiplayerSceneIndex);
-        }
     }
 
     public override void OnLeftRoom()

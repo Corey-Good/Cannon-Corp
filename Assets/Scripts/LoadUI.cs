@@ -6,7 +6,7 @@ using System.Collections;
 
 public class LoadUI : MonoBehaviour
 {
-    public Text   playerName;
+    public Text playerName;
     public Text   playerScore;
     public Slider healthBar;
     public Slider reloadBar;

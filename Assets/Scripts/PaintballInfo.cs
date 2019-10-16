@@ -9,10 +9,14 @@ public class PaintballInfo : MonoBehaviour
 
     static public Hashtable paintballInfo = new Hashtable()
     {
-        { "tankInfo",        CharacterInfo.info[CharacterMenu.currentModelIndex]},
+        { "playerName",      NameGenerator.UserName},
         { "paintballDamage", CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletDamage"]}
     };
 
+    public string GetName()
+    {
+        return (string)paintballInfo["playerName"];
+    }
     //void OnCollisionEnter(Collision collisionInfo) // Called when this collider/rigidbody has begun touching another rigidbody/collider
     //{
     //    if (PaintballLauncher.bulletActive == true)
