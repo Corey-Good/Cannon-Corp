@@ -18,9 +18,9 @@ MonoBehaviour:
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 0
-    FixedRegion: 
-    Server: 10.100.92.213
-    Port: 0
+    FixedRegion: USN
+    Server: 192.168.56.1
+    Port: 5055
     Protocol: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
