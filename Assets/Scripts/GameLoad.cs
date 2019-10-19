@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class GameLoad : MonoBehaviour
+public class GameLoad : MonoBehaviourPun
 {
     static public bool isXInverted = false;
     static public bool isYInverted = false;
@@ -12,7 +13,7 @@ public class GameLoad : MonoBehaviour
     // Start is called before the first frame update
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(4);
     }
 
     public void PracticeMode()
@@ -22,6 +23,7 @@ public class GameLoad : MonoBehaviour
 
     public void QuitGame()
     {
+        PhotonNetwork.Disconnect();
         SceneManager.LoadScene(0);
     }
 
@@ -34,4 +36,6 @@ public class GameLoad : MonoBehaviour
     {
         isYInverted = (isYInverted) ? false : true;
     }
+
+
 }
