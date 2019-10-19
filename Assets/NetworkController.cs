@@ -10,10 +10,11 @@ public class NetworkController : MonoBehaviourPunCallbacks
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+        Debug.Log("Attempting to connect to server...");
     }
 
-    public override void OnConnectedToMaster()
+    public override void OnConnected()
     {
-        Debug.Log("We are now connected to " + PhotonNetwork.CloudRegion + " server!");
+        Debug.Log("We are now connected to " + PhotonNetwork.ServerAddress + "!");
     }
 }

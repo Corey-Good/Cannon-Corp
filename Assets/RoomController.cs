@@ -18,8 +18,8 @@ public class RoomController : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("Joined Room!");
-        StartGame();
+        Debug.Log(PhotonNetwork.CurrentRoom);
+        StartGame(); 
     }
 
     private void StartGame()

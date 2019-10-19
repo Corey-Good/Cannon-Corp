@@ -16,23 +16,23 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        PhotonNetwork.JoinRandomRoom();
-        Debug.Log("Joining random room!");
+        PhotonNetwork.JoinRoom("FreeForAll");
+        Debug.Log("Joining a room!");
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
+    public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log("Failed to join a room. :(");
+        Debug.Log("Failed to join a room.");
         CreateRoom();
     }
 
+    //Free for all mode
     void CreateRoom()
     {
         Debug.Log("Creating a room!");
-        int randomRoomNumber = Random.Range(0, 101);
+
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 20 };
-        PhotonNetwork.CreateRoom("Room" + randomRoomNumber, roomOps);
-        Debug.Log("Room " + randomRoomNumber);
+        PhotonNetwork.CreateRoom("FreeForAll", roomOps);
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
