@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class KeyBindings : MonoBehaviour
 {
+    static public bool isXInverted = false;
+    static public bool isYInverted = false;
+
     public static string forwardKey = "W";
     public static string backwardKey = "S";
     public static string leftKey = "A";
@@ -36,9 +39,19 @@ public class KeyBindings : MonoBehaviour
             fireButton.text = "RightClick";
     }
 
+    public void FlipXAxis()
+    {
+        isXInverted = (isXInverted) ? false : true;
+    }
+
+    public void FlipYAxis()
+    {
+        isYInverted = (isYInverted) ? false : true;
+    }
+
     public void OnClick(Text text)
     {
-        text.text = "Hit Key";
+        text.text = "HIT KEY";
         lookingForKey = true;
         objectName = text.name;           
     }
