@@ -17,19 +17,19 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public void StartGame(Button button)
     {
         roomName = button.name;
-        PhotonNetwork.JoinRoom(roomName);
-        Debug.Log("Joining " + roomName);
+        if(PhotonNetwork.IsConnectedAndReady)
+            PhotonNetwork.JoinRoom(roomName);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log("Failed to join a room. :(");
+        //Debug.Log("Failed to join a room. :(");
         CreateRoom(roomName);
     }
 
     void CreateRoom(string room)
     {
-        Debug.Log("Creating a room!");
+        //Debug.Log("Creating a room!");
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 20 };
         PhotonNetwork.CreateRoom(room, roomOps);
         Debug.Log("Room: " + room);
@@ -59,25 +59,25 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     private void LoadGame()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            int index = 0;
-            Debug.Log("Starting game!");
-            if(roomName == "FreeForAll")
-            {
-                index = 1;
-            }
-            else
-            {
-                index = 3;
-            }
-            PhotonNetwork.LoadLevel(index);
-        }
+        //if (PhotonNetwork.IsMasterClient)
+        //{
+        //    int index = 0;
+            //Debug.Log("Starting game!");
+            //if(roomName == "FreeForAll")
+            //{
+            //    index = 1;
+            //}
+            //else
+            //{
+            //    index = 3;
+            //}
+            PhotonNetwork.LoadLevel(1);
+        //}
     }
 
     public override void OnLeftRoom()
     {
-        base.OnLeftRoom();
+        PhotonNetwork.Disconnect();
         Debug.Log("You are leaving the room");
     }
 }

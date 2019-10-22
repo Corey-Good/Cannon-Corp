@@ -21,9 +21,8 @@ public class GameLoad : MonoBehaviourPun
         SceneManager.LoadScene(2);
     }
 
-    public void QuitGame()
+    public void LoadMainMenu()
     {
-        PhotonNetwork.Disconnect();
         SceneManager.LoadScene(0);
     }
 

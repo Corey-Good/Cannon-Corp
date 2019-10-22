@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using Photon.Pun;
 
 public class LoadUI : MonoBehaviour
 {
@@ -43,7 +45,16 @@ public class LoadUI : MonoBehaviour
         // Send the player to the GameOver screen when killed
         if(currentHealth <= 0.0f)
         {
-            SceneManager.LoadScene(3);
+            StartCoroutine(DisconnectAndLoad());
         }
+    }
+
+    IEnumerator DisconnectAndLoad()
+    {
+        PhotonNetwork.LeaveRoom();
+        while (PhotonNetwork.InRoom)
+            yield return null;
+        SceneManager.LoadScene(3);
+
     }
 }

@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -43,5 +45,18 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
         pauseMenuUI.SetActive(true);
         IsPaused = true;
+    }
+
+    public void QuitGame()
+    {
+        StartCoroutine(DisconnectAndLoad());
+    }
+    IEnumerator DisconnectAndLoad()
+    {
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        SceneManager.LoadScene(0);
+
     }
 }

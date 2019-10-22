@@ -45,24 +45,24 @@ public class CameraMovement : MonoBehaviour
         if (player == null)
         {
             player = GameObject.FindWithTag("CharacterModel");
+            Debug.Log(player);
+        }
+        else
+        {           
+
+            // Handles the zoom of the camera based on the scroll wheel
+            if (Input.mouseScrollDelta[1] < 0)
+            {
+                offsetPosition.z -= 0.35f;
+            }
+            if (Input.mouseScrollDelta[1] > 0)
+            {
+                offsetPosition.z += 0.35f;
+            }
         }
     }
-    private void LateUpdate()
-    {
-        Refresh();
 
-        // Handles the zoom of the camera based on the scroll wheel
-        if (Input.mouseScrollDelta[1] < 0)
-        {
-            offsetPosition.z -= 0.35f;
-        }
-        if (Input.mouseScrollDelta[1] > 0)
-        {
-            offsetPosition.z += 0.35f;
-        }
-    }
-
-    public void Refresh()
+    public void LateUpdate()
     {
 
         // Resets the camera to the default position
