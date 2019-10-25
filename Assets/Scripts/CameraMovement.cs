@@ -45,53 +45,55 @@ public class CameraMovement : MonoBehaviour
         if (player == null)
         {
             player = GameObject.FindWithTag("CharacterModel");
-        }
-    }
-    private void LateUpdate()
-    {
-        Refresh();
-
-        // Handles the zoom of the camera based on the scroll wheel
-        if (Input.mouseScrollDelta[1] < 0)
-        {
-            offsetPosition.z -= 0.35f;
-        }
-        if (Input.mouseScrollDelta[1] > 0)
-        {
-            offsetPosition.z += 0.35f;
-        }
-    }
-
-    public void Refresh()
-    {
-
-        // Resets the camera to the default position
-        if (Input.GetKey("c"))
-        {
-            offsetPosition = defaultCamera;
-        }
-
-
-        // Handles the camera position in the map
-        if (offsetPositionSpace == Space.Self)
-        {
-            transform.position = player.transform.TransformPoint(offsetPosition);
+            //Debug.Log(player);
         }
         else
-        {
-            transform.position = player.transform.position + offsetPosition;
-        }
+        {           
 
-        //Computes the camera rotation in order to always look at the player
-        if (lookAt)
-        {
-            transform.LookAt(player.transform);
+            // Handles the zoom of the camera based on the scroll wheel
+            if (Input.mouseScrollDelta[1] < 0)
+            {
+                offsetPosition.z -= 0.35f;
+            }
+            if (Input.mouseScrollDelta[1] > 0)
+            {
+                offsetPosition.z += 0.35f;
+            }
         }
-        else
-        {
-            transform.rotation = player.transform.rotation;
+    }
+
+    public void LateUpdate()
+    {
+        if(player != null)
+        { 
+            // Resets the camera to the default position
+            if (Input.GetKey("c"))
+            {
+                offsetPosition = defaultCamera;
+            }
+
+
+            // Handles the camera position in the map
+            if (offsetPositionSpace == Space.Self)
+            {
+                transform.position = player.transform.TransformPoint(offsetPosition);
+            }
+            else
+            {
+                transform.position = player.transform.position + offsetPosition;
+            }
+
+            //Computes the camera rotation in order to always look at the player
+            if (lookAt)
+            {
+                transform.LookAt(player.transform);
+            }
+            else
+            {
+                transform.rotation = player.transform.rotation;
+            }
         }
-}
+    }
 
 
 
