@@ -8,76 +8,61 @@ using UnityEngine.UI;
 public class LobbyController : MonoBehaviourPunCallbacks
 {
     private string roomName = "";
+    public Text status;
 
+    public void Start()
+    {
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.ConnectUsingSettings();
+            status.text = "Connecting . . .";
+        }
+    }
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
+        status.text = "Now connected!!";
     }
 
     public void StartGame(Button button)
     {
         roomName = button.name;
         if(PhotonNetwork.IsConnectedAndReady)
-            PhotonNetwork.JoinRoom(roomName);
+        { 
+            PhotonNetwork.JoinRoom(roomName);            
+        }
+
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
-    {
-        //Debug.Log("Failed to join a room. :(");
+    {        
         CreateRoom(roomName);
     }
 
     void CreateRoom(string room)
     {
-        //Debug.Log("Creating a room!");
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 20 };
         PhotonNetwork.CreateRoom(room, roomOps);
-        Debug.Log("Room: " + room);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        Debug.Log("Failed to create a room . . . ");
         CreateRoom(roomName);
-    }
-
-    public override void OnEnable()
-    {
-        PhotonNetwork.AddCallbackTarget(this);
-    }
-
-    public override void OnDisable()
-    {
-        PhotonNetwork.AddCallbackTarget(this);
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("You have joined " + roomName);
         LoadGame();
     }
 
     private void LoadGame()
     {
-        //if (PhotonNetwork.IsMasterClient)
-        //{
-        //    int index = 0;
-            //Debug.Log("Starting game!");
-            //if(roomName == "FreeForAll")
-            //{
-            //    index = 1;
-            //}
-            //else
-            //{
-            //    index = 3;
-            //}
+        if(roomName == "FreeForAll")
             PhotonNetwork.LoadLevel(1);
-        //}
+        else
+        {
+            PhotonNetwork.LoadLevel(4);
+        }
     }
 
-    public override void OnLeftRoom()
-    {
-        PhotonNetwork.Disconnect();
-        Debug.Log("You are leaving the room");
-    }
+
 }

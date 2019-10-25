@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 63e03a953f224c644b7c0ee3f05536a6
   - enabled: 1
-    path: Assets/Scenes/Game Scene.unity
+    path: Assets/Scenes/FFA.unity
     guid: b305d6e28557d5849b31a96060923991
   - enabled: 1
     path: Assets/Scenes/Tutorial Mode.unity
@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: d61b63f286a01d349a204193a44516e3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Lobby.unity
     guid: dc8287f5b149d4845bc56219d09f0ff6
   m_configObjects: {}

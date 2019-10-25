@@ -45,7 +45,7 @@ public class CameraMovement : MonoBehaviour
         if (player == null)
         {
             player = GameObject.FindWithTag("CharacterModel");
-            Debug.Log(player);
+            //Debug.Log(player);
         }
         else
         {           
@@ -64,34 +64,36 @@ public class CameraMovement : MonoBehaviour
 
     public void LateUpdate()
     {
+        if(player != null)
+        { 
+            // Resets the camera to the default position
+            if (Input.GetKey("c"))
+            {
+                offsetPosition = defaultCamera;
+            }
 
-        // Resets the camera to the default position
-        if (Input.GetKey("c"))
-        {
-            offsetPosition = defaultCamera;
-        }
 
+            // Handles the camera position in the map
+            if (offsetPositionSpace == Space.Self)
+            {
+                transform.position = player.transform.TransformPoint(offsetPosition);
+            }
+            else
+            {
+                transform.position = player.transform.position + offsetPosition;
+            }
 
-        // Handles the camera position in the map
-        if (offsetPositionSpace == Space.Self)
-        {
-            transform.position = player.transform.TransformPoint(offsetPosition);
+            //Computes the camera rotation in order to always look at the player
+            if (lookAt)
+            {
+                transform.LookAt(player.transform);
+            }
+            else
+            {
+                transform.rotation = player.transform.rotation;
+            }
         }
-        else
-        {
-            transform.position = player.transform.position + offsetPosition;
-        }
-
-        //Computes the camera rotation in order to always look at the player
-        if (lookAt)
-        {
-            transform.LookAt(player.transform);
-        }
-        else
-        {
-            transform.rotation = player.transform.rotation;
-        }
-}
+    }
 
 
 

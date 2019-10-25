@@ -8,13 +8,11 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool IsPaused = false;
     public GameObject pauseMenuUI;
-    // Update is called once per frame
+  
 
     private void Awake()
     {
-
        Cursor.visible = false;
-
     }
 
     public void LateUpdate()
@@ -53,8 +51,8 @@ public class PauseMenu : MonoBehaviour
     }
     IEnumerator DisconnectAndLoad()
     {
-        PhotonNetwork.Disconnect();
-        while (PhotonNetwork.IsConnected)
+        PhotonNetwork.LeaveRoom();
+        while (PhotonNetwork.InRoom)
             yield return null;
         SceneManager.LoadScene(0);
 

@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 393143937223952022}
   - component: {fileID: 393143937214441842}
   m_Layer: 0
-  m_Name: CatapultModelv1
+  m_Name: CatapultModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

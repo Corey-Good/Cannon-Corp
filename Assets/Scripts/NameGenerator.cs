@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class NameGenerator : MonoBehaviour
 {
-    public Text PlayerName;
     static public string UserName;
+    public Text PlayerName;
+    
     private List<string> allNames = new List<string> { "Oswald_13",
         "Dr_Radkins",
         "Panda_King", 
