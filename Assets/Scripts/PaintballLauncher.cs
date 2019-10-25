@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Timers;
 using UnityEngine;
+using Photon.Pun;
 
-public class PaintballLauncher : MonoBehaviour
+public class PaintballLauncher : MonoBehaviourPun
 {
     public  GameObject bullet;              // Contains the bullet model
     private GameObject bulletCopy;          // Copy of the bullet that gets launched
@@ -27,7 +28,7 @@ public class PaintballLauncher : MonoBehaviour
         if (Input.GetMouseButtonDown(KeyBindings.clickIndex) && bulletActive == false)
         {
             // Creates a copy of the bullet, and captures its Rigibody (into bulletRB)
-            bulletCopy = Instantiate(bullet, bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;
+            bulletCopy = PhotonNetwork.Instantiate("Bullet", bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0));
             bulletRB = bulletCopy.GetComponent<Rigidbody>();
 
             // Applies the launching force to the bullet and sets its status to active (true)
