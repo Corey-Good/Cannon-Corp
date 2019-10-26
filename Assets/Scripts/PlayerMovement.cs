@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPun
 {
     private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
     private float rotateSpeed   = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
@@ -12,14 +13,57 @@ public class PlayerMovement : MonoBehaviour
     private string leftbutton;
     private string rightbutton;
 
-    private void Start()
+
+    void FixedUpdate()
     {
-        if(Equals(KeyBindings.forwardKey, "UpArrow"))
+        SetKeyBindings();
+        if (photonView.IsMine && !PauseMenu.GameIsPaused) 
+        { 
+            // Move play forwards and backwards, regenerate health when no movement is detected
+            if (Input.GetKey(forwardbutton))
+            {
+                transform.position += transform.forward * Time.deltaTime * movementForce;
+            } 
+            else if (Input.GetKey(backwardbutton))
+            {
+                transform.position += -transform.forward * Time.deltaTime * movementForce;
+            } 
+            else
+            {
+                if (LoadUI.currentHealth < LoadUI.totalHealth)
+                {
+                    LoadUI.currentHealth += 0.01f;
+                }
+            }
+
+            // Rotate model left and right
+            if (Input.GetKey(rightbutton))
+            {
+                transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+            }
+            else if (Input.GetKey(leftbutton))
+            {
+                transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
+            }
+        
+            // Decrease health, for testing purposes
+            if (Input.GetKey("h"))
+            {
+                LoadUI.currentHealth -= 1.0f;
+            }
+        }
+
+
+    }
+
+    public void SetKeyBindings()
+    {
+        if (Equals(KeyBindings.forwardKey, "UpArrow"))
         {
             forwardbutton = "up";
         }
         else
-        { 
+        {
             forwardbutton = KeyBindings.forwardKey.ToLower();
         }
 
@@ -49,43 +93,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rightbutton = KeyBindings.rightKey.ToLower();
         }
-
-
-
-
-    }
-    void FixedUpdate()
-    {
-        // Move play forwards and backwards, regenerate health when no movement is detected
-        if (Input.GetKey(forwardbutton))
-        {
-            transform.position += transform.forward * Time.deltaTime * movementForce;
-        } 
-        else if (Input.GetKey(backwardbutton))
-        {
-            transform.position += -transform.forward * Time.deltaTime * movementForce;
-        } 
-        else
-        {
-            LoadUI.currentHealth += 0.01f;
-        }
-
-        // Rotate model left and right
-        if (Input.GetKey(rightbutton))
-        {
-            transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
-        }
-        else if (Input.GetKey(leftbutton))
-        {
-            transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
-        }
-        
-        // Decrease health, for testing purposes
-        if (Input.GetKey("h"))
-        {
-            LoadUI.currentHealth -= 1.0f;
-        }
-
     }
 
 }

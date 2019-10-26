@@ -6,8 +6,9 @@
 /*      Purpose: Handles the camera positioning                      */
 /*********************************************************************/
 using UnityEngine;
+using Photon.Pun;
 
-public class CameraMovement : MonoBehaviour
+public class CameraMovement : MonoBehaviourPun
 {
     // Camera's main position and its offset
     private Vector3 defaultCamera;
@@ -41,6 +42,7 @@ public class CameraMovement : MonoBehaviour
 
     public void FixedUpdate()
     {
+        
         // Assigns the camera to the player that spawns. Change to player ID in order to deal with multiple player later on
         if (player == null)
         {
@@ -60,6 +62,7 @@ public class CameraMovement : MonoBehaviour
                 offsetPosition.z += 0.35f;
             }
         }
+        
     }
 
     public void LateUpdate()

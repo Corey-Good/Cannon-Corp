@@ -1,19 +1,22 @@
 ﻿
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class GameOver : MonoBehaviour
 {
     private float timeElapsed = 0.0f;
-    private float waitTime = 3.0f; // 3 seconds
-    public void FixedUpdate()
+    private float waitTime = 3.0f;
+
+    public void GameOverScreen()
     {
         // Give a short delay before loading the Main Menu
         timeElapsed += Time.deltaTime;
         if (timeElapsed > waitTime)
-        { 
-            SceneManager.LoadScene(0);
+        {
             Cursor.visible = true;
+            PhotonNetwork.LoadLevel(0);
+            
         }
     }
 }

@@ -25,7 +25,7 @@ public class PaintballLauncher : MonoBehaviourPun
     }
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(KeyBindings.clickIndex) && bulletActive == false)
+        if (Input.GetMouseButtonDown(KeyBindings.clickIndex) && bulletActive == false && !PauseMenu.GameIsPaused)
         {
             // Creates a copy of the bullet, and captures its Rigibody (into bulletRB)
             bulletCopy = PhotonNetwork.Instantiate("Bullet", bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0));
@@ -45,7 +45,7 @@ public class PaintballLauncher : MonoBehaviourPun
             // When a bullet is reloaded, delete the previouis copy and reset timer
             if (timeElapsed >= reloadSpeed)
             {
-                Destroy(bulletCopy);
+                PhotonNetwork.Destroy(bulletCopy);
                 timeElapsed = 0f;
                 bulletActive = false;
             }

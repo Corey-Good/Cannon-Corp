@@ -11,8 +11,8 @@ public class LoadUI : MonoBehaviour
     public Slider healthBar;
     public Slider reloadBar;
 
-    private       float score;
-    private       float totalHealth = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["healthPoints"];
+    public static float score;
+    public static       float totalHealth = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["healthPoints"];
     public static float currentHealth;
 
     void Awake()
@@ -20,6 +20,8 @@ public class LoadUI : MonoBehaviour
         // Set the player's health to full on load
         currentHealth = totalHealth;
         healthBar.value = currentHealth / totalHealth;
+
+        score = 0.0f;
 
         // Give the user a deafult name if no name was chosen
         if (NameGenerator.UserName == null)
@@ -46,8 +48,11 @@ public class LoadUI : MonoBehaviour
         if(currentHealth <= 0.0f)
         {
             StartCoroutine(DisconnectAndLoad());
+            //GameOver.GameOverScreen();
+
         }
     }
+
 
     IEnumerator DisconnectAndLoad()
     {
