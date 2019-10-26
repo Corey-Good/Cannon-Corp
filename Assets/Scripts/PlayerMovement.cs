@@ -13,9 +13,10 @@ public class PlayerMovement : MonoBehaviourPun
     private string leftbutton;
     private string rightbutton;
 
-
+    public static bool isMine; 
     void FixedUpdate()
     {
+        isMine = photonView.IsMine;
         SetKeyBindings();
         if (photonView.IsMine && !PauseMenu.GameIsPaused) 
         { 
