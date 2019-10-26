@@ -32,11 +32,11 @@ public class CameraMovement : MonoBehaviour
     // Deal with the technicals of camera rotation and position towards player
     private GameObject player;
     private Space offsetPositionSpace = Space.Self;
-    //public bool lookAt = true;
+    private bool lookAt = true;
 
     public void Start()
     {
-        offsetPosition = defaultCamera = (Vector3)CharacterInfo.info[CharacterMenu.currentModelIndex]["modelCameraOffset"];
+        offsetPosition = defaultCamera = new Vector3(0.0f, 3.0f, -11.0f);
     }
 
     public void FixedUpdate()
@@ -45,54 +45,54 @@ public class CameraMovement : MonoBehaviour
         if (player == null)
         {
             player = GameObject.FindWithTag("CharacterModel");
-        }
-    }
-    private void LateUpdate()
-    {
-        Refresh();
-
-        // Handles the zoom of the camera based on the scroll wheel
-        if (Input.mouseScrollDelta[1] < 0)
-        {
-            offsetPosition.z -= 0.35f;
-        }
-        if (Input.mouseScrollDelta[1] > 0)
-        {
-            offsetPosition.z += 0.35f;
-        }
-    }
-
-    public void Refresh()
-    {
-
-       // Changes the camera offset based on mouse postition in pixels
-
-        // Resets the camera to the default position
-        if (Input.GetKey("c"))
-        {
-            offsetPosition = defaultCamera;
-        }
-
-
-        // Handles the camera position in the map
-        if (offsetPositionSpace == Space.Self)
-        {
-            transform.position = player.transform.TransformPoint(offsetPosition);
+            //Debug.Log(player);
         }
         else
-        {
-            transform.position = player.transform.position + offsetPosition;
-        }
+        {           
 
-        // Computes the camera rotation in order to always look at the player
-        //if (lookAt)
-        //{
-        //    transform.LookAt(player.transform);
-        //}
-        //else
-        //{
-            transform.rotation = player.transform.rotation;
-        //}
+            // Handles the zoom of the camera based on the scroll wheel
+            if (Input.mouseScrollDelta[1] < 0)
+            {
+                offsetPosition.z -= 0.35f;
+            }
+            if (Input.mouseScrollDelta[1] > 0)
+            {
+                offsetPosition.z += 0.35f;
+            }
+        }
+    }
+
+    public void LateUpdate()
+    {
+        if(player != null)
+        { 
+            // Resets the camera to the default position
+            if (Input.GetKey("c"))
+            {
+                offsetPosition = defaultCamera;
+            }
+
+
+            // Handles the camera position in the map
+            if (offsetPositionSpace == Space.Self)
+            {
+                transform.position = player.transform.TransformPoint(offsetPosition);
+            }
+            else
+            {
+                transform.position = player.transform.position + offsetPosition;
+            }
+
+            //Computes the camera rotation in order to always look at the player
+            if (lookAt)
+            {
+                transform.LookAt(player.transform);
+            }
+            else
+            {
+                transform.rotation = player.transform.rotation;
+            }
+        }
     }
 
 

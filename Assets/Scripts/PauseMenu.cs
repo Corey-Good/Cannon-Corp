@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,10 +8,18 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+<<<<<<< HEAD
 
     private void Awake()
     {
         Cursor.visible = false;
+=======
+  
+
+    private void Awake()
+    {
+       Cursor.visible = false;
+>>>>>>> ProdWithMenu
     }
 
     public void LateUpdate()
@@ -55,5 +64,18 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Quitting game...");
+    }
+
+    public void QuitGame()
+    {
+        StartCoroutine(DisconnectAndLoad());
+    }
+    IEnumerator DisconnectAndLoad()
+    {
+        PhotonNetwork.LeaveRoom();
+        while (PhotonNetwork.InRoom)
+            yield return null;
+        SceneManager.LoadScene(0);
+
     }
 }
