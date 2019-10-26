@@ -8,18 +8,11 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-<<<<<<< HEAD
+    public GameObject settingsUI;
 
     private void Awake()
     {
         Cursor.visible = false;
-=======
-  
-
-    private void Awake()
-    {
-       Cursor.visible = false;
->>>>>>> ProdWithMenu
     }
 
     public void LateUpdate()
@@ -42,28 +35,28 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
         pauseMenuUI.SetActive(false);
         GameIsPaused = false;
+        settingsUI.SetActive(false);
     }
 
     public void Pause()
     {
         Cursor.visible = true;
-        pauseMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(true);   //Opposite of Settings()
         GameIsPaused = true;
+        settingsUI.SetActive(false);   //Opposite of Settings()
     }
 
     public void Settings()
     {
-        SceneManager.LoadScene("InGameSettings");
+        Cursor.visible = true;
+        pauseMenuUI.SetActive(false);  //Opposite of Pause()
+        GameIsPaused = true;
+        settingsUI.SetActive(true);    //Opposite of Pause()
     }
 
-    public void Back()
+public void Back()
     {
         Pause();
-    }
-
-    public void QuitGame()
-    {
-        Debug.Log("Quitting game...");
     }
 
     public void QuitGame()

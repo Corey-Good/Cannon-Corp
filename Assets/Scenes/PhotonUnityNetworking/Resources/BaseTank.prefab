@@ -352,11 +352,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3352513332656028137}
     m_Modifications:
-    - target: {fileID: 2357094597573215052, guid: f8042eab925619d438ed3ef8815f0e32,
-        type: 3}
-      propertyPath: m_Name
-      value: Firing Mechanism
-      objectReference: {fileID: 0}
     - target: {fileID: 2357094597573215055, guid: f8042eab925619d438ed3ef8815f0e32,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -411,6 +406,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2357094597573215052, guid: f8042eab925619d438ed3ef8815f0e32,
+        type: 3}
+      propertyPath: m_Name
+      value: Firing Mechanism
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8042eab925619d438ed3ef8815f0e32, type: 3}
