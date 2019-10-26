@@ -67,7 +67,10 @@ public class PlayerMovement : MonoBehaviourPun
             } 
             else
             {
-                LoadUI.currentHealth += 0.01f;
+                if (LoadUI.currentHealth < LoadUI.totalHealth)
+                {
+                    LoadUI.currentHealth += 0.01f;
+                }
             }
 
             // Rotate model left and right

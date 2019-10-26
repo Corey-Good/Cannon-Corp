@@ -27,8 +27,7 @@ public class CollisionDetection : MonoBehaviourPun
 
                 //LoadUI.score += killPoints;
                 enemyPlayer = collisionInfo.gameObject.GetComponent<PaintballInfo>();
-                UnityEngine.Debug.Log("You were hit by: " + enemyPlayer.GetName());
-                
+                UnityEngine.Debug.Log("You were hit by: " + enemyPlayer);               
 
             }
             else

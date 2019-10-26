@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class HeadRoation : MonoBehaviour
+public class HeadRoation : MonoBehaviourPun
 {
 
     private float x_left = (Screen.width / 2.0f) + (Screen.width * 0.12f);
@@ -16,14 +17,17 @@ public class HeadRoation : MonoBehaviour
 
     public void MoveXNormal()
     {
-        if (Input.mousePosition.x < x_left)
-        {
-            transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
-        }
-        if (Input.mousePosition.x > x_right)
-        {
+        if (photonView.IsMine)
+        {        
+            if (Input.mousePosition.x < x_left)
+            {
+                transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
+            }
+            if (Input.mousePosition.x > x_right)
+            {
             
-            transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
+                transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
+            }
         }
     }
 }
