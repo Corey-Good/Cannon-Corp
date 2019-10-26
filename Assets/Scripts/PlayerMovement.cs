@@ -13,48 +13,11 @@ public class PlayerMovement : MonoBehaviourPun
     private string leftbutton;
     private string rightbutton;
 
-    private void Start()
-    {
-        if(Equals(KeyBindings.forwardKey, "UpArrow"))
-        {
-            forwardbutton = "up";
-        }
-        else
-        { 
-            forwardbutton = KeyBindings.forwardKey.ToLower();
-        }
-
-        if (Equals(KeyBindings.backwardKey, "DownArrow"))
-        {
-            backwardbutton = "down";
-        }
-        else
-        {
-            backwardbutton = KeyBindings.backwardKey.ToLower();
-        }
-
-        if (Equals(KeyBindings.leftKey, "LeftArrow"))
-        {
-            leftbutton = "left";
-        }
-        else
-        {
-            leftbutton = KeyBindings.leftKey.ToLower();
-        }
-
-        if (Equals(KeyBindings.rightKey, "RightArrow"))
-        {
-            rightbutton = "right";
-        }
-        else
-        {
-            rightbutton = KeyBindings.rightKey.ToLower();
-        }
-    }
 
     void FixedUpdate()
     {
-        if (photonView.IsMine) 
+        SetKeyBindings();
+        if (photonView.IsMine && !PauseMenu.GameIsPaused) 
         { 
             // Move play forwards and backwards, regenerate health when no movement is detected
             if (Input.GetKey(forwardbutton))
@@ -91,6 +54,45 @@ public class PlayerMovement : MonoBehaviourPun
         }
 
 
+    }
+
+    public void SetKeyBindings()
+    {
+        if (Equals(KeyBindings.forwardKey, "UpArrow"))
+        {
+            forwardbutton = "up";
+        }
+        else
+        {
+            forwardbutton = KeyBindings.forwardKey.ToLower();
+        }
+
+        if (Equals(KeyBindings.backwardKey, "DownArrow"))
+        {
+            backwardbutton = "down";
+        }
+        else
+        {
+            backwardbutton = KeyBindings.backwardKey.ToLower();
+        }
+
+        if (Equals(KeyBindings.leftKey, "LeftArrow"))
+        {
+            leftbutton = "left";
+        }
+        else
+        {
+            leftbutton = KeyBindings.leftKey.ToLower();
+        }
+
+        if (Equals(KeyBindings.rightKey, "RightArrow"))
+        {
+            rightbutton = "right";
+        }
+        else
+        {
+            rightbutton = KeyBindings.rightKey.ToLower();
+        }
     }
 
 }

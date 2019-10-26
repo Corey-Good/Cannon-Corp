@@ -1,32 +1,31 @@
-﻿using Photon.Pun;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool IsPaused = false;
+    public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-  
+    public GameObject settingsUI;
 
     private void Awake()
     {
-       Cursor.visible = false;
+        Cursor.visible = false;
     }
 
     public void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (IsPaused)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameIsPaused)
             {
-                Cursor.visible = false;
                 Resume();
             }
             else
             {
                 Pause();
-                
             }
         }
     }
@@ -35,18 +34,34 @@ public class PauseMenu : MonoBehaviour
     {
         Cursor.visible = false;
         pauseMenuUI.SetActive(false);
-        IsPaused = false;
+        GameIsPaused = false;
+        settingsUI.SetActive(false);
     }
 
     public void Pause()
     {
         Cursor.visible = true;
-        pauseMenuUI.SetActive(true);
-        IsPaused = true;
+        pauseMenuUI.SetActive(true);   //Opposite of Settings()
+        GameIsPaused = true;
+        settingsUI.SetActive(false);   //Opposite of Settings()
+    }
+
+    public void Settings()
+    {
+        Cursor.visible = true;
+        pauseMenuUI.SetActive(false);  //Opposite of Pause()
+        GameIsPaused = true;
+        settingsUI.SetActive(true);    //Opposite of Pause()
+    }
+
+    public void Back()
+    {
+        Pause();
     }
 
     public void QuitGame()
     {
+        GameIsPaused = false;
         StartCoroutine(DisconnectAndLoad());
     }
     IEnumerator DisconnectAndLoad()

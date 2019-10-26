@@ -21,6 +21,8 @@ public class LoadUI : MonoBehaviour
         currentHealth = totalHealth;
         healthBar.value = currentHealth / totalHealth;
 
+        score = 0.0f;
+
         // Give the user a deafult name if no name was chosen
         if (NameGenerator.UserName == null)
         {

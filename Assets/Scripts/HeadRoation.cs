@@ -17,7 +17,7 @@ public class HeadRoation : MonoBehaviourPun
 
     public void MoveXNormal()
     {
-        if (photonView.IsMine)
+        if (photonView.IsMine && !PauseMenu.GameIsPaused)
         {        
             if (Input.mousePosition.x < x_left)
             {
