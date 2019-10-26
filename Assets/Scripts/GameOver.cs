@@ -8,7 +8,7 @@ public class GameOver : MonoBehaviour
     private float timeElapsed = 0.0f;
     private float waitTime = 3.0f;
 
-    public void GameOverScreen()
+    public void FixedUpdate()
     {
         // Give a short delay before loading the Main Menu
         timeElapsed += Time.deltaTime;
