@@ -5,8 +5,10 @@ using Photon.Pun;
 
 public class GameOver : MonoBehaviour
 {
+    private float timeElapsed = 0.0f;
+    private float waitTime = 3.0f;
 
-    public static void GameOverScreen()
+    public void GameOverScreen()
     {
         // Give a short delay before loading the Main Menu
         timeElapsed += Time.deltaTime;
@@ -14,7 +16,7 @@ public class GameOver : MonoBehaviour
         {
             Cursor.visible = true;
             PhotonNetwork.LoadLevel(0);
-            ;
+            
         }
     }
 }
