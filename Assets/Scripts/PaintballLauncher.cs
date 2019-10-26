@@ -45,7 +45,7 @@ public class PaintballLauncher : MonoBehaviourPun
             // When a bullet is reloaded, delete the previouis copy and reset timer
             if (timeElapsed >= reloadSpeed)
             {
-                Destroy(bulletCopy);
+                PhotonNetwork.Destroy(bulletCopy);
                 timeElapsed = 0f;
                 bulletActive = false;
             }

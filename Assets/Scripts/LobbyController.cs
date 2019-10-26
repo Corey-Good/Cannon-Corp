@@ -9,8 +9,8 @@ public class LobbyController : MonoBehaviourPunCallbacks
 {
     private string roomName = "";
     public Text status;
-
-    public void Start()
+    
+    public void Update()
     {
         if (!PhotonNetwork.IsConnected)
         {
@@ -26,31 +26,22 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public void StartGame(Button button)
     {
         roomName = button.name;
-        if(PhotonNetwork.IsConnectedAndReady)
+        TypedLobby typedLobby = new TypedLobby();
+        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 20 };
+        if (PhotonNetwork.IsConnectedAndReady)
         { 
-            PhotonNetwork.JoinRoom(roomName);            
+            PhotonNetwork.JoinOrCreateRoom(roomName, roomOps, typedLobby);            
         }
-
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
-    {        
-        CreateRoom(roomName);
-    }
-
-    void CreateRoom(string room)
     {
-        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 20 };
-        PhotonNetwork.CreateRoom(room, roomOps);
-    }
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        CreateRoom(roomName);
+        Debug.Log("Failed to make a room. . . .");
     }
 
     public override void OnJoinedRoom()
     {
+        Debug.Log("Joined a room! Now starting the game");
         LoadGame();
     }
 
@@ -64,5 +55,8 @@ public class LobbyController : MonoBehaviourPunCallbacks
         }
     }
 
-
+    public void ResetConnection()
+    {
+        PhotonNetwork.Disconnect();
+    }
 }

@@ -11,7 +11,7 @@ public class LoadUI : MonoBehaviour
     public Slider healthBar;
     public Slider reloadBar;
 
-    private       float score;
+    public static float score;
     private       float totalHealth = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["healthPoints"];
     public static float currentHealth;
 
