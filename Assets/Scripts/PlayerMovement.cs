@@ -7,6 +7,11 @@ public class PlayerMovement : MonoBehaviourPun
 {
     private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
     private float rotateSpeed   = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
+    private float x_left = (Screen.width / 2.0f) + (Screen.width * 0.12f);
+    private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
+
+    public GameObject baseObject;
+    public GameObject headObject;
 
     private string forwardbutton;
     private string backwardbutton;
@@ -17,43 +22,19 @@ public class PlayerMovement : MonoBehaviourPun
     void FixedUpdate()
     {
         SetKeyBindings();
+
         if (photonView.IsMine && !PauseMenu.GameIsPaused) 
-        { 
-            // Move play forwards and backwards, regenerate health when no movement is detected
-            if (Input.GetKey(forwardbutton))
+        {
+            MovePlayer();
+            if (GameLoad.isXInverted)
             {
-                transform.position += transform.forward * Time.deltaTime * movementForce;
-            } 
-            else if (Input.GetKey(backwardbutton))
-            {
-                transform.position += -transform.forward * Time.deltaTime * movementForce;
-            } 
+                MoveXInverted();
+            }
             else
             {
-                if (LoadUI.currentHealth < LoadUI.totalHealth)
-                {
-                    LoadUI.currentHealth += 0.01f;
-                }
-            }
-
-            // Rotate model left and right
-            if (Input.GetKey(rightbutton))
-            {
-                transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
-            }
-            else if (Input.GetKey(leftbutton))
-            {
-                transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
-            }
-        
-            // Decrease health, for testing purposes
-            if (Input.GetKey("h"))
-            {
-                LoadUI.currentHealth -= 1.0f;
+                MoveXNormal();
             }
         }
-
-
     }
 
     public void SetKeyBindings()
@@ -95,4 +76,68 @@ public class PlayerMovement : MonoBehaviourPun
         }
     }
 
+    public void MovePlayer()
+    {
+        // Move play forwards and backwards, regenerate health when no movement is detected
+        if (Input.GetKey(forwardbutton))
+        {
+            baseObject.transform.position += transform.forward * Time.deltaTime * movementForce;
+        }
+        else if (Input.GetKey(backwardbutton))
+        {
+            baseObject.transform.position += -transform.forward * Time.deltaTime * movementForce;
+        }
+        else
+        {
+            if (LoadUI.currentHealth < LoadUI.totalHealth)
+            {
+                LoadUI.currentHealth += 0.01f;
+            }
+        }
+
+        // Rotate model left and right
+        if (Input.GetKey(rightbutton))
+        {
+            baseObject.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+        }
+        else if (Input.GetKey(leftbutton))
+        {
+            baseObject.transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
+        }
+
+        // Decrease health, for testing purposes
+        if (Input.GetKey("h"))
+        {
+            LoadUI.currentHealth -= 1.0f;
+        }
+    }
+
+    public void MoveXNormal()
+    {
+        if (photonView.IsMine && !PauseMenu.GameIsPaused)
+        {
+            if (Input.mousePosition.x < x_left)
+            {
+                headObject.transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
+            }
+            if (Input.mousePosition.x > x_right)
+            {
+
+                headObject.transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
+            }
+        }
+    }
+
+    public void MoveXInverted()
+    {
+        if (Input.mousePosition.x < x_left)
+        {
+            headObject.transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
+        }
+        if (Input.mousePosition.x > x_right)
+        {
+            headObject.transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
+        }
+
+    }
 }

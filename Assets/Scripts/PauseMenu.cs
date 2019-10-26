@@ -64,6 +64,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
         StartCoroutine(DisconnectAndLoad());
     }
+
     IEnumerator DisconnectAndLoad()
     {
         PhotonNetwork.LeaveRoom();
