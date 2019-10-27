@@ -6,10 +6,9 @@ using Photon.Pun;
 
 public class PaintballLauncher : MonoBehaviourPun
 {
-    public  GameObject bullet;              // Contains the bullet model
     private GameObject bulletCopy;          // Copy of the bullet that gets launched
     public  GameObject bulletSpawnLocation; // Where the bull is instantiated
-    private Rigidbody  bulletRB;            // Rigibody of the bullet to be launched
+
         
     private float timeElapsed = 0f;
     private bool  bulletActive = false;
@@ -29,10 +28,10 @@ public class PaintballLauncher : MonoBehaviourPun
         {
             // Creates a copy of the bullet, and captures its Rigibody (into bulletRB)
             bulletCopy = PhotonNetwork.Instantiate("Bullet", bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0));
-            bulletRB = bulletCopy.GetComponent<Rigidbody>();
+
 
             // Applies the launching force to the bullet and sets its status to active (true)
-            bulletRB.AddRelativeForce(((transform.forward * bulletSpeed) + (transform.up * bulletArch)), ForceMode.Impulse);
+            bulletCopy.GetComponent<Rigidbody>().AddRelativeForce(((bulletSpawnLocation.transform.forward * bulletSpeed) + (bulletSpawnLocation.transform.up * bulletArch)), ForceMode.Impulse);
             bulletActive = true;
         }
 

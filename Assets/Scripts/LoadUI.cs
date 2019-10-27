@@ -41,7 +41,7 @@ public class LoadUI : MonoBehaviour
         playerScore.text = score.ToString("0"); // 0 converts the float to a string with no decimal value
 
         // Update the player health bar and reload bars
-        reloadBar.value = PaintballLauncher.reloadProgress;
+        reloadBar.value = PlayerMovement.reloadProgress;
         healthBar.value = currentHealth / totalHealth;
 
         // Send the player to the GameOver screen when killed
