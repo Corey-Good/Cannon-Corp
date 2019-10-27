@@ -31,6 +31,10 @@ public class PlayerMovement : MonoBehaviourPun
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
 
+    private void Awake()
+    {
+        reloadProgress = 1.0f;
+    }
     void FixedUpdate()
     {
         SetKeyBindings();

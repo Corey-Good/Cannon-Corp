@@ -10,7 +10,7 @@ public class SpawnCharacter : MonoBehaviourPun
     public GameObject[] location = new GameObject[15];
     public GameObject[] playerModel;
     private int index = CharacterMenu.currentModelIndex;
-    private string[] tankNames = new string[5] { "Base", "FutureTank", "CatapultModel", "CartoonTank", "Tank2" };
+    private string[] tankNames = new string[5] { "BaseTank", "FutureTank", "CatapultModel", "CartoonTank", "Tank2" };
 
 
 
