@@ -51,7 +51,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
             PhotonNetwork.LoadLevel(1);
         else
         {
-            PhotonNetwork.LoadLevel(4);
+            PhotonNetwork.LoadLevel(3);
         }
     }
 

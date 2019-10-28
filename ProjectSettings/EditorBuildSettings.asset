@@ -15,18 +15,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial.unity
     guid: a390773b767ea904487ac06d67b4558f
   - enabled: 1
+    path: Assets/Scenes/SM.unity
+    guid: c63ac2e486dc11449beacc5b500cef1a
+  - enabled: 0
     path: Assets/Scenes/GameOver.unity
     guid: d61b63f286a01d349a204193a44516e3
-  - enabled: 1
-    path: Assets/Scenes/SM.unity
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/328ace0f94719d045b9be5f997524f14
     guid: 328ace0f94719d045b9be5f997524f14
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/Tutorial Mode.unity
-    guid: 4cd1e9051679a7847bcffc6463324bd8
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/ff52e5d3fe917084e95f103bd1a4a783
-    guid: ff52e5d3fe917084e95f103bd1a4a783
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
