@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     public void LateUpdate()

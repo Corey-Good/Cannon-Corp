@@ -12,6 +12,10 @@ public class PlayerMovement : MonoBehaviourPun
 
     public GameObject baseObject;
     public GameObject headObject;
+    public GameObject tankCamera;
+    private float turretSpeed = 0.4f;
+
+    Quaternion temp;
 
     private string forwardbutton;
     private string backwardbutton;
@@ -30,6 +34,9 @@ public class PlayerMovement : MonoBehaviourPun
     private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
+
+
+
 
     private void Awake()
     {
@@ -53,6 +60,12 @@ public class PlayerMovement : MonoBehaviourPun
                 MoveXNormal();
             }
         }
+
+
+
+        //temp = Quaternion.Lerp(headObject.transform.rotation, tankCamera.transform.rotation, turretSpeed * Time.deltaTime);
+
+        //headObject.transform.rotation = new Quaternion(headObject.transform.rotation.x, temp.y, headObject.transform.rotation.z, headObject.transform.rotation.w);
     }
 
     public void SetKeyBindings()
@@ -135,13 +148,15 @@ public class PlayerMovement : MonoBehaviourPun
 
         if (Input.mousePosition.x < x_left)
         {
-            headObject.transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
+            headObject.transform.Rotate(-Vector3.up * 40.0f * Time.deltaTime);
         }
         if (Input.mousePosition.x > x_right)
         {
-
-            headObject.transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
+            headObject.transform.Rotate(Vector3.up * 40.0f * Time.deltaTime);
         }
+
+
+
 
     }
 
