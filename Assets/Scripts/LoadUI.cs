@@ -55,6 +55,11 @@ public class LoadUI : MonoBehaviour
             isGameOver = true;
         }
 
+        if(DangerZone.isInDanger)
+        {
+            currentHealth -= 0.05f;
+        }
+
         if(isGameOver)
         {
             LoadGameOver();
@@ -66,7 +71,7 @@ public class LoadUI : MonoBehaviour
         gameOverPanel.SetActive(true);
         panel = gameOverPanel.GetComponent<Image>();
         panel.color = new Color(0.0f, 0.0f, 0.0f, alpha);
-        alpha += 0.004f;
+        alpha += 0.007f;
         if (alpha > 1.9f)
         {
             Cursor.visible = true;

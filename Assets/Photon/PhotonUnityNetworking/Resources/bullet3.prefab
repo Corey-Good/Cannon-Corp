@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 265935855318999542}
   - component: {fileID: 8585114978597737767}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: bullet3
   m_TagString: EnemyTank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 2717774406268365404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.2246335, y: -0.6082225, z: 4.128087}
-  m_LocalScale: {x: 0.118700325, y: 0.118700325, z: 0.118700325}
+  m_LocalScale: {x: 0.17, y: 0.17, z: 0.17}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

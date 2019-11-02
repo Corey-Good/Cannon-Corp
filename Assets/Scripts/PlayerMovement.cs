@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviourPun
     private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
+    List<string> paintballs = new List<string>() { "bullet1", "bullet2", "bullet3", "bullet4", "bullet5"};
 
     private void Awake()
     {
@@ -53,7 +54,7 @@ public class PlayerMovement : MonoBehaviourPun
             {
                 MoveXNormal();
             }
-       }
+        }
     }
 
     public void SetKeyBindings()
@@ -167,7 +168,7 @@ public class PlayerMovement : MonoBehaviourPun
         {
             bulletColor = GetRandomColor();
             // Creates a copy of the bullet, and captures its Rigibody (into bulletRB)
-            bulletCopy = PhotonNetwork.Instantiate("Bullet", bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0));
+            bulletCopy = PhotonNetwork.Instantiate(paintballs[CharacterMenu.currentModelIndex], bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0));
             bulletRender = bulletCopy.GetComponent<Renderer>();
 
             bulletRender.material.color = bulletColor;
@@ -196,9 +197,10 @@ public class PlayerMovement : MonoBehaviourPun
             }
         }
     }
+
     private Color GetRandomColor()
     {
-        List<Color> colors = new List<Color>() { Color.black, Color.blue, Color.green, Color.red, Color.yellow, Color.cyan, Color.gray, Color.magenta, Color.white};
+        List<Color> colors = new List<Color>() { Color.blue, Color.green, Color.red, Color.yellow, Color.cyan, Color.gray, Color.magenta, Color.white};
 
         return colors[Random.Range(0, colors.Count)];
     }
