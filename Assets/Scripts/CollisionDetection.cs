@@ -21,8 +21,14 @@ public class CollisionDetection : MonoBehaviourPun
             {
                 LoadUI.currentHealth = ((float)LoadUI.currentHealth - (float)PaintballInfo.paintballInfo["paintballDamage"]);
                 enemyPlayer = collisionInfo.gameObject.GetComponent<PaintballInfo>();
-                UnityEngine.Debug.Log("You were hit by: " + enemyPlayer);               
+                UnityEngine.Debug.Log("You were hit by: " + enemyPlayer);
+                PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
 
+            }
+
+            if(collisionInfo.collider.tag == "DangerZone")
+            {
+                UnityEngine.Debug.Log("Entering The DAnger Zone!!!");
             }
 
         }

@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviourPun
 
     private GameObject bulletCopy;          // Copy of the bullet that gets launched
     public GameObject bulletSpawnLocation; // Where the bull is instantiated
+    public static Color bulletColor = Color.red;
 
 
     private float timeElapsed = 0f;
@@ -52,7 +53,7 @@ public class PlayerMovement : MonoBehaviourPun
             {
                 MoveXNormal();
             }
-        }
+       }
     }
 
     public void SetKeyBindings()
@@ -160,10 +161,16 @@ public class PlayerMovement : MonoBehaviourPun
 
     public void FireMechanism()
     {
+        Renderer bulletRender = null;
+        
         if (Input.GetMouseButtonDown(KeyBindings.clickIndex) && bulletActive == false && !PauseMenu.GameIsPaused)
         {
+            bulletColor = GetRandomColor();
             // Creates a copy of the bullet, and captures its Rigibody (into bulletRB)
             bulletCopy = PhotonNetwork.Instantiate("Bullet", bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0));
+            bulletRender = bulletCopy.GetComponent<Renderer>();
+
+            bulletRender.material.color = bulletColor;
 
 
             // Applies the launching force to the bullet and sets its status to active (true)
@@ -180,10 +187,19 @@ public class PlayerMovement : MonoBehaviourPun
             // When a bullet is reloaded, delete the previouis copy and reset timer
             if (timeElapsed >= reloadSpeed)
             {
-                PhotonNetwork.Destroy(bulletCopy);
+                //GameObject splatter = PhotonNetwork.Instantiate("Splatter", bulletCopy.transform.position, Quaternion.Euler(0, 0, 0));
+                //Renderer rend = splatter.GetComponent<Renderer>();
+                //rend.material.color = bulletColor;
+                //PhotonNetwork.Destroy(bulletCopy);
                 timeElapsed = 0f;
                 bulletActive = false;
             }
         }
+    }
+    private Color GetRandomColor()
+    {
+        List<Color> colors = new List<Color>() { Color.black, Color.blue, Color.green, Color.red, Color.yellow, Color.cyan, Color.gray, Color.magenta, Color.white};
+
+        return colors[Random.Range(0, colors.Count)];
     }
 }
