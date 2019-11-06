@@ -17,6 +17,10 @@ public class LobbyController : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
             status.text = "Connecting . . .";
         }
+        if(status.text == "Offline")
+        {
+            ResetConnection();
+        }
     }
     public override void OnConnectedToMaster()
     {

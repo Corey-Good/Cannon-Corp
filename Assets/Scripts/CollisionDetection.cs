@@ -8,7 +8,7 @@ public class CollisionDetection : MonoBehaviourPun
 {
     public GameObject objectName; // Name of the object using the CollisionDetection script
 
-    private float killPoints = 10.0f;
+    private float damage = 0f;
 
     private PaintballInfo enemyPlayer;
 
@@ -16,14 +16,37 @@ public class CollisionDetection : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-
-            if (collisionInfo.collider.name == "Bullet(Clone)")
+            switch(collisionInfo.collider.name)
             {
-                LoadUI.currentHealth = ((float)LoadUI.currentHealth - (float)PaintballInfo.paintballInfo["paintballDamage"]);
-                enemyPlayer = collisionInfo.gameObject.GetComponent<PaintballInfo>();
-                UnityEngine.Debug.Log("You were hit by: " + enemyPlayer);               
 
+                case "bullet1(Clone)":
+                    damage = 10.0f;
+                    LoadUI.currentHealth -= damage;
+                    PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
+                    break;
+                case "bullet2(Clone)":
+                    damage = 7.0f;
+                    LoadUI.currentHealth -= damage;
+                    PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
+                    break;
+                case "bullet3(Clone)":
+                    damage = 25.0f;
+                    LoadUI.currentHealth -= damage;
+                    PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
+                    break;
+                case "bullet4(Clone)":
+                    damage = 12.0f;
+                    LoadUI.currentHealth -= damage;
+                    PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
+                    break;
+                case "bullet5(Clone)":
+                    damage = 10.0f;
+                    LoadUI.currentHealth -= damage;
+                    PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
+                    break;
             }
+
+
 
         }
     }
