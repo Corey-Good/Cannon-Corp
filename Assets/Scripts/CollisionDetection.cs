@@ -19,26 +19,34 @@ public class CollisionDetection : MonoBehaviourPun
             switch(collisionInfo.collider.name)
             {
 
-                case "bullet1":
+                case "bullet1(Clone)":
                     damage = 10.0f;
+                    LoadUI.currentHealth -= damage;
+                    PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
                     break;
-                case "bullet2":
+                case "bullet2(Clone)":
                     damage = 7.0f;
+                    LoadUI.currentHealth -= damage;
+                    PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
                     break;
-                case "bullet3":
+                case "bullet3(Clone)":
                     damage = 25.0f;
+                    LoadUI.currentHealth -= damage;
+                    PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
                     break;
-                case "bullet4":
+                case "bullet4(Clone)":
                     damage = 12.0f;
+                    LoadUI.currentHealth -= damage;
+                    PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
                     break;
-                case "bullet5":
+                case "bullet5(Clone)":
                     damage = 10.0f;
+                    LoadUI.currentHealth -= damage;
+                    PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
                     break;
             }
 
-            LoadUI.currentHealth -= damage;
 
-            PhotonNetwork.Destroy(collisionInfo.collider.gameObject);
 
         }
     }
