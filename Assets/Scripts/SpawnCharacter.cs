@@ -8,7 +8,6 @@ using Photon.Pun;
 public class SpawnCharacter : MonoBehaviourPun
 {
     public GameObject[] location = new GameObject[15];
-    public GameObject[] playerModel;
     private int index = CharacterMenu.currentModelIndex;
     private string[] tankNames = new string[5] { "BaseTank", "FutureTank", "CatapultModel", "CartoonTank", "Tank2" };
 
@@ -21,13 +20,13 @@ public class SpawnCharacter : MonoBehaviourPun
         {
 
             int randomNumber = Random.Range(0, 11);
-            //GameObject a = Instantiate(playerModel[index], location[randomNumber].transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;
             PhotonNetwork.Instantiate(tankNames[index], location[randomNumber].transform.position, Quaternion.Euler(0, 0, 0));
         }
         catch (System.Exception)
         {
             Cursor.visible = true;
             SceneManager.LoadScene(0);
+            Debug.Log("Something went teriibly wrong!!!!!!!!!!!!!");
         };
     }
 }

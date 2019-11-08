@@ -52,7 +52,10 @@ public class LoadUI : MonoBehaviour
         // Send the player to the GameOver screen when killed
         if(currentHealth <= 0.0f)
         {
-            isGameOver = true;
+            if(!SharksMinnows.respawn)
+            {
+                isGameOver = true;
+            }
         }
 
         if(DangerZone.isInDanger)
