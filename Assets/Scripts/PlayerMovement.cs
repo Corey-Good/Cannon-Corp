@@ -13,20 +13,15 @@ public class PlayerMovement : MonoBehaviourPun
     public GameObject baseObject;
     public GameObject headObject;
     public GameObject tankCamera;
-    private float turretSpeed = 0.4f;
-
-    Quaternion temp;
+    //private float turretSpeed = 0.4f;
 
     private string forwardbutton;
     private string backwardbutton;
     private string leftbutton;
     private string rightbutton;
 
-
-
-    private GameObject bulletCopy;          // Copy of the bullet that gets launched
-    public GameObject bulletSpawnLocation; // Where the bull is instantiated
-
+    private GameObject bulletCopy;         // Copy of the bullet that gets launched
+    public GameObject bulletSpawnLocation; // Where the bullet is instantiated
 
     private float timeElapsed = 0f;
     private bool bulletActive = false;
@@ -35,14 +30,14 @@ public class PlayerMovement : MonoBehaviourPun
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
 
-
-
+    float mouseX;
 
     private void Awake()
     {
         reloadProgress = 1.0f;
     }
-    void FixedUpdate()
+
+    public void FixedUpdate()
     {
         SetKeyBindings();
 
@@ -60,12 +55,6 @@ public class PlayerMovement : MonoBehaviourPun
                 MoveXNormal();
             }
         }
-
-
-
-        //temp = Quaternion.Lerp(headObject.transform.rotation, tankCamera.transform.rotation, turretSpeed * Time.deltaTime);
-
-        //headObject.transform.rotation = new Quaternion(headObject.transform.rotation.x, temp.y, headObject.transform.rotation.z, headObject.transform.rotation.w);
     }
 
     public void SetKeyBindings()
@@ -143,34 +132,43 @@ public class PlayerMovement : MonoBehaviourPun
         }
     }
 
+    // Used for turret rotation
     public void MoveXNormal()
     {
+        float rotationSpeed = 1.0f;
 
-        if (Input.mousePosition.x < x_left)
+        //mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
+        //mouseX = Mathf.Clamp(mouseX, 0, 180);
+
+        // Move turret to the left
+        if (Input.mousePosition.x < x_right)
         {
-            headObject.transform.Rotate(-Vector3.up * 40.0f * Time.deltaTime);
+            headObject.transform.Rotate(Vector3.down * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
         }
-        if (Input.mousePosition.x > x_right)
+
+        // Move turret to the right
+        if (Input.mousePosition.x > x_left)
         {
-            headObject.transform.Rotate(Vector3.up * 40.0f * Time.deltaTime);
+            headObject.transform.Rotate(Vector3.up * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
         }
-
-
-
 
     }
 
     public void MoveXInverted()
     {
-        if (Input.mousePosition.x < x_left)
         {
-            headObject.transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
-        }
-        if (Input.mousePosition.x > x_right)
-        {
-            headObject.transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
-        }
+            // Move turret to the left
+            if (Input.mousePosition.x > CameraMovement.centerOfScreen)
+            {
+                headObject.transform.Rotate(Vector3.down * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
+            }
 
+            // Move turret to the right
+            if (Input.mousePosition.x < CameraMovement.centerOfScreen)
+            {
+                headObject.transform.Rotate(Vector3.up * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
+            }
+        }
     }
 
     public void FireMechanism()

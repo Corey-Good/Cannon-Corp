@@ -8,7 +8,7 @@ public class CollisionDetection : MonoBehaviourPun
 {
     public GameObject objectName; // Name of the object using the CollisionDetection script
 
-    private float killPoints = 10.0f;
+    //private float killPoints = 10.0f;
 
     private PaintballInfo enemyPlayer;
 
