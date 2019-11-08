@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviourPun
 
     public void Start()
     {
-        offsetPosition = defaultCamera = new Vector3(0.0f, 3.0f, -11.0f);
+        offsetPosition = defaultCamera = new Vector3(0.0f, 20.0f, -30.0f);
     }
 
     public void FixedUpdate()

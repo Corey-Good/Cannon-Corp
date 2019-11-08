@@ -13,10 +13,10 @@ public class PlayerMovement : MonoBehaviourPun
     public GameObject baseObject;
     public GameObject headObject;
 
-    private string forwardbutton;
-    private string backwardbutton;
-    private string leftbutton;
-    private string rightbutton;
+    private string forwardbutton = "w";
+    private string backwardbutton = "s";
+    private string leftbutton = "a";
+    private string rightbutton = "d";
 
 
 
