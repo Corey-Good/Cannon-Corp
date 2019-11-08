@@ -15,125 +15,71 @@ public class CameraMovement : MonoBehaviourPun
 
     // Deal with the technicals of camera rotation and position towards player
     public GameObject player;
-    //private Space offsetPositionSpace = Space.Self;
-    //private bool lookAt = true;
 
     public static float centerOfScreen = (Screen.width / 2.0f);
     private float movementSpeed;
-    public static float cameraRotateSpeed = 100.0f;
+    public static float cameraRotateSpeed = 200.0f;
 
     public float rotationSpeed = 1.0f;
 
-    private float mouseX, mouseY;
-    float camZoom = 0.5f;
 
+    private float camZoom = 0.5f;
     public Transform tankCamera;
     public Transform cameraTarget;
     private Vector3 cameraOffset;
-    [Range(0.1f, 1.0f)]
-    private float cameraSmoothness = 0.5f;
+
     public bool lookAtTank = false;
     public bool rotateAroundTank = true;
     public float cameraRotationSpeed = 5.0f;
 
+
+    private float targetUp = 1.2f;
+
+
     public void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-
         cameraOffset = tankCamera.position - cameraTarget.position;
     }
 
     public void FixedUpdate()
     {
-        // Assigns the camera to the player that spawns. Change to player ID in order to deal with multiple player later on
-        //if (player == null)
-        //{
-        //    // Handles the camera position in the map
-        //    player = GameObject.FindWithTag("CharacterModel");
-        //}
-
-        CursorLock();
-
         ScrollZoom();
+
     }
 
     public void LateUpdate()
     {
         CameraControl();
 
-        CameraFollow();
+        cameraTarget.position = new Vector3(player.transform.position.x, player.transform.position.y + targetUp, player.transform.position.z);
 
-        //CameraRotation();
+        if (lookAtTank)
+        {
+            tankCamera.transform.LookAt(cameraTarget);
+        }
 
-        //ClampCamera();
+
     }
 
     public void CameraControl()
     {
-        mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
-        mouseY -= Input.GetAxis("Mouse Y") * rotationSpeed;
-        mouseY = Mathf.Clamp(mouseY, -30, 30);
-
-        tankCamera.rotation = Quaternion.Euler(mouseY, mouseX, 0);
-
-        ////Rotates camera to the left
-        //if (Input.mousePosition.x < centerOfScreen)
-        //{
-        //    movementSpeed = (centerOfScreen - Input.mousePosition.x) / centerOfScreen * cameraRotateSpeed;
-
-        //    tankCamera.transform.RotateAround(player.transform.position, Vector3.down, movementSpeed * Time.deltaTime);
-        //}
-
-        ////Rotates camera to the right
-        //if (Input.mousePosition.x > centerOfScreen)
-        //{
-
-        //    movementSpeed = (centerOfScreen - Input.mousePosition.x) / centerOfScreen * cameraRotateSpeed;
-
-        //    tankCamera.transform.RotateAround(player.transform.position, Vector3.up, -(movementSpeed) * Time.deltaTime);
-        //}
-    }
-
-    public void CameraFollow()
-    {
-        Vector3 cameraPosition = cameraTarget.position + cameraOffset;
-
-        tankCamera.position = Vector3.Slerp(tankCamera.position, cameraPosition, cameraSmoothness);
-
-        if (lookAtTank)
+        //Debug.Log("X value: " + Input.GetAxis("Mouse X"));
+        //Debug.Log("Y value: " + Input.GetAxis("Mouse Y"));
+        //Rotates camera to the left
+        if (Input.GetAxis("Mouse X") > 0.0f)
         {
-            transform.LookAt(cameraTarget);
-        }
-    }
+            movementSpeed =Input.GetAxis("Mouse X") * cameraRotateSpeed; /*(centerOfScreen - Input.mousePosition.x) / centerOfScreen*/
 
-    public void CameraRotation()
-    {
-        if (rotateAroundTank)
-        {
-            Quaternion cameraTurnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * cameraRotationSpeed, Vector3.up);
-
-            cameraOffset = cameraTurnAngle * cameraOffset;
+            tankCamera.transform.RotateAround(player.transform.position, Vector3.down, movementSpeed * Time.deltaTime);
         }
 
-        if (lookAtTank || rotateAroundTank)
+        //Rotates camera to the right
+        if (Input.GetAxis("Mouse X") < 0.0f)
         {
-            transform.LookAt(cameraTarget);
-        }
-    }
 
-    public void CursorLock()
-    {
-        // Locks the cursor to the center of the screen
-        if (Input.GetKey("1"))
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = true;
-        }
+            movementSpeed = Input.GetAxis("Mouse X") * cameraRotateSpeed;
 
-        // Unlocks the cursor
-        if (Input.GetKey("2"))
-        {
-            Cursor.lockState = CursorLockMode.None;
+            tankCamera.transform.RotateAround(player.transform.position, Vector3.up, -(movementSpeed) * Time.deltaTime);
         }
     }
 
@@ -152,15 +98,5 @@ public class CameraMovement : MonoBehaviourPun
         cameraOffset = tankCamera.position - cameraTarget.position;
     }
     
-    private void ClampCamera()
-    {
-        Vector3 clampMovement = tankCamera.position;
 
-
-        //clampMovement.x = Mathf.Clamp(clampMovement.x, -1.0f, 10.0f);
-        //clampMovement.y = Mathf.Clamp(clampMovement.y, 0.0f, 17.0f);
-        //clampMovement.z = Mathf.Clamp(clampMovement.z, 0.0f, 50.0f);
-
-        tankCamera.position = clampMovement;
-    }
 }

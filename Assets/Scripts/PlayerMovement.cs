@@ -41,8 +41,8 @@ public class PlayerMovement : MonoBehaviourPun
     {
         SetKeyBindings();
 
-        if (photonView.IsMine && !PauseMenu.GameIsPaused)
-        {
+        //if (photonView.IsMine && !PauseMenu.GameIsPaused)
+        //{
             MovePlayer();
             FireMechanism();
 
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviourPun
             {
                 MoveXNormal();
             }
-        }
+        //}
     }
 
     public void SetKeyBindings()
@@ -135,22 +135,25 @@ public class PlayerMovement : MonoBehaviourPun
     // Used for turret rotation
     public void MoveXNormal()
     {
-        float rotationSpeed = 1.0f;
+        //float rotationSpeed = 1.0f;
 
         //mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
         //mouseX = Mathf.Clamp(mouseX, 0, 180);
 
-        // Move turret to the left
-        if (Input.mousePosition.x < x_right)
-        {
-            headObject.transform.Rotate(Vector3.down * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
-        }
+        //// Move turret to the left
+        //if (Input.mousePosition.x < x_right)
+        //{
+        //    headObject.transform.Rotate(Vector3.down * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
+        //}
 
-        // Move turret to the right
-        if (Input.mousePosition.x > x_left)
-        {
-            headObject.transform.Rotate(Vector3.up * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
-        }
+        //// Move turret to the right
+        //if (Input.mousePosition.x > x_left)
+        //{
+        //    headObject.transform.Rotate(Vector3.up * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
+        //}
+
+        //Quaternion temp = new Quaternion(headObject.transform.rotation.x, tankCamera.transform.rotation.y, headObject.transform.rotation.z, headObject.transform.rotation.w);
+        //headObject.transform.rotation = (Quaternion.Slerp(headObject.transform.rotation, temp, 0.5f));
 
     }
 
