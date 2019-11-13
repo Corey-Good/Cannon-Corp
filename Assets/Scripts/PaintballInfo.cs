@@ -24,7 +24,7 @@ public class PaintballInfo : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            GameObject splatter = PhotonNetwork.Instantiate("Splatter", objectName.transform.position, Quaternion.Euler(0, 0, 0));
+            GameObject splatter = PhotonNetwork.Instantiate("Splatter", objectName.transform.position, Quaternion.Euler(-90, 0, 0));
             Renderer rend = splatter.GetComponent<Renderer>();
             rend.material.color = PlayerMovement.bulletColor;
             PhotonNetwork.Destroy(objectName);

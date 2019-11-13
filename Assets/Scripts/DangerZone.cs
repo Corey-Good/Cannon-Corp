@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class DangerZone : MonoBehaviour
 {
     public static bool isInDanger = false;
@@ -20,8 +21,11 @@ public class DangerZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        isInDanger = false;
-        dangerMessage.SetActive(false);
+        if (other.gameObject.tag == "Player")
+        {
+            isInDanger = false;
+            dangerMessage.SetActive(false);
+        }
     }
 
 }
