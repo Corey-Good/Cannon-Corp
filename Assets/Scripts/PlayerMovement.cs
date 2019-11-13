@@ -1,4 +1,4 @@
-﻿using Photon.Pun;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
+    public static float reloadMultiplier = 1.0f;
     List<string> paintballs = new List<string>() { "bullet1", "bullet2", "bullet3", "bullet4", "bullet5"};
 
     private void Awake()
@@ -41,19 +42,19 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     {
         SetKeyBindings();
 
-        if (photonView.IsMine && !PauseMenu.GameIsPaused)
+        if (/*photonView.IsMine &&*/ !PauseMenu.GameIsPaused)
         {
             MovePlayer();
             FireMechanism();
 
-            if (GameLoad.isXInverted)
-            {
-                MoveXInverted();
-            }
-            else
-            {
-                MoveXNormal();
-            }
+            //if (GameLoad.isXInverted)
+            //{
+            //    MoveXInverted();
+            //}
+            //else
+            //{
+            //    MoveXNormal();
+            //}
         }
     }
 
@@ -183,10 +184,10 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         {
             // Increase time and update the reloadBar progress
             timeElapsed += Time.deltaTime;
-            reloadProgress = timeElapsed / reloadSpeed;
+            reloadProgress = timeElapsed / (reloadSpeed * reloadMultiplier);
 
             // When a bullet is reloaded, delete the previouis copy and reset timer
-            if (timeElapsed >= reloadSpeed)
+            if (timeElapsed >= (reloadSpeed * reloadMultiplier))
             {
                 //GameObject splatter = PhotonNetwork.Instantiate("Splatter", bulletCopy.transform.position, Quaternion.Euler(0, 0, 0));
                 //Renderer rend = splatter.GetComponent<Renderer>();

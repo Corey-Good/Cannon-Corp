@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviourPun
 
     public void Start()
     {
-        offsetPosition = defaultCamera = new Vector3(0.0f, 3.0f, -11.0f);
+        offsetPosition = defaultCamera = new Vector3(0.0f, 10.0f, -30.0f);
     }
 
     public void FixedUpdate()
@@ -35,14 +35,14 @@ public class CameraMovement : MonoBehaviourPun
         else
         {    
             // Handles the zoom of the camera based on the scroll wheel
-            if (Input.mouseScrollDelta[1] < 0)
-            {
-                offsetPosition.z -= 0.35f;
-            }
-            if (Input.mouseScrollDelta[1] > 0)
-            {
-                offsetPosition.z += 0.35f;
-            }
+            //if (Input.mouseScrollDelta[1] < 0)
+            //{
+            //    offsetPosition.z -= 0.35f;
+            //}
+            //if (Input.mouseScrollDelta[1] > 0)
+            //{
+            //    offsetPosition.z += 0.35f;
+            //}
         }
         
     }
