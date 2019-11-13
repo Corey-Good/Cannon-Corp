@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviourPun
+public class PlayerMovement : MonoBehaviourPun, IPunObservable
 {
     private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
     private float rotateSpeed   = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
@@ -204,4 +204,23 @@ public class PlayerMovement : MonoBehaviourPun
 
         return colors[Random.Range(0, colors.Count)];
     }
+<<<<<<< HEAD
 }
+=======
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(baseObject.transform.position);
+            stream.SendNext(headObject.transform.position);
+
+        }
+        else
+        {
+            baseObject.transform.position = (Vector3)stream.ReceiveNext();
+            headObject.transform.position = (Vector3)stream.ReceiveNext();
+        }
+    }
+}
+>>>>>>> 5cd6453fbcdb66ab10f05ff28e48ba2c6adfb788
