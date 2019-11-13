@@ -1,41 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Photon.Pun;
 using UnityEngine;
-using Photon.Pun;
 
 public class SharksMinnows : MonoBehaviourPun
 {
     public GameObject[] location = new GameObject[15];
-    public static bool respawn = true;
-    private bool needToRespawn = false;
-    
+    public static bool respawn = false;
+    private GameObject player;
+
     private void Awake()
     {
-        int randomNumber = Random.Range(0, 11);
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1) 
+        respawn = true;
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
-            PhotonNetwork.Instantiate("Shark", location[randomNumber].transform.position, Quaternion.Euler(0, 0, 0));
+            player = SpawnCharacter("Shark");
         }
         else
         {
-            PhotonNetwork.Instantiate("Minnow", location[randomNumber].transform.position, Quaternion.Euler(0, 0, 0));
+            player = SpawnCharacter("Minnow");
         }
     }
 
     private void FixedUpdate()
     {
-        if(LoadUI.currentHealth < 0.0f)
+        if (LoadUI.currentHealth <= 0)
         {
-            needToRespawn = true;
-        }
-
-        if(needToRespawn)
-        {
-            LoadUI.currentHealth = 100.0f;
-            int randomNumber = Random.Range(0, 11);
-            PhotonNetwork.Instantiate("Shark", location[randomNumber].transform.position, Quaternion.Euler(0, 0, 0));
-            needToRespawn = false;
+            PhotonNetwork.Destroy(player);
+            LoadUI.currentHealth = 75.0f;
+            LoadUI.score = 0.0f;
+            player = SpawnCharacter("Shark");
         }
     }
 
+    private GameObject SpawnCharacter(string model)
+    {
+        return PhotonNetwork.Instantiate(model, location[Random.Range(0, 10)].transform.position, Quaternion.Euler(0, 0, 0));
+    }
 }

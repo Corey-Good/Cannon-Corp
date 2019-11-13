@@ -1,13 +1,13 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+﻿using Photon.Pun;
 using System.Collections;
-using Photon.Pun;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoadUI : MonoBehaviour
 {
-    public Text   playerName;
-    public Text   playerScore;
+    public Text playerName;
+    public Text playerScore;
     public Slider healthBar;
     public Slider reloadBar;
 
@@ -20,7 +20,7 @@ public class LoadUI : MonoBehaviour
     private Image panel;
     private float alpha = 0.0f;
 
-    void Awake()
+    private void Awake()
     {
         // Set the player's health to full on load
         currentHealth = totalHealth;
@@ -35,7 +35,7 @@ public class LoadUI : MonoBehaviour
         }
         else
         {
-          playerName.text = NameGenerator.UserName;
+            playerName.text = NameGenerator.UserName;
         }
     }
 
@@ -50,20 +50,20 @@ public class LoadUI : MonoBehaviour
         healthBar.value = currentHealth / totalHealth;
 
         // Send the player to the GameOver screen when killed
-        if(currentHealth <= 0.0f)
+        if (currentHealth <= 0.0f)
         {
-            if(!SharksMinnows.respawn)
+            if (!SharksMinnows.respawn)
             {
                 isGameOver = true;
             }
         }
 
-        if(DangerZone.isInDanger)
+        if (DangerZone.isInDanger)
         {
             currentHealth -= 0.05f;
         }
 
-        if(isGameOver)
+        if (isGameOver)
         {
             LoadGameOver();
         }
@@ -82,14 +82,11 @@ public class LoadUI : MonoBehaviour
         }
     }
 
-    IEnumerator DisconnectAndLoad()
+    private IEnumerator DisconnectAndLoad()
     {
         PhotonNetwork.LeaveRoom();
         while (PhotonNetwork.InRoom)
             yield return null;
         SceneManager.LoadScene(0);
-
     }
-
-
 }

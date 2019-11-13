@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Photon.Pun;
+﻿using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LobbyController : MonoBehaviourPunCallbacks
 {
     private string roomName = "";
     public Text status;
-    
+
     public void Update()
     {
         if (!PhotonNetwork.IsConnected)
@@ -17,11 +15,12 @@ public class LobbyController : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
             status.text = "Connecting . . .";
         }
-        if(status.text == "Offline")
+        if (status.text == "Offline")
         {
             ResetConnection();
         }
     }
+
     public override void OnConnectedToMaster()
     {
         status.text = "Now connected!!";
@@ -33,8 +32,8 @@ public class LobbyController : MonoBehaviourPunCallbacks
         TypedLobby typedLobby = new TypedLobby();
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 20 };
         if (PhotonNetwork.IsConnectedAndReady)
-        { 
-            PhotonNetwork.JoinOrCreateRoom(roomName, roomOps, typedLobby);            
+        {
+            PhotonNetwork.JoinOrCreateRoom(roomName, roomOps, typedLobby);
         }
     }
 
@@ -51,7 +50,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     private void LoadGame()
     {
-        if(roomName == "FreeForAll")
+        if (roomName == "FreeForAll")
             PhotonNetwork.LoadLevel(1);
         else
         {

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class DangerZone : MonoBehaviour
 {
@@ -16,7 +13,6 @@ public class DangerZone : MonoBehaviour
             isInDanger = true;
             dangerMessage.SetActive(true);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,5 +23,4 @@ public class DangerZone : MonoBehaviour
             dangerMessage.SetActive(false);
         }
     }
-
 }

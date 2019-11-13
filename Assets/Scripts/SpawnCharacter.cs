@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Photon.Pun;
-
 
 public class SpawnCharacter : MonoBehaviourPun
 {
@@ -11,14 +8,11 @@ public class SpawnCharacter : MonoBehaviourPun
     private int index = CharacterMenu.currentModelIndex;
     private string[] tankNames = new string[5] { "BaseTank", "FutureTank", "CatapultModel", "CartoonTank", "Tank2" };
 
-
-
     // On Scene Load, spawn the charcter in one of the random locations, if fails, load Main Menu
-    void Awake()
+    private void Awake()
     {
         try
         {
-
             int randomNumber = Random.Range(0, 11);
             PhotonNetwork.Instantiate(tankNames[index], location[randomNumber].transform.position, Quaternion.Euler(0, 0, 0));
         }

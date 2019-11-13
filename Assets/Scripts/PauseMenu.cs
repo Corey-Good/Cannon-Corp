@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Photon.Pun;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -62,15 +61,15 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         GameIsPaused = false;
+        SharksMinnows.respawn = false;
         StartCoroutine(DisconnectAndLoad());
     }
 
-    IEnumerator DisconnectAndLoad()
+    private IEnumerator DisconnectAndLoad()
     {
         PhotonNetwork.LeaveRoom();
         while (PhotonNetwork.InRoom)
             yield return null;
         SceneManager.LoadScene(0);
-
     }
 }
