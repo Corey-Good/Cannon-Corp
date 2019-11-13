@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviourPun
             if (timeElapsed >= reloadSpeed)
             {
                 //GameObject splatter = PhotonNetwork.Instantiate("Splatter", bulletCopy.transform.position, Quaternion.Euler(0, 0, 0));
-                //Renderer rend = splatter.GetComponent<Renderer>();
+                //Renderer rend      = splatter.GetComponent<Renderer>();
                 //rend.material.color = bulletColor;
                 //PhotonNetwork.Destroy(bulletCopy);
                 timeElapsed = 0f;
