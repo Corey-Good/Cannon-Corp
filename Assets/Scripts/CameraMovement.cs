@@ -16,6 +16,8 @@ public class CameraMovement : MonoBehaviourPun
     // Deal with the technicals of camera rotation and position towards player
     public GameObject player;
 
+    public static float centerOfScreen = (Screen.width / 2.0f);
+
     private float movementSpeed;
     public static float cameraRotateSpeed = 500.0f;
 
