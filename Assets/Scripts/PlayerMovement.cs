@@ -135,6 +135,17 @@ public class PlayerMovement : MonoBehaviourPun
     // Used for turret rotation
     public void MoveXNormal()
     {
+
+        if (Input.GetKey("e"))
+        {
+            headObject.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+        }
+        else if (Input.GetKey("q"))
+        {
+            headObject.transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
+        }
+
+
         //float rotationSpeed = 1.0f;
 
         //mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
