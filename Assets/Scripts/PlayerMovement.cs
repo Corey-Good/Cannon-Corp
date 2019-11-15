@@ -30,8 +30,6 @@ public class PlayerMovement : MonoBehaviourPun
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
 
-    float mouseX;
-
     private void Awake()
     {
         reloadProgress = 1.0f;

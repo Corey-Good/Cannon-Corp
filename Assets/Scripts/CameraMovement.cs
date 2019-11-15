@@ -55,6 +55,8 @@ public class CameraMovement : MonoBehaviourPun
 
         if (!PauseMenu.GameIsPaused)
         {
+
+
             CameraControl();
         }
 
@@ -70,7 +72,6 @@ public class CameraMovement : MonoBehaviourPun
 
     public void CameraControl()
     {
-        Cursor.lockState = CursorLockMode.Locked;
 
         //Rotates camera left
         if (Input.GetAxis("Mouse X") > 0.0f) //Debug.Log("X value: " + Input.GetAxis("Mouse X"));
