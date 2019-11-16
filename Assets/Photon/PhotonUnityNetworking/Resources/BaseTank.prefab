@@ -129,6 +129,8 @@ MonoBehaviour:
   headObject: {fileID: 5930129108071091481}
   tankCamera: {fileID: 7042548001526687879}
   bulletSpawnLocation: {fileID: 8186286032616048506}
+  turretTransform: {fileID: 6853637348630144071}
+  turretLagSpeed: 0.5
 --- !u!114 &6176343321340850341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,9 +236,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4565624828414996048}
-  m_LocalRotation: {x: -0, y: 0.004363274, z: -0, w: 0.9999905}
-  m_LocalPosition: {x: -4.75, y: -1.2, z: 3.43}
-  m_LocalScale: {x: 0.023999998, y: 0.024000002, z: 0.023999998}
+  m_LocalRotation: {x: -0, y: 0.0043632747, z: 2.9103834e-11, w: 0.9999905}
+  m_LocalPosition: {x: -4.765, y: -1.2, z: 1.724}
+  m_LocalScale: {x: 0.023999993, y: 0.024000002, z: 0.02399999}
   m_Children:
   - {fileID: 8657266474618349386}
   m_Father: {fileID: 3609342399487944951}
@@ -447,8 +449,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7042548001526687879}
-  m_LocalRotation: {x: 0.112074904, y: -0.0043357844, z: 0.00048901816, w: 0.99369025}
-  m_LocalPosition: {x: 1.5, y: 28.2, z: -178.6}
+  m_LocalRotation: {x: 0.11207489, y: -0.004335785, z: 0.0004890181, w: 0.9936902}
+  m_LocalPosition: {x: 1.4999931, y: 28.199999, z: -178.60007}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 2965854526883430265}
@@ -516,13 +518,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f637737fe67b7d447abf60a7684f05a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 631144466196034836}
-  rotationSpeed: 1
-  tankCamera: {fileID: 8657266474618349386}
   cameraTarget: {fileID: 2965854526883430265}
+  tankCamera: {fileID: 8657266474618349386}
+  player: {fileID: 631144466196034836}
+  cameraRotationSpeed: 100
   lookAtTank: 1
   rotateAroundTank: 1
-  cameraRotationSpeed: 100
 --- !u!1 &8186286032616048506
 GameObject:
   m_ObjectHideFlags: 0

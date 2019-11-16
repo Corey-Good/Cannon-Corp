@@ -11,52 +11,42 @@ using Photon.Pun;
 public class CameraMovement : MonoBehaviourPun
 {
     // Camera's main position and its offset
-    // private Vector3 defaultCamera;
+    public Transform cameraTarget;
+    private Transform cameraDefault;
+    public Transform tankCamera;
+    private Vector3 cameraOffset;
 
     // Deal with the technicals of camera rotation and position towards player
     public GameObject player;
 
-    public static float centerOfScreen = (Screen.width / 2.0f);
-
-    private float movementSpeed;
+    // 
     public static float cameraRotateSpeed = 500.0f;
-
-    public float rotationSpeed = 1.0f;
-
-    private float camZoom = 0.1f;
-    public Transform tankCamera;
-    public Transform cameraTarget;
-    private Vector3 cameraOffset;
-
-    private Transform cameraDefault;
-
-    public bool lookAtTank = false;
-    public bool rotateAroundTank = true;
     public float cameraRotationSpeed = 5.0f;
-
-
+    private float cameraZoom = 0.1f;
+    private float movementSpeed;
     private float targetUp = 1.2f;
+
+    // 
+    public bool lookAtTank       = false;
+    public bool rotateAroundTank = true;
 
 
     public void Start()
     {
-        cameraOffset = tankCamera.position - cameraTarget.position;
         cameraDefault = cameraTarget;
+        cameraOffset  = tankCamera.position - cameraTarget.position;
     }
 
     public void FixedUpdate()
     {
         ScrollZoom();
-
     }
 
     public void LateUpdate()
     {
-
+        //       if (photonView.IsMine && !PauseMenu.GameIsPaused)
         if (!PauseMenu.GameIsPaused)
         {
-
-
             CameraControl();
         }
 
@@ -66,14 +56,10 @@ public class CameraMovement : MonoBehaviourPun
         {
             tankCamera.transform.LookAt(cameraTarget);
         }
-
-
     }
 
     public void CameraControl()
     {
-
-        //Rotates camera left
         if (Input.GetAxis("Mouse X") > 0.0f) //Debug.Log("X value: " + Input.GetAxis("Mouse X"));
         {
             movementSpeed = Input.GetAxis("Mouse X") * cameraRotateSpeed;
@@ -89,21 +75,21 @@ public class CameraMovement : MonoBehaviourPun
             tankCamera.transform.RotateAround(player.transform.position, Vector3.up, movementSpeed * Time.deltaTime);
         }
 
-        //Rotates camera up        
-        if (Input.GetAxis("Mouse Y") > 0.0f) //Debug.Log("Y value: " + Input.GetAxis("Mouse Y"));
-        {
-            movementSpeed = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
+        ////Rotates camera up        
+        //if (Input.GetAxis("Mouse Y") > 0.0f) //Debug.Log("Y value: " + Input.GetAxis("Mouse Y"));
+        //{
+        //    movementSpeed = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
 
-            tankCamera.transform.RotateAround(player.transform.position, Vector3.left, movementSpeed * Time.deltaTime);
-        }
+        //    tankCamera.transform.RotateAround(player.transform.position, Vector3.left, movementSpeed * Time.deltaTime);
+        //}
 
-        //Rotates camera down
-        if (Input.GetAxis("Mouse Y") < 0.0f)
-        {
-            movementSpeed = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
+        ////Rotates camera down
+        //if (Input.GetAxis("Mouse Y") < 0.0f)
+        //{
+        //    movementSpeed = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
 
-            tankCamera.transform.RotateAround(player.transform.position, Vector3.left, movementSpeed * Time.deltaTime);
-        }
+        //    tankCamera.transform.RotateAround(player.transform.position, Vector3.left, movementSpeed * Time.deltaTime);
+        //}
     }
 
     public void ScrollZoom()
@@ -112,17 +98,15 @@ public class CameraMovement : MonoBehaviourPun
         //{
             if (Input.GetAxis("Mouse ScrollWheel") < 0)
             {
-                tankCamera.Translate(0, 0, -camZoom);
+                tankCamera.Translate(0, 0, -cameraZoom);
             }
 
             if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {
-                tankCamera.Translate(0, 0, camZoom);
+                tankCamera.Translate(0, 0, cameraZoom);
             }
         //}
 
         cameraOffset = tankCamera.position - cameraTarget.position;
     }
-    
-
 }

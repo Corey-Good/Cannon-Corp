@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void LateUpdate()
@@ -32,26 +32,35 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        Cursor.visible = false;
-        pauseMenuUI.SetActive(false);
         GameIsPaused = false;
-        settingsUI.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible   = false;
+
+        pauseMenuUI.SetActive(false);
+        settingsUI.SetActive (false);
     }
 
     public void Pause()
     {
-        Cursor.visible = true;
-        pauseMenuUI.SetActive(true);   //Opposite of Settings()
         GameIsPaused = true;
-        settingsUI.SetActive(false);   //Opposite of Settings()
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible   = true;
+
+        pauseMenuUI.SetActive(true);   //Opposite of Settings()
+        settingsUI.SetActive (false);  //Opposite of Settings()
     }
 
     public void Settings()
     {
-        Cursor.visible = true;
-        pauseMenuUI.SetActive(false);  //Opposite of Pause()
         GameIsPaused = true;
-        settingsUI.SetActive(true);    //Opposite of Pause()
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible   = true;
+
+        pauseMenuUI.SetActive(false);  //Opposite of Pause()
+        settingsUI.SetActive (true);   //Opposite of Pause()
     }
 
     public void Back()
@@ -62,6 +71,7 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         GameIsPaused = false;
+
         StartCoroutine(DisconnectAndLoad());
     }
 
@@ -71,6 +81,5 @@ public class PauseMenu : MonoBehaviour
         while (PhotonNetwork.InRoom)
             yield return null;
         SceneManager.LoadScene(0);
-
     }
 }
