@@ -10,124 +10,63 @@ using Photon.Pun;
 
 public class CameraMovement : MonoBehaviourPun
 {
-    public Transform cameraTarget;
-    //private Transform cameraDefault;
-    public Transform tankCamera;
-    private Vector3 cameraOffset;
+    public GameObject   player;
 
-    private float cameraDistance;
-    private float cameraMin = 0.2f;
-    private float cameraMax = 2.2f;
-
-    public GameObject player;
+    public Transform    cameraTarget;
+    public Transform    tankCameraT;                 //same as tankCameraC, needed for transform.LookAt and transform.RotateAround
+    public Camera       tankCameraC;                 //same as tankCameraT, needed for camera.fieldOfView
 
     public static float cameraRotateSpeed = 500.0f;
-    public float cameraRotationSpeed = 5.0f;
-    private float cameraZoom = 0.1f;
-    private float movementSpeed;
-    private float targetUp = 1.2f;
-
-    public bool lookAtTank = false;
-    public bool rotateAroundTank = true;
-
-    public void Start()
-    {
-        //cameraDefault = cameraTarget;
-        cameraOffset  = tankCamera.position - cameraTarget.position;
-    }
 
     public void FixedUpdate()
     {
-        if (!PauseMenu.GameIsPaused) //       if (photonView.IsMine && !PauseMenu.GameIsPaused)
+        if (!PauseMenu.GameIsPaused) // might need (photonView.IsMine && !PauseMenu.GameIsPaused) for network
         {
-            ScrollZoom();
-            ScrollLimiter();
+            ZoomCamera();
         }
     }
 
     public void LateUpdate()
     {
-        if (!PauseMenu.GameIsPaused) //       if (photonView.IsMine && !PauseMenu.GameIsPaused)
+        SetCameraTarget();
+
+        if (!PauseMenu.GameIsPaused)
         {
-            CameraControl();
+            OrbitCamera();
         }
 
-        cameraTarget.position = new Vector3(player.transform.position.x, player.transform.position.y + targetUp, player.transform.position.z);
-
-        if (lookAtTank)
-        {
-            tankCamera.transform.LookAt(cameraTarget);
-        }
+        LookAtCameraTarget();
     }
 
-    public void CameraControl()
+    public void SetCameraTarget()
     {
-        if (Input.GetAxis("Mouse X") > 0.0f) //Debug.Log("X value: " + Input.GetAxis("Mouse X"));
-        {
-            movementSpeed = Input.GetAxis("Mouse X") * cameraRotateSpeed;
+        float cameraTargetOffset = 1.0f;
 
-            tankCamera.transform.RotateAround(player.transform.position, Vector3.up, movementSpeed * Time.deltaTime);
-        }
-
-        //Rotates camera right
-        if (Input.GetAxis("Mouse X") < 0.0f)
-        {
-            movementSpeed = Input.GetAxis("Mouse X") * cameraRotateSpeed;
-
-            tankCamera.transform.RotateAround(player.transform.position, Vector3.up, movementSpeed * Time.deltaTime);
-        }
-
-        ////Rotates camera up        
-        //if (Input.GetAxis("Mouse Y") > 0.0f) //Debug.Log("Y value: " + Input.GetAxis("Mouse Y"));
-        //{
-        //    movementSpeed = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
-
-        //    tankCamera.transform.RotateAround(player.transform.position, Vector3.left, movementSpeed * Time.deltaTime);
-        //}
-
-        ////Rotates camera down
-        //if (Input.GetAxis("Mouse Y") < 0.0f)
-        //{
-        //    movementSpeed = Input.GetAxis("Mouse Y") * cameraRotateSpeed;
-
-        //    tankCamera.transform.RotateAround(player.transform.position, Vector3.left, movementSpeed * Time.deltaTime);
-        //}
+        cameraTarget.position = new Vector3(player.transform.position.x, (player.transform.position.y + cameraTargetOffset), player.transform.position.z);
     }
 
-    public void ScrollZoom()
+    public void OrbitCamera()
     {
-        if (cameraDistance > cameraMin && cameraDistance < cameraMax)
-        {
-            if (Input.GetAxis("Mouse ScrollWheel") < 0)
-            {
-                tankCamera.Translate(0, 0, -cameraZoom);
-            }
+        float orbitSpeed = Input.GetAxis("Mouse X") * cameraRotateSpeed * Time.deltaTime;
 
-            if (Input.GetAxis("Mouse ScrollWheel") > 0)
-            {
-                tankCamera.Translate(0, 0, cameraZoom);
-            }
-        }
-
-        cameraOffset = tankCamera.position - cameraTarget.position;
+        tankCameraT.transform.RotateAround(player.transform.position, Vector3.up, orbitSpeed);
     }
 
-    public void ScrollLimiter()
+    public void LookAtCameraTarget()
     {
-        //Debug.Log("distance: " + cameraDistance);
-        //Debug.Log("min: " + cameraMin);
-        //Debug.Log("max: " + cameraMax);
+        tankCameraT.transform.LookAt(cameraTarget);
+    }
 
-        if (cameraDistance < cameraMin)
-        {
-            cameraOffset.y = 0.21f;
-        }
+    public void ZoomCamera()
+    {
+        float zoomFOV      = tankCameraC.fieldOfView;
+        float zoomDistance = 1.0f;
+        float zoomMin      = 15.0f;
+        float zoomMax      = 75.0f;
 
-        if (cameraDistance > cameraMax)
-        {
-            cameraOffset.y = 2.19f;
-        }
+        zoomFOV -= Input.GetAxis("Mouse ScrollWheel") * zoomDistance;
+        zoomFOV =  Mathf.Clamp(zoomFOV, zoomMin, zoomMax);
 
-        cameraDistance = cameraOffset.y;
+        tankCameraC.fieldOfView = zoomFOV;
     }
 }

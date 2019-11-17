@@ -519,12 +519,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f637737fe67b7d447abf60a7684f05a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTarget: {fileID: 2965854526883430265}
-  tankCamera: {fileID: 8657266474618349386}
+  tankCameraC: {fileID: 7665375878861294314}
   player: {fileID: 631144466196034836}
-  cameraRotationSpeed: 100
-  lookAtTank: 1
-  rotateAroundTank: 1
+  cameraTarget: {fileID: 2965854526883430265}
+  tankCameraT: {fileID: 8657266474618349386}
 --- !u!1 &8186286032616048506
 GameObject:
   m_ObjectHideFlags: 0

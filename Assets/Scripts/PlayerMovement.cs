@@ -32,17 +32,13 @@ public class PlayerMovement : MonoBehaviourPun
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
 
-
-
-    public Camera useless;
+    private Camera Camera;
     public Transform turretObject;
     public float turretLagSpeed = 50.0f;
 
     private Vector3 turretFinalLookDirection;
 
     private Vector3 cursorPosition;
-
-
 
     private void Awake()
     {
@@ -148,7 +144,7 @@ public class PlayerMovement : MonoBehaviourPun
 
     public void TurretRotation()
     {
-        Ray screenRay = useless.ScreenPointToRay(Input.mousePosition);
+        Ray screenRay = Camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(screenRay, out hit))
         {
