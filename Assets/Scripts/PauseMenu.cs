@@ -34,33 +34,33 @@ public class PauseMenu : MonoBehaviour
     {
         GameIsPaused = false;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible   = false;
-
         pauseMenuUI.SetActive(false);
         settingsUI.SetActive (false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible   = false;
     }
 
     public void Pause()
     {
         GameIsPaused = true;
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible   = true;
-
         pauseMenuUI.SetActive(true);   //Opposite of Settings()
         settingsUI.SetActive (false);  //Opposite of Settings()
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible   = true;
     }
 
     public void Settings()
     {
         GameIsPaused = true;
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible   = true;
-
         pauseMenuUI.SetActive(false);  //Opposite of Pause()
         settingsUI.SetActive (true);   //Opposite of Pause()
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void Back()

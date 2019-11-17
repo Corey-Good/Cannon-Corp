@@ -10,42 +10,44 @@ using Photon.Pun;
 
 public class CameraMovement : MonoBehaviourPun
 {
-    // Camera's main position and its offset
     public Transform cameraTarget;
-    private Transform cameraDefault;
+    //private Transform cameraDefault;
     public Transform tankCamera;
     private Vector3 cameraOffset;
 
-    // Deal with the technicals of camera rotation and position towards player
+    private float cameraDistance;
+    private float cameraMin = 0.2f;
+    private float cameraMax = 2.2f;
+
     public GameObject player;
 
-    // 
     public static float cameraRotateSpeed = 500.0f;
     public float cameraRotationSpeed = 5.0f;
     private float cameraZoom = 0.1f;
     private float movementSpeed;
     private float targetUp = 1.2f;
 
-    // 
-    public bool lookAtTank       = false;
+    public bool lookAtTank = false;
     public bool rotateAroundTank = true;
-
 
     public void Start()
     {
-        cameraDefault = cameraTarget;
+        //cameraDefault = cameraTarget;
         cameraOffset  = tankCamera.position - cameraTarget.position;
     }
 
     public void FixedUpdate()
     {
-        ScrollZoom();
+        if (!PauseMenu.GameIsPaused) //       if (photonView.IsMine && !PauseMenu.GameIsPaused)
+        {
+            ScrollZoom();
+            ScrollLimiter();
+        }
     }
 
     public void LateUpdate()
     {
-        //       if (photonView.IsMine && !PauseMenu.GameIsPaused)
-        if (!PauseMenu.GameIsPaused)
+        if (!PauseMenu.GameIsPaused) //       if (photonView.IsMine && !PauseMenu.GameIsPaused)
         {
             CameraControl();
         }
@@ -94,8 +96,8 @@ public class CameraMovement : MonoBehaviourPun
 
     public void ScrollZoom()
     {
-        //if (tankCamera > cameraDefault)
-        //{
+        if (cameraDistance > cameraMin && cameraDistance < cameraMax)
+        {
             if (Input.GetAxis("Mouse ScrollWheel") < 0)
             {
                 tankCamera.Translate(0, 0, -cameraZoom);
@@ -105,8 +107,27 @@ public class CameraMovement : MonoBehaviourPun
             {
                 tankCamera.Translate(0, 0, cameraZoom);
             }
-        //}
+        }
 
         cameraOffset = tankCamera.position - cameraTarget.position;
+    }
+
+    public void ScrollLimiter()
+    {
+        //Debug.Log("distance: " + cameraDistance);
+        //Debug.Log("min: " + cameraMin);
+        //Debug.Log("max: " + cameraMax);
+
+        if (cameraDistance < cameraMin)
+        {
+            cameraOffset.y = 0.21f;
+        }
+
+        if (cameraDistance > cameraMax)
+        {
+            cameraOffset.y = 2.19f;
+        }
+
+        cameraDistance = cameraOffset.y;
     }
 }

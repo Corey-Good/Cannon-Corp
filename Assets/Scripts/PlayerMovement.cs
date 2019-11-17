@@ -7,15 +7,15 @@ public class PlayerMovement : MonoBehaviourPun
 {
     private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
     private float rotateSpeed   = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
-    private float x_left = (Screen.width / 2.0f) + (Screen.width * 0.12f);
-    private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
+    //private float x_left = (Screen.width / 2.0f) + (Screen.width * 0.12f);
+    //private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
 
     private float centerOfScreen = (Screen.width / 2.0f);
 
     public GameObject baseObject;
     public GameObject headObject;
+
     public GameObject tankCamera;
-    //private float turretSpeed = 0.4f;
 
     private string forwardbutton;
     private string backwardbutton;
@@ -33,16 +33,15 @@ public class PlayerMovement : MonoBehaviourPun
     public static float reloadProgress;
 
 
-    //[Header("Turret Properties")]
-    //public Transform turretTransform;
-    //public float turretLagSpeed = 0.5f;
-    //private Vector3 turretFinalLookDirection;
 
+    public Camera useless;
+    public Transform turretObject;
+    public float turretLagSpeed = 50.0f;
 
-    Vector3 targetPosition;
-    Vector3 lookAtTarget;
-    Quaternion playerRot;
-    float rotSpeed = 5;
+    private Vector3 turretFinalLookDirection;
+
+    private Vector3 cursorPosition;
+
 
 
     private void Awake()
@@ -58,18 +57,17 @@ public class PlayerMovement : MonoBehaviourPun
         {
             MovePlayer();
             FireMechanism();
-        }
 
-        //SetTargetPosition();
-        //RotateHead();
+            TurretRotation();
+        }
 
         //if (GameLoad.isXInverted)
         //{
-        //    MoveXInverted();
+            //MoveXInverted();
         //}
         //else
         //{
-        //    MoveXNormal();
+            //MoveXNormal();
         //}
     }
 
@@ -148,62 +146,52 @@ public class PlayerMovement : MonoBehaviourPun
         }
     }
 
+    public void TurretRotation()
+    {
+        Ray screenRay = useless.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(screenRay, out hit))
+        {
+            cursorPosition = hit.point;
+        }
 
-    //void SetTargetPosition()
-    //{
-    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //    RaycastHit hit;
+        Vector3 turretLookDirection = cursorPosition - turretObject.position;
+        turretLookDirection.y = 0.0f;
 
-    //    if (Physics.Raycast(ray, out hit, 1000))
-    //    {
-    //        targetPosition = hit.point;
-    //        //this.transform.LookAt(targetPosition);
-    //        lookAtTarget = new Vector3(targetPosition.x - transform.position.x, transform.position.y, targetPosition.z - transform.position.z);
-    //        playerRot = Quaternion.LookRotation(lookAtTarget);
-    //    }
-    //}
+        turretFinalLookDirection = Vector3.Lerp(turretFinalLookDirection, turretLookDirection, turretLagSpeed * Time.deltaTime);
+        turretObject.rotation = Quaternion.LookRotation(turretFinalLookDirection);
+    }
 
-    //void RotateHead()
-    //{
-    //    transform.rotation = Quaternion.Slerp(transform.rotation, playerRot, rotSpeed * Time.deltaTime);
-    //}
-
-    // Used for turret rotation
     public void MoveXNormal()
     {
-        //if (Input.GetKey("e"))
-        //{
-        //    headObject.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
-        //}
-        //else if (Input.GetKey("q"))
-        //{
-        //    headObject.transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
-        //}
-        //else
-        //{
+        if (Input.GetKey("e"))
+        {
+            headObject.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);  //Debug.Log("e: " + headObject.transform.position);
+        }
+        else if (Input.GetKey("q"))
+        {
+            headObject.transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime); //Debug.Log("q: " + headObject.transform.position);
+        }
+        else
+        {
 
-        //}
-
-        //if (turretTransform)
-        //{
-        //    Vector3 turretLookDirection = Input.
-        //}
+        }
     }
 
     public void MoveXInverted()
     {
         {
-            // Move turret to the left
-            if (Input.mousePosition.x > centerOfScreen)
-            {
-                headObject.transform.Rotate(Vector3.down * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
-            }
+            //// Move turret to the left
+            //if (Input.mousePosition.x > centerOfScreen)
+            //{
+            //    headObject.transform.Rotate(Vector3.down * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
+            //}
 
-            // Move turret to the right
-            if (Input.mousePosition.x < centerOfScreen)
-            {
-                headObject.transform.Rotate(Vector3.up * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
-            }
+            //// Move turret to the right
+            //if (Input.mousePosition.x < centerOfScreen)
+            //{
+            //    headObject.transform.Rotate(Vector3.up * (CameraMovement.cameraRotateSpeed) / 2 * Time.deltaTime);
+            //}
         }
     }
 

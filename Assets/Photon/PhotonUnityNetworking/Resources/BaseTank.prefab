@@ -129,7 +129,8 @@ MonoBehaviour:
   headObject: {fileID: 5930129108071091481}
   tankCamera: {fileID: 7042548001526687879}
   bulletSpawnLocation: {fileID: 8186286032616048506}
-  turretTransform: {fileID: 6853637348630144071}
+  useless: {fileID: 7665375878861294314}
+  turretObject: {fileID: 5930129108071091486}
   turretLagSpeed: 0.5
 --- !u!114 &6176343321340850341
 MonoBehaviour:
