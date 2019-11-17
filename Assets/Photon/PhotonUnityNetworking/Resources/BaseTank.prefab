@@ -129,7 +129,7 @@ MonoBehaviour:
   headObject: {fileID: 5930129108071091481}
   tankCamera: {fileID: 7042548001526687879}
   bulletSpawnLocation: {fileID: 8186286032616048506}
-  useless: {fileID: 7665375878861294314}
+  cam: {fileID: 7665375878861294314}
   turretObject: {fileID: 5930129108071091486}
   turretLagSpeed: 0.5
 --- !u!114 &6176343321340850341
@@ -519,10 +519,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f637737fe67b7d447abf60a7684f05a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankCameraC: {fileID: 7665375878861294314}
   player: {fileID: 631144466196034836}
   cameraTarget: {fileID: 2965854526883430265}
   tankCameraT: {fileID: 8657266474618349386}
+  tankCameraC: {fileID: 7665375878861294314}
 --- !u!1 &8186286032616048506
 GameObject:
   m_ObjectHideFlags: 0
