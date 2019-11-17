@@ -6,9 +6,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviourPun, IPunObservable
 {
     private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
-    private float rotateSpeed   = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
-    private float x_left = (Screen.width / 2.0f) + (Screen.width * 0.12f);
-    private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
+    private float rotateSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
+    //private float x_left = (Screen.width / 2.0f) + (Screen.width * 0.12f);
+    //private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
+
+    private float centerOfScreen = (Screen.width / 2.0f);
 
     public GameObject baseObject;
     public GameObject headObject;
@@ -18,12 +20,17 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private string leftbutton;
     private string rightbutton;
 
-
-
-    private GameObject bulletCopy;          // Copy of the bullet that gets launched
-    public GameObject bulletSpawnLocation; // Where the bull is instantiated
+    private GameObject bulletCopy;         // Copy of the bullet that gets launched
+    public GameObject bulletSpawnLocation; // Where the bullet is instantiated
     public static Color bulletColor = Color.red;
 
+    private Camera Camera;
+    public Transform turretObject;
+    public float turretLagSpeed = 50.0f;
+
+    private Vector3 turretFinalLookDirection;
+
+    private Vector3 cursorPosition;
 
     private float timeElapsed = 0f;
     private bool bulletActive = false;
@@ -31,12 +38,13 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
-    List<string> paintballs = new List<string>() { "bullet1", "bullet2", "bullet3", "bullet4", "bullet5"};
+    List<string> paintballs = new List<string>() { "bullet1", "bullet2", "bullet3", "bullet4", "bullet5" };
 
     private void Awake()
     {
         reloadProgress = 1.0f;
     }
+
     void FixedUpdate()
     {
         SetKeyBindings();
@@ -46,14 +54,16 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             MovePlayer();
             FireMechanism();
 
-            if (GameLoad.isXInverted)
-            {
-                MoveXInverted();
-            }
-            else
-            {
-                MoveXNormal();
-            }
+            TurretRotation();
+
+            //if (GameLoad.isXInverted)
+            //{
+            //    MoveXInverted();
+            //}
+            //else
+            //{
+            //    MoveXNormal();
+            //}
         }
     }
 
@@ -132,38 +142,54 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         }
     }
 
-    public void MoveXNormal()
+    public void TurretRotation()
     {
-
-        if (Input.mousePosition.x < x_left)
+        Ray screenRay = Camera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(screenRay, out hit))
         {
-            headObject.transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
-        }
-        if (Input.mousePosition.x > x_right)
-        {
-
-            headObject.transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
+            cursorPosition = hit.point;
         }
 
+        Vector3 turretLookDirection = cursorPosition - turretObject.position;
+        turretLookDirection.y = 0.0f;
+
+        turretFinalLookDirection = Vector3.Lerp(turretFinalLookDirection, turretLookDirection, turretLagSpeed * Time.deltaTime);
+        turretObject.rotation = Quaternion.LookRotation(turretFinalLookDirection);
     }
 
-    public void MoveXInverted()
-    {
-        if (Input.mousePosition.x < x_left)
-        {
-            headObject.transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
-        }
-        if (Input.mousePosition.x > x_right)
-        {
-            headObject.transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
-        }
+    //    public void MoveXNormal()
+    //    {
 
-    }
+    //        if (Input.mousePosition.x < x_left)
+    //        {
+    //            headObject.transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
+    //        }
+    //        if (Input.mousePosition.x > x_right)
+    //        {
+
+    //            headObject.transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
+    //        }
+
+    //    }
+
+    //    public void MoveXInverted()
+    //    {
+    //        if (Input.mousePosition.x < x_left)
+    //        {
+    //            headObject.transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
+    //        }
+    //        if (Input.mousePosition.x > x_right)
+    //        {
+    //            headObject.transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
+    //        }
+
+    //    }
 
     public void FireMechanism()
     {
         Renderer bulletRender = null;
-        
+
         if (Input.GetMouseButtonDown(KeyBindings.clickIndex) && bulletActive == false && !PauseMenu.GameIsPaused)
         {
             bulletColor = GetRandomColor();
@@ -188,10 +214,10 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             // When a bullet is reloaded, delete the previouis copy and reset timer
             if (timeElapsed >= reloadSpeed)
             {
-                //GameObject splatter = PhotonNetwork.Instantiate("Splatter", bulletCopy.transform.position, Quaternion.Euler(0, 0, 0));
-                //Renderer rend = splatter.GetComponent<Renderer>();
-                //rend.material.color = bulletColor;
-                //PhotonNetwork.Destroy(bulletCopy);
+                GameObject splatter = PhotonNetwork.Instantiate("Splatter", bulletCopy.transform.position, Quaternion.Euler(0, 0, 0));
+                Renderer rend = splatter.GetComponent<Renderer>();
+                rend.material.color = bulletColor;
+                PhotonNetwork.Destroy(bulletCopy);
                 timeElapsed = 0f;
                 bulletActive = false;
             }
@@ -200,14 +226,14 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
     private Color GetRandomColor()
     {
-        List<Color> colors = new List<Color>() { Color.blue, Color.green, Color.red, Color.yellow, Color.cyan, Color.gray, Color.magenta, Color.white};
+        List<Color> colors = new List<Color>() { Color.blue, Color.green, Color.red, Color.yellow, Color.cyan, Color.gray, Color.magenta, Color.white };
 
         return colors[Random.Range(0, colors.Count)];
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if(stream.IsWriting)
+        if (stream.IsWriting)
         {
             stream.SendNext(baseObject.transform.position);
             stream.SendNext(headObject.transform.position);
