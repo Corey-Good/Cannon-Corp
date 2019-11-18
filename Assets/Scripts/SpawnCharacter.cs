@@ -25,6 +25,7 @@ public class SpawnCharacter : MonoBehaviourPun
         {
             Cursor.visible = true;
             SceneManager.LoadScene(0);
+            Debug.Log("This is the FLASH bug that has been haunting you! Boo");
         };
     }
 }

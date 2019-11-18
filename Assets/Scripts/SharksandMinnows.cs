@@ -25,7 +25,8 @@ public class SharksandMinnows : MonoBehaviourPun
 
     private GameObject SpawnCharacter(string model)
     {
-        return PhotonNetwork.Instantiate(model, location[Random.Range(0, 10)].transform.position, Quaternion.Euler(0, 0, 0));
+        int randomNumber = Random.Range(0, 10);
+        return PhotonNetwork.Instantiate(model, location[randomNumber].transform.position, location[randomNumber].transform.rotation);
     }
 
 }
