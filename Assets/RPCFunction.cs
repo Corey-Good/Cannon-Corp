@@ -5,6 +5,9 @@ using Photon.Pun;
 
 public class RPCFunction : MonoBehaviourPun
 {
+    public GameObject tankBody;
+    public GameObject tankHead;
+
     private void FixedUpdate()
     {
         if (LoadUI.currentHealth <= 0)
@@ -18,9 +21,10 @@ public class RPCFunction : MonoBehaviourPun
     {
         LoadUI.currentHealth = 55.0f;
         LoadUI.score = 0.0f;
-        //transform.position = location[Random.Range(0, 10)].transform.position;
-        //transform.rotation = new Quaternion(0, 0, 0, 0);
+        transform.position = SharksandMinnows.location[Random.Range(0, 10)].transform.position;
+        transform.rotation = new Quaternion(0, 0, 0, 0);
         tag = "EnemyTank";
-        GetComponent<MeshRenderer>().material.color = Color.red;
+        tankBody.GetComponent<MeshRenderer>().material.color = Color.red;
+        tankHead.GetComponent<MeshRenderer>().material.color = Color.red;
     }
 }

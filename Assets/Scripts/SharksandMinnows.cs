@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SharksandMinnows : MonoBehaviourPun
 {
-    public GameObject[] location = new GameObject[10];
+    public static GameObject[] location = new GameObject[10];
     public static bool respawn = false;
     private GameObject player;
     public Material sharkSkin;
