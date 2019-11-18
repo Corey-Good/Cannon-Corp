@@ -12,9 +12,9 @@ public class CameraMovement : MonoBehaviourPun
 {
     public GameObject   player;
 
-    public Transform    cameraTarget;
-    public Transform    tankCameraT;                 //same as tankCameraC, needed for transform.LookAt and transform.RotateAround
-    public Camera       tankCameraC;                 //same as tankCameraT, needed for camera.fieldOfView
+    public Transform    target;
+    public Transform    cameraTransform;            //same as tankCamera, needed for transform.LookAt and transform.RotateAround
+    public Camera       tankCamera;                 //same as cameraTransform, needed for camera.fieldOfView
 
     public static float cameraRotateSpeed = 500.0f;
 
@@ -42,24 +42,24 @@ public class CameraMovement : MonoBehaviourPun
     {
         float cameraTargetOffset = 1.0f;
 
-        cameraTarget.position = new Vector3(player.transform.position.x, (player.transform.position.y + cameraTargetOffset), player.transform.position.z);
+        target.position = new Vector3(player.transform.position.x, (player.transform.position.y + cameraTargetOffset), player.transform.position.z);
     }
 
     public void OrbitCamera()
     {
         float orbitSpeed = Input.GetAxis("Mouse X") * cameraRotateSpeed * Time.deltaTime;
 
-        tankCameraT.transform.RotateAround(player.transform.position, Vector3.up, orbitSpeed);
+        cameraTransform.transform.RotateAround(player.transform.position, Vector3.up, orbitSpeed);
     }
 
     public void LookAtCameraTarget()
     {
-        tankCameraT.transform.LookAt(cameraTarget);
+        cameraTransform.transform.LookAt(target);
     }
 
     public void ZoomCamera()
     {
-        float zoomFOV      = tankCameraC.fieldOfView;
+        float zoomFOV      = tankCamera.fieldOfView;
         float zoomDistance = 1.0f;
         float zoomMin      = 15.0f;
         float zoomMax      = 75.0f;
@@ -67,6 +67,6 @@ public class CameraMovement : MonoBehaviourPun
         zoomFOV -= Input.GetAxis("Mouse ScrollWheel") * zoomDistance;
         zoomFOV =  Mathf.Clamp(zoomFOV, zoomMin, zoomMax);
 
-        tankCameraC.fieldOfView = zoomFOV;
+        tankCamera.fieldOfView = zoomFOV;
     }
 }

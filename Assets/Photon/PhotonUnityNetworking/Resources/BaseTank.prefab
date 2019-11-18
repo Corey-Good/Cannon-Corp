@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 631144466198293460}
   - component: {fileID: 631144466196034826}
   - component: {fileID: 5164458798706883654}
-  - component: {fileID: 5394500606193053141}
   - component: {fileID: 6176343321340850341}
   - component: {fileID: 4704377533284146696}
   - component: {fileID: 3521674394763569424}
+  - component: {fileID: 5861663963630317862}
   m_Layer: 0
   m_Name: BaseTank
   m_TagString: Untagged
@@ -113,25 +113,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5394500606193053141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631144466196034836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f76ca8337806cd34591a97ec8aea847e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseObject: {fileID: 631144466196034836}
-  headObject: {fileID: 5930129108071091481}
-  tankCamera: {fileID: 7042548001526687879}
-  bulletSpawnLocation: {fileID: 8186286032616048506}
-  cam: {fileID: 7665375878861294314}
-  turretObject: {fileID: 5930129108071091486}
-  turretLagSpeed: 0.5
 --- !u!114 &6176343321340850341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +163,25 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &5861663963630317862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631144466196034836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76ca8337806cd34591a97ec8aea847e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseObject: {fileID: 631144466196034836}
+  headObject: {fileID: 6853637348630247527}
+  tankCamera: {fileID: 7042548001526687879}
+  bulletSpawnLocation: {fileID: 8186286032616048506}
+  tankCameraC: {fileID: 7665375878861294314}
+  turretObject: {fileID: 5930129108071091486}
+  turretLagSpeed: 50
 --- !u!1 &1945003076268401409
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,36 +276,6 @@ Transform:
   m_Father: {fileID: 631144466196392244}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5930129108310910354
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5930129108310910355}
-  m_Layer: 0
-  m_Name: CameraFocus
-  m_TagString: CharacterModel
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5930129108310910355
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5930129108310910354}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.69, z: 0.27}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6853637348630144071}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6853637348630247527
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +307,6 @@ Transform:
   m_LocalPosition: {x: 0.009999871, y: -2.5679998, z: -0.65600204}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5930129108310910355}
   - {fileID: 8186286032616048485}
   m_Father: {fileID: 5930129108071091486}
   m_RootOrder: 0
@@ -520,9 +489,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 631144466196034836}
-  cameraTarget: {fileID: 2965854526883430265}
-  tankCameraT: {fileID: 8657266474618349386}
-  tankCameraC: {fileID: 7665375878861294314}
+  target: {fileID: 2965854526883430265}
+  cameraTransform: {fileID: 8657266474618349386}
+  tankCamera: {fileID: 7665375878861294314}
 --- !u!1 &8186286032616048506
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,5 +520,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6853637348630144071}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -15,8 +15,6 @@ public class PlayerMovement : MonoBehaviourPun
     public GameObject baseObject;
     public GameObject headObject;
 
-    public GameObject tankCamera;
-
     private string forwardbutton;
     private string backwardbutton;
     private string leftbutton;
@@ -32,7 +30,7 @@ public class PlayerMovement : MonoBehaviourPun
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
 
-    public Camera cam;
+    public Camera tankCamera;
     public Transform turretObject;
     public float turretLagSpeed = 50.0f;
 
@@ -53,18 +51,8 @@ public class PlayerMovement : MonoBehaviourPun
         {
             MovePlayer();
             FireMechanism();
-
             TurretRotation();
         }
-
-        //if (GameLoad.isXInverted)
-        //{
-            //MoveXInverted();
-        //}
-        //else
-        //{
-            //MoveXNormal();
-        //}
     }
 
     public void SetKeyBindings()
@@ -144,7 +132,7 @@ public class PlayerMovement : MonoBehaviourPun
 
     public void TurretRotation()
     {
-        Ray screenRay = cam.ScreenPointToRay(Input.mousePosition);
+        Ray screenRay = tankCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(screenRay, out hit))
         {
@@ -154,7 +142,8 @@ public class PlayerMovement : MonoBehaviourPun
         Vector3 turretLookDirection = cursorPosition - turretObject.position;
         turretLookDirection.y = 0.0f;
 
-        turretFinalLookDirection = Vector3.Lerp(turretFinalLookDirection, turretLookDirection, turretLagSpeed * Time.deltaTime);
+        turretFinalLookDirection = Vector3.Lerp(turretFinalLookDirection, turretLookDirection, turretLagSpeed * Time.deltaTime); //use Vector3.RotateTowards() instead of Vector3.Lerp()
+
         turretObject.rotation = Quaternion.LookRotation(turretFinalLookDirection);
     }
 
