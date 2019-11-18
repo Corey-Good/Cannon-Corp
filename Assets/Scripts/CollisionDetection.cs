@@ -46,8 +46,6 @@ public class CollisionDetection : MonoBehaviourPun
                     break;
             }
 
-
-
         }
     }
 }

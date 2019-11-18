@@ -19,6 +19,7 @@ public class LoadUI : MonoBehaviour
     private bool isGameOver = false;
     private Image panel;
     private float alpha = 0.0f;
+    //public GameObject dangerPanel;
 
     void Awake()
     {
@@ -52,7 +53,8 @@ public class LoadUI : MonoBehaviour
         // Send the player to the GameOver screen when killed
         if(currentHealth <= 0.0f)
         {
-            isGameOver = true;
+            if(!SharksandMinnows.respawn)
+                isGameOver = true;
         }
 
         if(DangerZone.isInDanger)
@@ -63,6 +65,7 @@ public class LoadUI : MonoBehaviour
         if(isGameOver)
         {
             LoadGameOver();
+            isGameOver = false;
         }
     }
 

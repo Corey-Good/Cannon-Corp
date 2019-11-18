@@ -8,11 +8,8 @@ using Photon.Pun;
 public class SpawnCharacter : MonoBehaviourPun
 {
     public GameObject[] location = new GameObject[15];
-    public GameObject[] playerModel;
     private int index = CharacterMenu.currentModelIndex;
     private string[] tankNames = new string[5] { "BaseTank", "FutureTank", "CatapultModel", "CartoonTank", "Tank2" };
-
-
 
     // On Scene Load, spawn the charcter in one of the random locations, if fails, load Main Menu
     void Awake()
