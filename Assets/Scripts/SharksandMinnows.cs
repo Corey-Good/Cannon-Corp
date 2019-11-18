@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class SharksandMinnows : MonoBehaviourPun
 {
-    public static GameObject[] location = new GameObject[10];
+    public GameObject[] location = new GameObject[10];
     public static bool respawn = false;
     private GameObject player;
-    public Material sharkSkin;
 
     private void Awake()
     {
@@ -26,7 +25,7 @@ public class SharksandMinnows : MonoBehaviourPun
     private GameObject SpawnCharacter(string model)
     {
         int randomNumber = Random.Range(0, 10);
-        return PhotonNetwork.Instantiate(model, location[randomNumber].transform.position, location[randomNumber].transform.rotation);
+        return PhotonNetwork.Instantiate(model, location[randomNumber].transform.position, new Quaternion(0, 0, 0, 0));
     }
 
 }

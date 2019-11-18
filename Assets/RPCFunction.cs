@@ -21,7 +21,7 @@ public class RPCFunction : MonoBehaviourPun
     {
         LoadUI.currentHealth = 55.0f;
         LoadUI.score = 0.0f;
-        transform.position = SharksandMinnows.location[Random.Range(0, 10)].transform.position;
+        //transform.position = SharksandMinnows.location[Random.Range(0, 10)].transform.position;
         transform.rotation = new Quaternion(0, 0, 0, 0);
         tag = "EnemyTank";
         tankBody.GetComponent<MeshRenderer>().material.color = Color.red;

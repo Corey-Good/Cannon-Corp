@@ -5859,6 +5859,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 233cd7b2ee0a0004a8d3cb057a6de728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  location:
+  - {fileID: 1240079321}
+  - {fileID: 973765700}
+  - {fileID: 681711025}
+  - {fileID: 1847713846}
+  - {fileID: 779125821}
+  - {fileID: 1751067592}
+  - {fileID: 1192767176}
+  - {fileID: 560182812}
+  - {fileID: 1451903705}
+  - {fileID: 1645810784}
   sharkSkin: {fileID: 2100000, guid: 2f9e8b33dc806b24280564b568329ef2, type: 2}
 --- !u!4 &2093123447
 Transform:
