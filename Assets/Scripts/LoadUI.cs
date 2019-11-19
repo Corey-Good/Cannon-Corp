@@ -1,13 +1,13 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+﻿using Photon.Pun;
 using System.Collections;
-using Photon.Pun;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoadUI : MonoBehaviour
 {
-    public Text   playerName;
-    public Text   playerScore;
+    public Text playerName;
+    public Text playerScore;
     public Slider healthBar;
     public Slider reloadBar;
 
@@ -19,13 +19,17 @@ public class LoadUI : MonoBehaviour
     private bool isGameOver = false;
     private Image panel;
     private float alpha = 0.0f;
-    //public GameObject dangerPanel;
 
-    void Awake()
+    public Texture2D cursorImage;
+    public GameObject dangerPanel;
+
+    private void Awake()
     {
         // Set the player's health to full on load
         currentHealth = totalHealth;
         healthBar.value = currentHealth / totalHealth;
+
+        Cursor.SetCursor(cursorImage, new Vector2(0, 0), CursorMode.Auto);
 
         score = 0.0f;
 
@@ -36,7 +40,7 @@ public class LoadUI : MonoBehaviour
         }
         else
         {
-          playerName.text = NameGenerator.UserName;
+            playerName.text = NameGenerator.UserName;
         }
     }
 
@@ -51,18 +55,18 @@ public class LoadUI : MonoBehaviour
         healthBar.value = currentHealth / totalHealth;
 
         // Send the player to the GameOver screen when killed
-        if(currentHealth <= 0.0f)
+        if (currentHealth <= 0.0f)
         {
-            if(!SharksandMinnows.respawn)
+            if (SceneManager.GetActiveScene().name == "FFA")
                 isGameOver = true;
         }
 
-        if(DangerZone.isInDanger)
+        if (DangerZone.isInDanger)
         {
             currentHealth -= 0.05f;
         }
 
-        if(isGameOver)
+        if (isGameOver)
         {
             LoadGameOver();
             isGameOver = false;
@@ -72,6 +76,7 @@ public class LoadUI : MonoBehaviour
     public void LoadGameOver()
     {
         gameOverPanel.SetActive(true);
+        dangerPanel.SetActive(false);
         panel = gameOverPanel.GetComponent<Image>();
         panel.color = new Color(0.0f, 0.0f, 0.0f, alpha);
         alpha += 0.007f;
@@ -82,14 +87,11 @@ public class LoadUI : MonoBehaviour
         }
     }
 
-    IEnumerator DisconnectAndLoad()
+    private IEnumerator DisconnectAndLoad()
     {
         PhotonNetwork.LeaveRoom();
         while (PhotonNetwork.InRoom)
             yield return null;
         SceneManager.LoadScene(0);
-
     }
-
-
 }

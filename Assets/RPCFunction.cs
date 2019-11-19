@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Photon.Pun;
 using UnityEngine;
-using Photon.Pun;
 
 public class RPCFunction : MonoBehaviourPun
 {
@@ -17,11 +15,11 @@ public class RPCFunction : MonoBehaviourPun
     }
 
     [PunRPC]
-    void RespawnCharacter()
+    private void RespawnCharacter()
     {
         LoadUI.currentHealth = 55.0f;
         LoadUI.score = 0.0f;
-        //transform.position = SharksandMinnows.location[Random.Range(0, 10)].transform.position;
+        transform.position = SharksandMinnows.spawnLocations[Random.Range(0, 10)].transform.position;
         transform.rotation = new Quaternion(0, 0, 0, 0);
         tag = "EnemyTank";
         tankBody.GetComponent<MeshRenderer>().material.color = Color.red;

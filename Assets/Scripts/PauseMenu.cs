@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Photon.Pun;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     public void LateUpdate()
@@ -32,7 +31,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
         pauseMenuUI.SetActive(false);
         GameIsPaused = false;
         settingsUI.SetActive(false);
@@ -65,12 +64,11 @@ public class PauseMenu : MonoBehaviour
         StartCoroutine(DisconnectAndLoad());
     }
 
-    IEnumerator DisconnectAndLoad()
+    private IEnumerator DisconnectAndLoad()
     {
         PhotonNetwork.LeaveRoom();
         while (PhotonNetwork.InRoom)
             yield return null;
         SceneManager.LoadScene(0);
-
     }
 }
