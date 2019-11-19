@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
-public class DangerZone : MonoBehaviour
+public class DangerZone : MonoBehaviourPun
 {
     public static bool isInDanger = false;
     public GameObject dangerMessage;
@@ -17,6 +18,8 @@ public class DangerZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!photonView.IsMine) return;
+
         if (other.gameObject.tag == "Player")
         {
             isInDanger = false;
