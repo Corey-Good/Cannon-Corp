@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 265935855318999542}
   - component: {fileID: 8585114978597737767}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: bullet4
   m_TagString: EnemyTank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
