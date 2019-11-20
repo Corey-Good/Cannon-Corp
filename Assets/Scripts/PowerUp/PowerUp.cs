@@ -43,6 +43,7 @@ public class PowerUp : MonoBehaviour
     public string powerUpName;
     public string powerUpExplanation;
     public string powerUpQuote;
+    Vector3 powerUpOffset = new Vector3(0.0f, -20.0f, 0.0f);
     [Tooltip ("Tick true for power ups that are instant use, eg a health addition that has no delay before expiring")]
     public bool expiresImmediately;
     public GameObject specialEffect;
@@ -112,7 +113,7 @@ public class PowerUp : MonoBehaviour
         // presented so far, but it is neater in the gameObject hierarchy
         gameObject.transform.parent = playerBrain.gameObject.transform;
         gameObject.transform.localScale = new Vector3(.1f, .1f, .1f);
-        gameObject.transform.position = playerBrain.gameObject.transform.position;
+        gameObject.transform.position = playerBrain.gameObject.transform.position + powerUpOffset;
 
         // Collection effects
         PowerUpEffects ();           
