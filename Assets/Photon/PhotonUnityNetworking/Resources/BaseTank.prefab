@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6176343321340850341}
   - component: {fileID: 4704377533284146696}
   - component: {fileID: 3521674394763569424}
+  - component: {fileID: 4114744331820327398}
   m_Layer: 0
   m_Name: BaseTank
   m_TagString: Player
@@ -180,6 +181,24 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &4114744331820327398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631144466196034836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff849b7549a973840a46d3fe10c4ccba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2.2
+  damageFromEnemyContact: 11
+  soundEffectEnemyContact: {fileID: 0}
+  particleContactPrefab: {fileID: 0}
+  tankbase: {fileID: 631144466196034836}
+  tankhead: {fileID: 6853637348630247527}
 --- !u!1 &1945003076268401409
 GameObject:
   m_ObjectHideFlags: 0
