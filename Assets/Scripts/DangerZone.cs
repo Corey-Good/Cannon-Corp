@@ -1,25 +1,26 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 
-public class DangerZone : MonoBehaviourPun
+public class DangerZone : MonoBehaviour
 {
     public static bool isInDanger = false;
     public GameObject dangerMessage;
+    int photonID;
     // Start is called before the first frame update
 
-    public void Awake()
-    {
-        if (!photonView.IsMine)
-        {
-            GameObject danger = GameObject.FindWithTag("DangerZone");
-            danger.SetActive(false);
-        }
-    }
+    //public void Awake()
+    //{
+    //    if (!photonView.IsMine)
+    //    {
+    //        GameObject danger = GameObject.FindWithTag("DangerZone");
+    //        danger.SetActive(false);
+    //    }
+    //}
     private void OnTriggerExit(Collider other)
     {
-
-        Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "Player")
+        
+        //Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag == "Player" && other.GetComponent<PhotonView>().GetInstanceID() == photonID)
         {
             isInDanger = true;
             dangerMessage.SetActive(true);
@@ -28,7 +29,8 @@ public class DangerZone : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
+        photonID = other.GetComponent<PhotonView>().GetInstanceID();
+        //Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Player")
         {
             isInDanger = false;
