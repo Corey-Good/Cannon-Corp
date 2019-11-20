@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviourPun
 
     public Camera tankCamera;
     public Transform turretObject;
-    public float turretLagSpeed = 50.0f;
+    public float turretLagSpeed = 0.7f;
 
     private Vector3 turretFinalLookDirection;
     private Vector3 cursorPosition;

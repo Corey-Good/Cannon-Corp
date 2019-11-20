@@ -180,7 +180,7 @@ MonoBehaviour:
   bulletSpawnLocation: {fileID: 8186286032616048506}
   tankCamera: {fileID: 7665375878861294314}
   turretObject: {fileID: 5930129108071091486}
-  turretLagSpeed: 50
+  turretLagSpeed: 0.7
 --- !u!1 &1945003076268401409
 GameObject:
   m_ObjectHideFlags: 0

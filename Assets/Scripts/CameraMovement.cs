@@ -60,7 +60,7 @@ public class CameraMovement : MonoBehaviourPun
     public void ZoomCamera()
     {
         float zoomFOV      = tankCamera.fieldOfView;
-        float zoomDistance = 1.0f;
+        float zoomDistance = 7.0f;
         float zoomMin      = 15.0f;
         float zoomMax      = 75.0f;
 
