@@ -18,8 +18,17 @@ public class CameraMovement : MonoBehaviourPun
 
     public static float cameraRotateSpeed = 500.0f;
 
+    public void Awake()
+    {
+        if (!photonView.IsMine) 
+        {
+            tankCamera.enabled = false;
+            return; 
+        }
+    }
     public void FixedUpdate()
     {
+        if (!photonView.IsMine) { return; }
         if (!PauseMenu.GameIsPaused) // might need (photonView.IsMine && !PauseMenu.GameIsPaused) for network
         {
             ZoomCamera();
@@ -28,6 +37,7 @@ public class CameraMovement : MonoBehaviourPun
 
     public void LateUpdate()
     {
+        if (!photonView.IsMine) return;
         SetCameraTarget();
 
         if (!PauseMenu.GameIsPaused)

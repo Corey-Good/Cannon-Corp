@@ -35,9 +35,14 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     public static float reloadProgress;
     private List<string> paintballs = new List<string>() { "bullet1", "bullet2", "bullet3", "bullet4", "bullet5" };
 
+    public static int playerViewId;
+
     private void Awake()
     {
         reloadProgress = 1.0f;
+        //PhotonView view = baseObject.GetPhotonView();
+        //playerViewId =  view.ViewID;
+       // Debug.Log(playerViewId);
     }
 
     private void FixedUpdate()
@@ -46,6 +51,8 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
         if (photonView.IsMine && !PauseMenu.GameIsPaused)
         {
+            PhotonView view = baseObject.GetPhotonView();
+            playerViewId = view.ViewID;
             MovePlayer();
             FireMechanism();
 
