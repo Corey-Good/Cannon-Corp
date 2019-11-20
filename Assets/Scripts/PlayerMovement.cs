@@ -1,5 +1,4 @@
 ﻿using Photon.Pun;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,10 +6,6 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 {
     private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
     private float rotateSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
-    //private float x_left = (Screen.width / 2.0f) + (Screen.width * 0.12f);
-    //private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
-
-    private float centerOfScreen = (Screen.width / 2.0f);
 
     public GameObject baseObject;
     public GameObject headObject;
@@ -24,9 +19,9 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     public GameObject bulletSpawnLocation; // Where the bullet is instantiated
     public static Color bulletColor = Color.red;
 
-    private Camera Camera;
+    public Camera tankCamera;
     public Transform turretObject;
-    public float turretLagSpeed = 50.0f;
+    private float turretLagSpeed = 0.7f;
 
     private Vector3 turretFinalLookDirection;
 
@@ -38,14 +33,14 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
     private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
-    List<string> paintballs = new List<string>() { "bullet1", "bullet2", "bullet3", "bullet4", "bullet5" };
+    private List<string> paintballs = new List<string>() { "bullet1", "bullet2", "bullet3", "bullet4", "bullet5" };
 
     private void Awake()
     {
         reloadProgress = 1.0f;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         SetKeyBindings();
 
@@ -55,15 +50,6 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             FireMechanism();
 
             TurretRotation();
-
-            //if (GameLoad.isXInverted)
-            //{
-            //    MoveXInverted();
-            //}
-            //else
-            //{
-            //    MoveXNormal();
-            //}
         }
     }
 
@@ -144,7 +130,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
     public void TurretRotation()
     {
-        Ray screenRay = Camera.ScreenPointToRay(Input.mousePosition);
+        Ray screenRay = tankCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(screenRay, out hit))
         {
@@ -154,37 +140,9 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         Vector3 turretLookDirection = cursorPosition - turretObject.position;
         turretLookDirection.y = 0.0f;
 
-        turretFinalLookDirection = Vector3.Lerp(turretFinalLookDirection, turretLookDirection, turretLagSpeed * Time.deltaTime);
+        turretFinalLookDirection = Vector3.RotateTowards(turretFinalLookDirection, turretLookDirection, turretLagSpeed * Time.deltaTime, 10.0f);
         turretObject.rotation = Quaternion.LookRotation(turretFinalLookDirection);
     }
-
-    //    public void MoveXNormal()
-    //    {
-
-    //        if (Input.mousePosition.x < x_left)
-    //        {
-    //            headObject.transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
-    //        }
-    //        if (Input.mousePosition.x > x_right)
-    //        {
-
-    //            headObject.transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
-    //        }
-
-    //    }
-
-    //    public void MoveXInverted()
-    //    {
-    //        if (Input.mousePosition.x < x_left)
-    //        {
-    //            headObject.transform.Rotate(Vector3.up * 30.0f * Time.deltaTime);
-    //        }
-    //        if (Input.mousePosition.x > x_right)
-    //        {
-    //            headObject.transform.Rotate(-Vector3.up * 30.0f * Time.deltaTime);
-    //        }
-
-    //    }
 
     public void FireMechanism()
     {
@@ -198,7 +156,6 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             bulletRender = bulletCopy.GetComponent<Renderer>();
 
             bulletRender.material.color = bulletColor;
-
 
             // Applies the launching force to the bullet and sets its status to active (true)
             bulletCopy.GetComponent<Rigidbody>().AddRelativeForce(((bulletSpawnLocation.transform.forward * bulletSpeed) + (bulletSpawnLocation.transform.up * bulletArch)), ForceMode.Impulse);
@@ -214,10 +171,6 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             // When a bullet is reloaded, delete the previouis copy and reset timer
             if (timeElapsed >= reloadSpeed)
             {
-                GameObject splatter = PhotonNetwork.Instantiate("Splatter", bulletCopy.transform.position, Quaternion.Euler(0, 0, 0));
-                Renderer rend = splatter.GetComponent<Renderer>();
-                rend.material.color = bulletColor;
-                PhotonNetwork.Destroy(bulletCopy);
                 timeElapsed = 0f;
                 bulletActive = false;
             }
@@ -237,7 +190,6 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         {
             stream.SendNext(baseObject.transform.position);
             stream.SendNext(headObject.transform.position);
-
         }
         else
         {
