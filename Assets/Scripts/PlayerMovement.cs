@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private string leftbutton;
     private string rightbutton;
 
-
+    Vector3 targetPosition;
 
     private GameObject bulletCopy;          // Copy of the bullet that gets launched
     public GameObject bulletSpawnLocation; // Where the bull is instantiated
@@ -180,9 +180,16 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
             bulletRender.material.color = bulletColor;
 
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 1000))
+            {
+                targetPosition = hit.point;
+            }
 
             // Applies the launching force to the bullet and sets its status to active (true)
-            bulletCopy.GetComponent<Rigidbody>().AddRelativeForce(((bulletSpawnLocation.transform.forward * (Vector3.Distance(this.transform.position, crosshairs.transform.position))) + (bulletSpawnLocation.transform.up * bulletArch)), ForceMode.Impulse);
+            bulletCopy.GetComponent<Rigidbody>().AddRelativeForce(((bulletSpawnLocation.transform.forward * (Vector3.Distance(this.transform.position, targetPosition))) + (bulletSpawnLocation.transform.up * bulletArch)), ForceMode.Impulse);
             bulletActive = true;
         }
 

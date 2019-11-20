@@ -27,7 +27,7 @@ public class FreelyRotatingTurret : MonoBehaviour
             targetPosition = hit.point;
             //this.transform.LookAt(targetPosition);
             lookAtTarget = new Vector3(targetPosition.x - transform.position.x,
-                transform.position.y,
+                0,
                 targetPosition.z - transform.position.z);
             playerRot = Quaternion.LookRotation(lookAtTarget);
         }

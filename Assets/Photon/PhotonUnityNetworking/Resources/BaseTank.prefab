@@ -215,7 +215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4476240553900718411}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.009997685, y: 2.9620004, z: 1.0339975}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7246439805565187565}
@@ -350,6 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseObject: {fileID: 7246439805564824013}
   headObject: {fileID: 4476240553686094272}
+  crosshairs: {fileID: 0}
   bulletSpawnLocation: {fileID: 2146325683858709411}
 --- !u!114 &4171467497859509372
 MonoBehaviour:
@@ -418,3 +419,5 @@ MonoBehaviour:
   damageFromEnemyContact: 11
   soundEffectEnemyContact: {fileID: 0}
   particleContactPrefab: {fileID: 0}
+  tankbase: {fileID: 7246439805564824013}
+  tankhead: {fileID: 3697387996984960190}
