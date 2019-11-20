@@ -7,11 +7,15 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 {
     private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
     private float rotateSpeed   = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
+    public static float movementMultiplier = 1.0f;
+    public static float rotateMultiplier = 1.0f;
+
     private float x_left = (Screen.width / 2.0f) + (Screen.width * 0.12f);
     private float x_right = (Screen.width / 2.0f) - (Screen.width * 0.12f);
 
     public GameObject baseObject;
     public GameObject headObject;
+    public GameObject crosshairs;
 
     private string forwardbutton;
     private string backwardbutton;
@@ -28,8 +32,10 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private float timeElapsed = 0f;
     private bool bulletActive = false;
     private float reloadSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["reloadSpeed"];
-    private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
-    private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
+    //private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
+    private float bulletSpeed = 5.0f;
+    private float bulletArch = 4.0f;
+    //private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
     public static float reloadProgress;
     public static float reloadMultiplier = 1.0f;
     List<string> paintballs = new List<string>() { "bullet1", "bullet2", "bullet3", "bullet4", "bullet5"};
@@ -102,11 +108,11 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         // Move play forwards and backwards, regenerate health when no movement is detected
         if (Input.GetKey(forwardbutton))
         {
-            baseObject.transform.position += transform.forward * Time.deltaTime * movementForce;
+            baseObject.transform.position += transform.forward * Time.deltaTime * movementForce * movementMultiplier;
         }
         else if (Input.GetKey(backwardbutton))
         {
-            baseObject.transform.position += -transform.forward * Time.deltaTime * movementForce;
+            baseObject.transform.position += -transform.forward * Time.deltaTime * movementForce * movementMultiplier;
         }
         else
         {
@@ -119,11 +125,11 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         // Rotate model left and right
         if (Input.GetKey(rightbutton))
         {
-            baseObject.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+            baseObject.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime * rotateMultiplier);
         }
         else if (Input.GetKey(leftbutton))
         {
-            baseObject.transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
+            baseObject.transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime * rotateMultiplier);
         }
 
         // Decrease health, for testing purposes
@@ -176,7 +182,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
 
             // Applies the launching force to the bullet and sets its status to active (true)
-            bulletCopy.GetComponent<Rigidbody>().AddRelativeForce(((bulletSpawnLocation.transform.forward * bulletSpeed) + (bulletSpawnLocation.transform.up * bulletArch)), ForceMode.Impulse);
+            bulletCopy.GetComponent<Rigidbody>().AddRelativeForce(((bulletSpawnLocation.transform.forward * (Vector3.Distance(this.transform.position, crosshairs.transform.position))) + (bulletSpawnLocation.transform.up * bulletArch)), ForceMode.Impulse);
             bulletActive = true;
         }
 

@@ -54,6 +54,19 @@ public class PlayerBrain : MonoBehaviour//, IMainGameEvents
     private float horizSpeed;
     private float vertSpeed;
     private static float reloadOriginal;
+    private float oldMovementMultiplier;
+    private float oldRotateMultiplier;
+    public GameObject tankbase;
+    public GameObject tankhead;
+    Renderer tankbaseRenderer;
+    Renderer tankheadRenderer;
+    float reloadBoostTimer = 0.0f;
+    Vector3 movementBoostStartLocation;
+    float totalDistanceTravelled = 0.0f;
+
+    bool isInvisible = false;
+    bool reloadBoostActive = false;
+    bool movementBoostActive = false;
 
     //void IMainGameEvents.OnGameWon ()
     //{
@@ -72,13 +85,51 @@ public class PlayerBrain : MonoBehaviour//, IMainGameEvents
     private void Awake ()
     {
         rigidBody = GetComponent<Rigidbody> ();
-        spriteRenderer = GetComponent<SpriteRenderer> ();
+        tankbaseRenderer = tankbase.GetComponent<Renderer>();
+        tankheadRenderer = tankhead.GetComponent<Renderer>();
     }
 
     // Use this for initialization
     void Start ()
     {
         playerHitPoints = 100;
+    }
+
+    void FixedUpdate()
+    {
+        // Removes boost after set amount of time
+        if(reloadBoostActive)
+        {
+            reloadBoostTimer += 0.1f;
+        }
+        if(reloadBoostTimer > 55.0f)
+        {
+            SetFasterReloadOff();
+        }
+        Debug.Log(reloadBoostTimer);
+
+        // Removes invisibility after firing
+        if(isInvisible)
+        {
+            if(Input.GetMouseButtonDown(KeyBindings.clickIndex))
+            {
+                SetInvisibilityOff();
+            }
+        }
+
+        // Removes movement boost after set distance is travelled
+        if(movementBoostActive)
+        {
+            if(totalDistanceTravelled < 50.0f)
+            {
+                totalDistanceTravelled += Vector3.Distance(movementBoostStartLocation, this.transform.position);
+                movementBoostStartLocation = this.transform.position;
+            } else if (totalDistanceTravelled > 50.0f)
+            {
+                SetFasterMovementOff();
+            }
+        }
+        //Debug.Log(totalDistanceTravelled);
     }
 
     public void SetHealthAdjustment (int adjustmentAmount)
@@ -111,27 +162,71 @@ public class PlayerBrain : MonoBehaviour//, IMainGameEvents
     //    }
     //}
 
+    public void SetInvisibilityOn()
+    {
+        tankbaseRenderer.enabled = false;
+        tankheadRenderer.enabled = false;
+        isInvisible = true;
+    }
+
+    public void SetInvisibilityOff()
+    {
+        tankbaseRenderer.enabled = true;
+        tankheadRenderer.enabled = true;
+        isInvisible = false;
+    }
+
     public void SetFasterReloadOn(float newSpeedMultiplier)
     {
+        if (reloadBoostActive)
+        {
+            SetFasterReloadOff();
+        }
+        reloadBoostActive = true;
+        reloadBoostTimer = 0.0f;
         reloadOriginal = PlayerMovement.reloadMultiplier;
         PlayerMovement.reloadMultiplier = newSpeedMultiplier;
+
     }
 
     public void SetFasterReloadOff()
     {
         PlayerMovement.reloadMultiplier = reloadOriginal;
+        reloadBoostActive = false;
     }
 
-    public void SetSpeedBoostOn (float speedMultiplier)
+    public void SetFasterMovementOn(float newMovementMultiplier, float newRotateMultiplier)
     {
-        speedOriginal = speed;
-        speed *= speedMultiplier;
+        if (movementBoostActive)
+        {
+            SetFasterMovementOff();
+        }
+        movementBoostActive = true;
+        oldMovementMultiplier = PlayerMovement.movementMultiplier;
+        oldRotateMultiplier = PlayerMovement.rotateMultiplier;
+        PlayerMovement.movementMultiplier = newMovementMultiplier;
+        PlayerMovement.rotateMultiplier = newRotateMultiplier;
+        movementBoostStartLocation = this.transform.position;
+        totalDistanceTravelled = 0.0f;
     }
 
-    public void SetSpeedBoostOff ()
+    public void SetFasterMovementOff()
     {
-        speed = speedOriginal;
+        PlayerMovement.movementMultiplier = oldMovementMultiplier;
+        PlayerMovement.rotateMultiplier = oldRotateMultiplier;
+        movementBoostActive = false;
     }
+
+    //public void SetSpeedBoostOn (float speedMultiplier)
+    //{
+    //    speedOriginal = speed;
+    //    speed *= speedMultiplier;
+    //}
+
+    //public void SetSpeedBoostOff ()
+    //{
+    //    speed = speedOriginal;
+    //}
 
     public void SetInvulnerability (bool isInvulnerabilityOn)
     {

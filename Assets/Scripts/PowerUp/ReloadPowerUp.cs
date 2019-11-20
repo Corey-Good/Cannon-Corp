@@ -19,6 +19,4 @@ class ReloadPowerUp : PowerUp
 
         playerBrain.SetFasterReloadOff();
     }
-
-    
 }

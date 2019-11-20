@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedPowerUp : MonoBehaviour
+public class SpeedPowerUp : PowerUp
 {
+    public float newMovementMultiplier = 2.0f;
+    public float newRotateMultiplier = 2.0f;
     // Start is called before the first frame update
-    void Start()
+    protected override void PowerUpPayload()
     {
-        
-    }
+        base.PowerUpPayload();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        playerBrain.SetFasterMovementOn(newMovementMultiplier, newRotateMultiplier);
     }
 }
