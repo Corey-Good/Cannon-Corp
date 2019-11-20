@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using Photon.Pun;
 
-public class DangerZone : MonoBehaviour
+public class DangerZone : MonoBehaviourPun
 {
     public static bool isInDanger = false;
     public GameObject dangerMessage;
@@ -16,16 +14,16 @@ public class DangerZone : MonoBehaviour
             isInDanger = true;
             dangerMessage.SetActive(true);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!photonView.IsMine) return;
+
         if (other.gameObject.tag == "Player")
         {
             isInDanger = false;
             dangerMessage.SetActive(false);
         }
     }
-
 }
