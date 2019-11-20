@@ -5,22 +5,14 @@ public class DangerZone : MonoBehaviour
 {
     public static bool isInDanger = false;
     public GameObject dangerMessage;
-    int photonID;
+
     // Start is called before the first frame update
 
-    //public void Awake()
-    //{
-    //    if (!photonView.IsMine)
-    //    {
-    //        GameObject danger = GameObject.FindWithTag("DangerZone");
-    //        danger.SetActive(false);
-    //    }
-    //}
     private void OnTriggerExit(Collider other)
     {
-        
+        //Debug.Log(other.gameObject.GetComponent<PhotonView>().ViewID);
         //Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "Player" && other.GetComponent<PhotonView>().GetInstanceID() == photonID)
+        if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<PhotonView>().ViewID == PlayerMovement.playerViewId)
         {
             isInDanger = true;
             dangerMessage.SetActive(true);
@@ -29,9 +21,9 @@ public class DangerZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        photonID = other.GetComponent<PhotonView>().GetInstanceID();
+        
         //Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<PhotonView>().ViewID == PlayerMovement.playerViewId)
         {
             isInDanger = false;
             dangerMessage.SetActive(false);
