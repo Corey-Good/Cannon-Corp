@@ -20,6 +20,7 @@ public class CameraMovement : MonoBehaviourPun
 
     public void FixedUpdate()
     {
+        if (!photonView.IsMine) return;
         if (!PauseMenu.GameIsPaused) // might need (photonView.IsMine && !PauseMenu.GameIsPaused) for network
         {
             ZoomCamera();
@@ -28,6 +29,7 @@ public class CameraMovement : MonoBehaviourPun
 
     public void LateUpdate()
     {
+        if (!photonView.IsMine) return;
         SetCameraTarget();
 
         if (!PauseMenu.GameIsPaused)
