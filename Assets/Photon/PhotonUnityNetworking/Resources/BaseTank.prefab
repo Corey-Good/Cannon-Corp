@@ -177,9 +177,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseObject: {fileID: 631144466196034836}
   headObject: {fileID: 6853637348630247527}
-  tankCamera: {fileID: 7042548001526687879}
   bulletSpawnLocation: {fileID: 8186286032616048506}
-  tankCameraC: {fileID: 7665375878861294314}
+  tankCamera: {fileID: 7665375878861294314}
   turretObject: {fileID: 5930129108071091486}
   turretLagSpeed: 50
 --- !u!1 &1945003076268401409
