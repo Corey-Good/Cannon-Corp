@@ -21,6 +21,10 @@ public class PaintballInfo : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
+            if (collisionInfo.collider.tag == "Player")
+            {
+                LoadUI.score += 10;
+            }
             GameObject splatter = PhotonNetwork.Instantiate("Splatter", objectName.transform.position, Quaternion.Euler(-90, 0, 0));
             Renderer rend = splatter.GetComponent<Renderer>();
             rend.material.color = PlayerMovement.bulletColor;

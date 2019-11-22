@@ -47,7 +47,7 @@ public class LoadUI : MonoBehaviour
     public void FixedUpdate()
     {
         // Currently, the score is based on the amount of time alive
-        score += Time.deltaTime;
+        //score += Time.deltaTime;
         playerScore.text = score.ToString("0"); // 0 converts the float to a string with no decimal value
 
         // Update the player health bar and reload bars
