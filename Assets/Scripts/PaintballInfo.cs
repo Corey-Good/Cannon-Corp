@@ -25,11 +25,22 @@ public class PaintballInfo : MonoBehaviourPun
             {
                 LoadUI.score += 10;
             }
-            GameObject splatter = PhotonNetwork.Instantiate("Splatter", objectName.transform.position, Quaternion.Euler(-90, 0, 0));
-            Renderer rend = splatter.GetComponent<Renderer>();
-            rend.material.color = PlayerMovement.bulletColor;
-            if(collisionInfo.collider.tag != "Player")
-                PhotonNetwork.Destroy(objectName);
+            else
+            {                
+                GameObject splatter = PhotonNetwork.Instantiate("Splatter", objectName.transform.position, Quaternion.Euler(-90, 0, 0));
+                Renderer rend = splatter.GetComponent<Renderer>();
+                rend.material.color = PlayerMovement.bulletColor;
+            }
+
+            for (float i = 0; i < 10; i+= 0.1f)
+            {
+
+            }
+            //Debug.Log("Bullet destroyed at: " + PhotonNetwork.Time);
+            PhotonNetwork.Destroy(objectName);
+
         }
     }
+
+
 }

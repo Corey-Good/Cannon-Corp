@@ -10,6 +10,7 @@ public class LoadUI : MonoBehaviour
     public Text playerScore;
     public Slider healthBar;
     public Slider reloadBar;
+    public Text timer;
 
     public static float score;
     public static float totalHealth = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["healthPoints"];
@@ -19,6 +20,9 @@ public class LoadUI : MonoBehaviour
     private bool isGameOver = false;
     private Image panel;
     private float alpha = 0.0f;
+    private float time = 360.0f;
+    private int minute;
+    private int second;
 
     public Texture2D cursorImage;
     public GameObject dangerPanel;
@@ -29,7 +33,7 @@ public class LoadUI : MonoBehaviour
         currentHealth = totalHealth;
         healthBar.value = currentHealth / totalHealth;
 
-        Cursor.SetCursor(cursorImage, new Vector2(0, 0), CursorMode.Auto);
+        Cursor.SetCursor(cursorImage, new Vector2(cursorImage.width/2, cursorImage.height/2), CursorMode.Auto);
 
         score = 0.0f;
 
@@ -42,12 +46,19 @@ public class LoadUI : MonoBehaviour
         {
             playerName.text = NameGenerator.UserName;
         }
+
     }
 
     public void FixedUpdate()
     {
+
         // Currently, the score is based on the amount of time alive
-        //score += Time.deltaTime;
+        if (SceneManager.GetActiveScene().name == "SM")
+        {
+            UpdateTimer();
+        }
+
+
         playerScore.text = score.ToString("0"); // 0 converts the float to a string with no decimal value
 
         // Update the player health bar and reload bars
@@ -87,8 +98,26 @@ public class LoadUI : MonoBehaviour
         }
     }
 
+    public void UpdateTimer()
+    {
+        if(time <= 0.0f)
+        {
+            StartCoroutine(DisconnectAndLoad());
+        }
+        time -= Time.deltaTime;
+        second = (int)(time % 60.0f);
+        minute = (int)(time / 60.0f);
+        timer.text = "";
+        timer.text = minute.ToString() + ":" + second.ToString("00");
+        // Note for next semester:
+        // SM will have a lobby, once the lobby has enough players then the game will start
+        // Have the master client start the timer over the network and have evryone else get the value from the master client
+        // that way the round will end at the same time for everyone
+    }
+
     private IEnumerator DisconnectAndLoad()
     {
+        Cursor.SetCursor(null, new Vector2(0, 0), CursorMode.Auto);
         PhotonNetwork.LeaveRoom();
         while (PhotonNetwork.InRoom)
             yield return null;

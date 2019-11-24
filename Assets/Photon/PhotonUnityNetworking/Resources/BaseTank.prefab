@@ -287,9 +287,11 @@ GameObject:
   - component: {fileID: 6853637348628244135}
   - component: {fileID: 8891339502127287469}
   - component: {fileID: 2658394668650138717}
+  - component: {fileID: 4424021484794726897}
+  - component: {fileID: 6352548536089296011}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,6 +393,32 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!65 &4424021484794726897
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853637348630247527}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.114474, y: 1.6882876, z: 3.040269}
+  m_Center: {x: 0.0000038494663, y: 3.657777, z: 0.64320016}
+--- !u!114 &6352548536089296011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853637348630247527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad86dcc967604c54a963aca841ba4688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: {fileID: 6853637348630247527}
 --- !u!1 &7042548001526687879
 GameObject:
   m_ObjectHideFlags: 0

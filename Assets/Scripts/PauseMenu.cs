@@ -9,11 +9,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject settingsUI;
 
-    private void Awake()
-    {
-        //Cursor.visible = false;
-    }
-
     public void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -66,6 +61,7 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator DisconnectAndLoad()
     {
+        Cursor.SetCursor(null, new Vector2(0, 0), CursorMode.Auto);
         PhotonNetwork.LeaveRoom();
         while (PhotonNetwork.InRoom)
             yield return null;

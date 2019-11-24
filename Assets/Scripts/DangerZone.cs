@@ -10,8 +10,6 @@ public class DangerZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.gameObject.GetComponent<PhotonView>().ViewID + " is exiting");
-        //Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<PhotonView>().ViewID == PlayerMovement.playerViewId)
         {
             isInDanger = true;
@@ -21,8 +19,7 @@ public class DangerZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.GetComponent<PhotonView>().ViewID + " is entering");
-        //Debug.Log(other.gameObject.tag);
+
         if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<PhotonView>().ViewID == PlayerMovement.playerViewId)
         {
             isInDanger = false;
