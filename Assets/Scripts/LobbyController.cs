@@ -51,11 +51,17 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     private void LoadGame()
     {
-        if(roomName == "FreeForAll")
+        if (roomName == "FreeForAll")
+        {
             PhotonNetwork.LoadLevel(1);
-        else
+        }
+        else if (roomName == "SharksandMinnows")
         {
             PhotonNetwork.LoadLevel(3);
+        }
+        else
+        {
+            PhotonNetwork.LoadLevel(4);
         }
     }
 
