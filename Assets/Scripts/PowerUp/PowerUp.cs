@@ -1,4 +1,5 @@
-﻿/*
+﻿    #region CopyRightRegion
+/*
  * Copyright (c) 2017 Razeware LLC
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,6 +28,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#endregion 
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -38,16 +41,18 @@ using UnityEngine.EventSystems;
 /// 2. Optionally Implement PowerUpHasExpired() to remove what was given in the payload
 /// 3. Call PowerUpHasExpired() when the power up has expired or tick ExpiresImmediately in inspector
 /// </summary>
+/// 
+
 public class PowerUp : MonoBehaviour
 {
-    public string powerUpName;
-    public string powerUpExplanation;
-    public string powerUpQuote;
+    //public string powerUpName;
+    //public string powerUpExplanation;
+    //public string powerUpQuote;
     Vector3 powerUpOffset = new Vector3(0.0f, -20.0f, 0.0f);
     [Tooltip ("Tick true for power ups that are instant use, eg a health addition that has no delay before expiring")]
     public bool expiresImmediately;
     public GameObject specialEffect;
-    public AudioClip soundEffect;
+    //public AudioClip soundEffect;
 
     /// <summary>
     /// It is handy to keep a reference to the player that collected us

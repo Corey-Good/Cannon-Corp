@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3275154655120330900}
   - component: {fileID: 4747734368853607991}
   - component: {fileID: 6978259927386998378}
+  - component: {fileID: 6330752227627636939}
   m_Layer: 0
   m_Name: CartoonTank
   m_TagString: Player
@@ -199,6 +200,22 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &6330752227627636939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80407516241083625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff849b7549a973840a46d3fe10c4ccba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2.2
+  damageFromEnemyContact: 11
+  tankbase: {fileID: 80407516241083625}
+  tankhead: {fileID: 80407516241083631}
 --- !u!1 &80407516241083631
 GameObject:
   m_ObjectHideFlags: 0

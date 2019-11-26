@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
 
-class ReloadPowerUp : PowerUp
+
+internal class ReloadPowerUp : PowerUp
 {
     public float ReloadMultiplier = .1f;
 

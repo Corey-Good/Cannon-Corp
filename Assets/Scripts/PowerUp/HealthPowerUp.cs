@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-class HealthPowerUp : PowerUp
+
+
+internal class HealthPowerUp : PowerUp
 {
     public int healthBonus = 20;
 
@@ -11,6 +10,6 @@ class HealthPowerUp : PowerUp
         base.PowerUpPayload();
 
         // Payload is to give some health bonus
-        playerBrain.SetHealthAdjustment(healthBonus);      
+        playerBrain.SetHealthAdjustment(healthBonus);
     }
 }
