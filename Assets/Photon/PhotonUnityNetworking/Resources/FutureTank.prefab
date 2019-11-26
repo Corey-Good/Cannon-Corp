@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 2750186390182618816}
   - component: {fileID: 8623078646135627167}
   - component: {fileID: 1318415907420501371}
+  - component: {fileID: 7550043026234597943}
   m_Layer: 0
   m_Name: FutureTank
   m_TagString: Player
@@ -347,6 +348,22 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &7550043026234597943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2545945380744510970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff849b7549a973840a46d3fe10c4ccba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2.2
+  damageFromEnemyContact: 11
+  tankbase: {fileID: 2545945380744510970}
+  tankhead: {fileID: 2545945380744510962}
 --- !u!1 &2545945380744510974
 GameObject:
   m_ObjectHideFlags: 0

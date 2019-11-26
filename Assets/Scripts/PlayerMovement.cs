@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private Vector3 turretFinalLookDirection;
 
     private Vector3 cursorPosition;
+    public static float reloadMultiplier = 1.0f;
+    public static float movementMultiplier = 1.0f;
+    public static float rotateMultiplier = 1.0f;
 
     private float timeElapsed = 0f;
     private bool bulletActive = false;
@@ -104,11 +107,11 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         // Move play forwards and backwards, regenerate health when no movement is detected
         if (Input.GetKey(forwardbutton))
         {
-            baseObject.transform.position += transform.forward * Time.deltaTime * movementForce;
+            baseObject.transform.position += transform.forward * Time.deltaTime * movementForce * movementMultiplier;
         }
         else if (Input.GetKey(backwardbutton))
         {
-            baseObject.transform.position += -transform.forward * Time.deltaTime * movementForce;
+            baseObject.transform.position += -transform.forward * Time.deltaTime * movementForce * movementMultiplier;
         }
         else
         {
@@ -121,11 +124,11 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         // Rotate model left and right
         if (Input.GetKey(rightbutton))
         {
-            baseObject.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+            baseObject.transform.Rotate(Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
         }
         else if (Input.GetKey(leftbutton))
         {
-            baseObject.transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
+            baseObject.transform.Rotate(-Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
         }
 
         // Decrease health, for testing purposes
@@ -165,7 +168,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             bulletRender.material.color = bulletColor;
 
             // Applies the launching force to the bullet and sets its status to active (true)
-            bulletCopy.GetComponent<Rigidbody>().AddRelativeForce(((bulletSpawnLocation.transform.forward * bulletSpeed) + (bulletSpawnLocation.transform.up * bulletArch)), ForceMode.Impulse);
+            bulletCopy.GetComponent<Rigidbody>().AddRelativeForce(((bulletSpawnLocation.transform.forward * Vector3.Distance(this.transform.position, cursorPosition)) + (bulletSpawnLocation.transform.up * bulletArch)), ForceMode.Impulse);
             bulletActive = true;
         }
 
@@ -173,10 +176,10 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         {
             // Increase time and update the reloadBar progress
             timeElapsed += Time.deltaTime;
-            reloadProgress = timeElapsed / reloadSpeed;
+            reloadProgress = timeElapsed / (reloadSpeed * reloadMultiplier);
 
             // When a bullet is reloaded, delete the previouis copy and reset timer
-            if (timeElapsed >= reloadSpeed)
+            if (timeElapsed >= (reloadSpeed * reloadMultiplier))
             {
                 timeElapsed = 0f;
                 bulletActive = false;
