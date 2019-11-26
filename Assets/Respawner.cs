@@ -12,5 +12,4 @@ public class Respawner : MonoBehaviour
         other.gameObject.transform.position = location[rNumber].transform.position;
         other.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
-
 }
