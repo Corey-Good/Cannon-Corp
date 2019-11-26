@@ -86,7 +86,7 @@ public class PlayerBrain : MonoBehaviour
         {
             SetFasterReloadOff();
         }
-        Debug.Log(reloadBoostTimer);
+        //Debug.Log(reloadBoostTimer);
 
         // Removes invisibility after firing
         if (isInvisible)

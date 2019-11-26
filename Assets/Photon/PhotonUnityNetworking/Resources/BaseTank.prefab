@@ -195,8 +195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.2
   damageFromEnemyContact: 11
-  soundEffectEnemyContact: {fileID: 0}
-  particleContactPrefab: {fileID: 0}
   tankbase: {fileID: 631144466196034836}
   tankhead: {fileID: 6853637348630247527}
 --- !u!1 &1945003076268401409
