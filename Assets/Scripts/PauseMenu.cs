@@ -66,6 +66,7 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator DisconnectAndLoad()
     {
+        Cursor.SetCursor(null, new Vector2(0, 0), CursorMode.Auto);
         PhotonNetwork.LeaveRoom();
         while (PhotonNetwork.InRoom)
             yield return null;

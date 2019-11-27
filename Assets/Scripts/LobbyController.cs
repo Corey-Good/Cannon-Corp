@@ -55,7 +55,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel(1);
         }
-        else if (roomName == "SharksandMinnows")
+        else if (roomName == "SharksAndMinnows")
         {
             PhotonNetwork.LoadLevel(3);
         }

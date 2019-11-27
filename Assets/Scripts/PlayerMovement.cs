@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviourPun, IPunObservable
 {
@@ -50,6 +51,12 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
     private void FixedUpdate()
     {
+        FixedJoint fixedJoint = headObject.GetComponent<FixedJoint>();
+        if (fixedJoint != null && SceneManager.GetActiveScene().name != "Obstacle")
+        {
+            Destroy(fixedJoint);
+            Debug.Log("Removing the Fixed Joint");
+        }
         SetKeyBindings();
 
         if (photonView.IsMine && !PauseMenu.GameIsPaused)
