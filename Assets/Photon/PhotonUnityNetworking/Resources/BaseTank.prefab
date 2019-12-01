@@ -454,6 +454,7 @@ GameObject:
   - component: {fileID: 4933722108362326127}
   - component: {fileID: 2990930264034826773}
   - component: {fileID: 5309762920062778813}
+  - component: {fileID: 5361003176460200286}
   m_Layer: 0
   m_Name: tankCamera
   m_TagString: Untagged
@@ -578,6 +579,18 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &5361003176460200286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7042548001526687879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a8c58f07bb2a049a61da98774a23c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8186286032616048506
 GameObject:
   m_ObjectHideFlags: 0
