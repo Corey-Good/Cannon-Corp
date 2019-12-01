@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
 using UnityEngine;
 
 public class Respawner : MonoBehaviour
@@ -13,6 +18,5 @@ public class Respawner : MonoBehaviour
         other.gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         other.gameObject.transform.position = location[rNumber].transform.position;
         other.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
-
     }
 }

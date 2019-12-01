@@ -1,10 +1,17 @@
-﻿using Photon.Pun;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
+using Photon.Pun;
 using UnityEngine;
 
 public class SharksandMinnows : MonoBehaviourPun
 {
-    public GameObject[] location = new GameObject[10];
     public static GameObject[] spawnLocations;
+    public GameObject[] location = new GameObject[10];
     private GameObject player;
 
     private void Awake()

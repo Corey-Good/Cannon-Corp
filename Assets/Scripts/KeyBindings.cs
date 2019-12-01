@@ -1,51 +1,31 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class KeyBindings : MonoBehaviour
 {
-    public static string forwardKey = "W";
     public static string backwardKey = "S";
+    public static int clickIndex = 0;
+    public static string forwardKey = "W";
     public static string leftKey = "A";
     public static string rightKey = "D";
-    public static int clickIndex = 0;
-
-    public Text forwardButton;
     public Text backwardButton;
-    public Text leftButton;
-    public Text rightButton;
     public Text fireButton;
-
+    public Text forwardButton;
+    public Text leftButton;
+    public bool lookingForKey = false;
+    public Text rightButton;
     private string keyHit;
     private string objectName;
-
-    public bool lookingForKey = false;
-
-
-    private void Start()
-    {
-        forwardButton.text = forwardKey;
-        backwardButton.text = backwardKey;
-        leftButton.text = leftKey;
-        rightButton.text = rightKey;
-        if (clickIndex == 0)
-            fireButton.text = "LeftClick";
-        else if (clickIndex == 1)
-            fireButton.text = "RightClick";
-    }
-
     public void OnClick(Text text)
     {
         text.text = "Hit Key";
-        lookingForKey = true;
-        objectName = text.name;           
-    }
-
-    public void OnMouseClick(Text text)
-    {
-        text.text = "Click Mouse";
         lookingForKey = true;
         objectName = text.name;
     }
@@ -62,14 +42,17 @@ public class KeyBindings : MonoBehaviour
                     forwardButton.text = keyHit;
                     forwardKey = forwardButton.text;
                     break;
+
                 case "BackwardText":
                     backwardButton.text = keyHit;
                     backwardKey = backwardButton.text;
                     break;
+
                 case "LeftText":
                     leftButton.text = keyHit;
                     leftKey = leftButton.text;
                     break;
+
                 case "RightText":
                     rightButton.text = keyHit;
                     rightKey = rightButton.text;
@@ -78,7 +61,7 @@ public class KeyBindings : MonoBehaviour
             lookingForKey = false;
         }
 
-        if(e.isMouse && lookingForKey)
+        if (e.isMouse && lookingForKey)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -94,4 +77,22 @@ public class KeyBindings : MonoBehaviour
         }
     }
 
+    public void OnMouseClick(Text text)
+    {
+        text.text = "Click Mouse";
+        lookingForKey = true;
+        objectName = text.name;
+    }
+
+    private void Start()
+    {
+        forwardButton.text = forwardKey;
+        backwardButton.text = backwardKey;
+        leftButton.text = leftKey;
+        rightButton.text = rightKey;
+        if (clickIndex == 0)
+            fireButton.text = "LeftClick";
+        else if (clickIndex == 1)
+            fireButton.text = "RightClick";
+    }
 }

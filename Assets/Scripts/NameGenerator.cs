@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,10 +13,10 @@ public class NameGenerator : MonoBehaviour
 {
     static public string UserName;
     public Text PlayerName;
-    
+
     private List<string> allNames = new List<string> { "Oswald_13",
         "Dr_Radkins",
-        "Panda_King", 
+        "Panda_King",
         "MinecraftBob1",
         "Big Kahuna",
         "Phantom Mystery",
@@ -33,12 +39,10 @@ public class NameGenerator : MonoBehaviour
         "Alphastar",
         "Attack of Logic"};
 
-
     public void randomName()
     {
         int randomNumber = Random.Range(0, 23);
         PlayerName.text = allNames[randomNumber];
         UserName = PlayerName.text;
-
     }
 }

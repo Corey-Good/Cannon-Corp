@@ -1,24 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
 using Photon.Pun;
+using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
 {
-    string[] powerupNames = new string[4] { "HeartPU", "InvisibiltyPU", "ReloadPU", "SpeedPU" };
     public GameObject[] powerupRotations = new GameObject[4];
     public GameObject[] spawnLocations = new GameObject[4];
+    private string[] powerupNames = new string[4] { "HeartPU", "InvisibiltyPU", "ReloadPU", "SpeedPU" };
     private float time = 0.0f;
 
     public void FixedUpdate()
     {
         time += Time.deltaTime;
-        if(time > 8.0f)
+        if (time > 8.0f)
         {
             SpawnRandomPowerUp();
             time = 0.0f;
         }
-
     }
 
     private void SpawnRandomPowerUp()
@@ -26,7 +30,7 @@ public class PowerUpManager : MonoBehaviour
         int randomNumber = Random.Range(0, 4);
         Debug.Log(randomNumber);
         float yValue = 1.0f;
-        if(randomNumber == 1)
+        if (randomNumber == 1)
         {
             yValue = 0.0f;
         }

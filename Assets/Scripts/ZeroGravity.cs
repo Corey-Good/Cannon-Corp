@@ -1,7 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
 using Photon.Pun;
+using UnityEngine;
 
 public class ZeroGravity : MonoBehaviour
 {

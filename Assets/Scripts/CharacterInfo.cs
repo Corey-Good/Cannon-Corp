@@ -1,24 +1,22 @@
-﻿/*********************************************************************/
-/*         Team: Cannon Corps                                        */
-/*       Author: Corey Good                                          */
-/* Date Created: September 30, 2019                                  */
-/* Date Updated: October 14, 2019                                    */
-/*      Purpose: Stores all  model values                            */
-/*********************************************************************/
-
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class CharacterInfo : MonoBehaviour
 {
-
     static public Dictionary<int, Hashtable> info =
         new Dictionary<int, Hashtable>
         {
             { // Model 1, this is the base model tank
                 0, new Hashtable()
-                {                    
+                {
                     {"movementForce", 7.0f },
                     {"rotationSpeed", 30.0f },
                     {"healthPoints", 65.0f},
@@ -26,12 +24,11 @@ public class CharacterInfo : MonoBehaviour
                     {"bulletSpeed", 55.0f},
                     {"bulletArch", 1.7f},
                     {"bulletDamage", 10.0f}
-
                 }
             },
             { // Model 2, this is the futuristic tank
                 1, new Hashtable()
-                {                    
+                {
                     {"movementForce", 10.0f },
                     {"rotationSpeed", 40.0f },
                     {"healthPoints", 55.0f},
@@ -43,7 +40,7 @@ public class CharacterInfo : MonoBehaviour
             },
             { // Model 3, this is the catapult
                 2, new Hashtable()
-                {                    
+                {
                     {"movementForce", 5.0f },
                     {"rotationSpeed", 25.0f },
                     {"healthPoints", 90.0f},
@@ -55,7 +52,7 @@ public class CharacterInfo : MonoBehaviour
             },
             { // Model 4, this is the Cartoon Tank
                 3, new Hashtable()
-                {                    
+                {
                     {"movementForce", 8.0f },
                     {"rotationSpeed", 35.0f },
                     {"healthPoints", 65.0f},
@@ -67,7 +64,7 @@ public class CharacterInfo : MonoBehaviour
             },
             { // Model 5, this is the box tank
                 4, new Hashtable()
-                {                    
+                {
                     {"movementForce", 6.0f },
                     {"rotationSpeed", 30.0f },
                     {"healthPoints", 100.0f},
@@ -77,8 +74,5 @@ public class CharacterInfo : MonoBehaviour
                     {"bulletDamage", 10.0f}
                 }
             }
-           
         };
 }
-
-

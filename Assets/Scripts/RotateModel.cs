@@ -1,11 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
 using UnityEngine;
 
 public class RotateModel : MonoBehaviour
 {
     public float rotateSpeed = 18f;
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
         transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
     }

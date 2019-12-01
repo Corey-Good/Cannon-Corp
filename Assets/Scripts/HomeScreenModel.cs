@@ -1,12 +1,17 @@
-﻿using System.Collections;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HomeScreenModel : MonoBehaviour
 {
-    public List<GameObject> allModels = new List<GameObject>(5);
     static public int currentModelIndex = 0;
-
+    public List<GameObject> allModels = new List<GameObject>(5);
     public void Awake()
     {
         currentModelIndex = 0;
@@ -18,7 +23,7 @@ public class HomeScreenModel : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         allModels[0].SetActive(false);
         allModels[1].SetActive(false);

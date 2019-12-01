@@ -1,6 +1,12 @@
-﻿using Photon.Pun;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
+using Photon.Pun;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SpawnCharacter : MonoBehaviourPun
 {

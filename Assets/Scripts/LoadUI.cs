@@ -1,4 +1,11 @@
-﻿using Photon.Pun;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,48 +13,24 @@ using UnityEngine.UI;
 
 public class LoadUI : MonoBehaviour
 {
-    public Text playerName;
-    public Text playerScore;
-    public Slider healthBar;
-    public Slider reloadBar;
-    public Text timer;
-
+    public static float currentHealth;
     public static float score;
     public static float totalHealth = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["healthPoints"];
-    public static float currentHealth;
-
-    public GameObject gameOverPanel;
-    private bool isGameOver = false;
-    private Image panel;
-    private float alpha = 0.0f;
-    private float time = 360.0f;
-    private float stopwatchTime = 0.0f;
-    private int minute;
-    private int second;
-
     public Texture2D cursorImage;
     public GameObject dangerPanel;
-
-    private void Awake()
-    {
-        // Set the player's health to full on load
-        currentHealth = totalHealth;
-        healthBar.value = currentHealth / totalHealth;
-
-        Cursor.SetCursor(cursorImage, new Vector2(cursorImage.width/2.0f, cursorImage.height/2.0f), CursorMode.Auto);
-
-        score = 0.0f;
-
-        // Give the user a deafult name if no name was chosen
-        if (NameGenerator.UserName == null)
-        {
-            playerName.text = "NoNameNoWin";
-        }
-        else
-        {
-            playerName.text = NameGenerator.UserName;
-        }
-    }
+    public GameObject gameOverPanel;
+    public Slider healthBar;
+    public Text playerName;
+    public Text playerScore;
+    public Slider reloadBar;
+    public Text timer;
+    private float alpha = 0.0f;
+    private bool isGameOver = false;
+    private int minute;
+    private Image panel;
+    private int second;
+    private float stopwatchTime = 0.0f;
+    private float time = 360.0f;
 
     public void FixedUpdate()
     {
@@ -61,6 +44,15 @@ public class LoadUI : MonoBehaviour
             timer.text = stopwatchTime.ToString("0.00s");
         }
 
+        //Cursor.visible = true;
+        //if (Input.GetKey(KeyCode.Escape))
+        //{
+        //    Cursor.lockState = CursorLockMode.Locked;
+        //}
+        //else
+        //{
+        //    Cursor.lockState = CursorLockMode.None;
+        //}
         playerScore.text = score.ToString("0"); // 0 converts the float to a string with no decimal value
 
         // Update the player health bar and reload bars
@@ -115,6 +107,27 @@ public class LoadUI : MonoBehaviour
         // SM will have a lobby, once the lobby has enough players then the game will start
         // Have the master client start the timer over the network and have evryone else get the value from the master client
         // that way the round will end at the same time for everyone
+    }
+
+    private void Awake()
+    {
+        // Set the player's health to full on load
+        currentHealth = totalHealth;
+        healthBar.value = currentHealth / totalHealth;
+
+        Cursor.SetCursor(cursorImage, new Vector2(cursorImage.width / 2.0f, cursorImage.height / 2.0f), CursorMode.Auto);
+
+        score = 0.0f;
+
+        // Give the user a deafult name if no name was chosen
+        if (NameGenerator.UserName == null)
+        {
+            playerName.text = "NoNameNoWin";
+        }
+        else
+        {
+            playerName.text = NameGenerator.UserName;
+        }
     }
 
     private IEnumerator DisconnectAndLoad()

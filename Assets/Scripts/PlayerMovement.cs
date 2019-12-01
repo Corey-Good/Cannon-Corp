@@ -1,72 +1,129 @@
-﻿using Photon.Pun;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
+using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviourPun, IPunObservable
 {
-    private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
-    private float rotateSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
-
-    public GameObject baseObject;
-    public GameObject headObject;
-
-    private string forwardbutton;
-    private string backwardbutton;
-    private string leftbutton;
-    private string rightbutton;
-
-    private GameObject bulletCopy;         // Copy of the bullet that gets launched
-    public GameObject bulletSpawnLocation; // Where the bullet is instantiated
     public static Color bulletColor = Color.red;
-
+    public static float movementMultiplier = 1.0f;
+    public static int playerViewId;
+    public static float reloadMultiplier = 1.0f;
+    public static float reloadProgress;
+    public static float rotateMultiplier = 1.0f;
+    public GameObject baseObject;
+    public GameObject bulletSpawnLocation;
+    public GameObject headObject;
+    // Where the bullet is instantiated
     public Camera tankCamera;
+
     public Transform turretObject;
-    private float turretLagSpeed = 0.7f;
+    private string backwardbutton;
+    private bool bulletActive = false;
+    private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
+    private GameObject bulletCopy;
+    private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
+    private Vector3 cursorPosition;
+    private string forwardbutton;
+    private string leftbutton;
+    private float movementForce = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["movementForce"];
+    private List<string> paintballs = new List<string>() { "bullet1", "bullet2", "bullet3", "bullet4", "bullet5" };
+    private float reloadSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["reloadSpeed"];
+    private string rightbutton;
+    private float rotateSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
+    private float timeElapsed = 0f;
 
     private Vector3 turretFinalLookDirection;
 
-    private Vector3 cursorPosition;
-    public static float reloadMultiplier = 1.0f;
-    public static float movementMultiplier = 1.0f;
-    public static float rotateMultiplier = 1.0f;
-
-    private float timeElapsed = 0f;
-    private bool bulletActive = false;
-    private float reloadSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["reloadSpeed"];
-    private float bulletSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletSpeed"];
-    private float bulletArch = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletArch"];
-    public static float reloadProgress;
-    private List<string> paintballs = new List<string>() { "bullet1", "bullet2", "bullet3", "bullet4", "bullet5" };
-
-    public static int playerViewId;
-
-    private void Awake()
+    // Copy of the bullet that gets launched
+    private float turretLagSpeed = 0.7f;
+    public void FireMechanism()
     {
-        reloadProgress = 1.0f;
-        //PhotonView view = baseObject.GetPhotonView();
-        //playerViewId =  view.ViewID;
-       // Debug.Log(playerViewId);
+        Renderer bulletRender = null;
+
+        if (Input.GetMouseButtonDown(KeyBindings.clickIndex) && bulletActive == false && !PauseMenu.GameIsPaused)
+        {
+            bulletColor = GetRandomColor();
+            // Creates a copy of the bullet, and captures its Rigibody (into bulletRB)
+            bulletCopy = PhotonNetwork.Instantiate(paintballs[CharacterMenu.currentModelIndex], bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0));
+            bulletRender = bulletCopy.GetComponent<Renderer>();
+
+            bulletRender.material.color = bulletColor;
+
+            // Applies the launching force to the bullet and sets its status to active (true)
+            bulletCopy.GetComponent<Rigidbody>().AddRelativeForce(((bulletSpawnLocation.transform.forward * Vector3.Distance(this.transform.position, cursorPosition)) + (bulletSpawnLocation.transform.up * bulletArch)), ForceMode.Impulse);
+            bulletActive = true;
+        }
+
+        if (bulletActive)
+        {
+            // Increase time and update the reloadBar progress
+            timeElapsed += Time.deltaTime;
+            reloadProgress = timeElapsed / (reloadSpeed * reloadMultiplier);
+
+            // When a bullet is reloaded, delete the previouis copy and reset timer
+            if (timeElapsed >= (reloadSpeed * reloadMultiplier))
+            {
+                timeElapsed = 0f;
+                bulletActive = false;
+            }
+        }
     }
 
-    private void FixedUpdate()
+    public void MovePlayer()
     {
-        FixedJoint fixedJoint = headObject.GetComponent<FixedJoint>();
-        if (fixedJoint != null && SceneManager.GetActiveScene().name != "Obstacle")
+        // Move play forwards and backwards, regenerate health when no movement is detected
+        if (Input.GetKey(forwardbutton))
         {
-            Destroy(fixedJoint);
-            Debug.Log("Removing the Fixed Joint");
+            baseObject.transform.position += transform.forward * Time.deltaTime * movementForce * movementMultiplier;
         }
-        SetKeyBindings();
-
-        if (photonView.IsMine && !PauseMenu.GameIsPaused)
+        else if (Input.GetKey(backwardbutton))
         {
-            PhotonView view = baseObject.GetPhotonView();
-            playerViewId = view.ViewID;
-            MovePlayer();
-            FireMechanism();
+            baseObject.transform.position += -transform.forward * Time.deltaTime * movementForce * movementMultiplier;
+        }
+        else
+        {
+            if (LoadUI.currentHealth < LoadUI.totalHealth)
+            {
+                LoadUI.currentHealth += 0.01f;
+            }
+        }
 
-            TurretRotation();
+        // Rotate model left and right
+        if (Input.GetKey(rightbutton))
+        {
+            baseObject.transform.Rotate(Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
+        }
+        else if (Input.GetKey(leftbutton))
+        {
+            baseObject.transform.Rotate(-Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
+        }
+
+        // Decrease health, for testing purposes
+        if (Input.GetKey("h"))
+        {
+            LoadUI.currentHealth -= 1.0f;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(baseObject.transform.position);
+            stream.SendNext(headObject.transform.position);
+        }
+        else
+        {
+            baseObject.transform.position = (Vector3)stream.ReceiveNext();
+            headObject.transform.position = (Vector3)stream.ReceiveNext();
         }
     }
 
@@ -109,42 +166,6 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         }
     }
 
-    public void MovePlayer()
-    {
-        // Move play forwards and backwards, regenerate health when no movement is detected
-        if (Input.GetKey(forwardbutton))
-        {
-            baseObject.transform.position += transform.forward * Time.deltaTime * movementForce * movementMultiplier;
-        }
-        else if (Input.GetKey(backwardbutton))
-        {
-            baseObject.transform.position += -transform.forward * Time.deltaTime * movementForce * movementMultiplier;
-        }
-        else
-        {
-            if (LoadUI.currentHealth < LoadUI.totalHealth)
-            {
-                LoadUI.currentHealth += 0.01f;
-            }
-        }
-
-        // Rotate model left and right
-        if (Input.GetKey(rightbutton))
-        {
-            baseObject.transform.Rotate(Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
-        }
-        else if (Input.GetKey(leftbutton))
-        {
-            baseObject.transform.Rotate(-Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
-        }
-
-        // Decrease health, for testing purposes
-        if (Input.GetKey("h"))
-        {
-            LoadUI.currentHealth -= 1.0f;
-        }
-    }
-
     public void TurretRotation()
     {
         Ray screenRay = tankCamera.ScreenPointToRay(Input.mousePosition);
@@ -161,57 +182,38 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         turretObject.rotation = Quaternion.LookRotation(turretFinalLookDirection);
     }
 
-    public void FireMechanism()
+    private void Awake()
     {
-        Renderer bulletRender = null;
-
-        if (Input.GetMouseButtonDown(KeyBindings.clickIndex) && bulletActive == false && !PauseMenu.GameIsPaused)
-        {
-            bulletColor = GetRandomColor();
-            // Creates a copy of the bullet, and captures its Rigibody (into bulletRB)
-            bulletCopy = PhotonNetwork.Instantiate(paintballs[CharacterMenu.currentModelIndex], bulletSpawnLocation.transform.position, Quaternion.Euler(0, 0, 0));
-            bulletRender = bulletCopy.GetComponent<Renderer>();
-
-            bulletRender.material.color = bulletColor;
-
-            // Applies the launching force to the bullet and sets its status to active (true)
-            bulletCopy.GetComponent<Rigidbody>().AddRelativeForce(((bulletSpawnLocation.transform.forward * Vector3.Distance(this.transform.position, cursorPosition)) + (bulletSpawnLocation.transform.up * bulletArch)), ForceMode.Impulse);
-            bulletActive = true;
-        }
-
-        if (bulletActive)
-        {
-            // Increase time and update the reloadBar progress
-            timeElapsed += Time.deltaTime;
-            reloadProgress = timeElapsed / (reloadSpeed * reloadMultiplier);
-
-            // When a bullet is reloaded, delete the previouis copy and reset timer
-            if (timeElapsed >= (reloadSpeed * reloadMultiplier))
-            {
-                timeElapsed = 0f;
-                bulletActive = false;
-            }
-        }
+        reloadProgress = 1.0f;
+        //PhotonView view = baseObject.GetPhotonView();
+        //playerViewId =  view.ViewID;
+        // Debug.Log(playerViewId);
     }
 
+    private void FixedUpdate()
+    {
+        FixedJoint fixedJoint = headObject.GetComponent<FixedJoint>();
+        if (fixedJoint != null && SceneManager.GetActiveScene().name != "Obstacle")
+        {
+            Destroy(fixedJoint);
+            Debug.Log("Removing the Fixed Joint");
+        }
+        SetKeyBindings();
+
+        if (photonView.IsMine && !PauseMenu.GameIsPaused)
+        {
+            PhotonView view = baseObject.GetPhotonView();
+            playerViewId = view.ViewID;
+            MovePlayer();
+            FireMechanism();
+
+            TurretRotation();
+        }
+    }
     private Color GetRandomColor()
     {
         List<Color> colors = new List<Color>() { Color.blue, Color.green, Color.red, Color.yellow, Color.cyan, Color.gray, Color.magenta, Color.white };
 
         return colors[Random.Range(0, colors.Count)];
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(baseObject.transform.position);
-            stream.SendNext(headObject.transform.position);
-        }
-        else
-        {
-            baseObject.transform.position = (Vector3)stream.ReceiveNext();
-            headObject.transform.position = (Vector3)stream.ReceiveNext();
-        }
     }
 }

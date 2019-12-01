@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
 using UnityEngine;
 
 public class SpringBoard : MonoBehaviour
@@ -8,7 +13,7 @@ public class SpringBoard : MonoBehaviour
     {
         int randomNumber = Random.Range(0, 115);
         float direction;
-        if(Random.Range(0,2) == 0)
+        if (Random.Range(0, 2) == 0)
         {
             direction = 0.75f;
         }
@@ -16,11 +21,10 @@ public class SpringBoard : MonoBehaviour
         {
             direction = -0.5f;
         }
-        
+
         if (randomNumber == 0)
         {
             collisionInfo.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, direction) * 2500, ForceMode.Impulse);
-          
         }
     }
 }

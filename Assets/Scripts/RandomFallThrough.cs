@@ -1,10 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
 using UnityEngine;
 
 public class RandomFallThrough : MonoBehaviour
 {
     private float time = 0.0f;
+
     public void FixedUpdate()
     {
         time += Time.deltaTime;

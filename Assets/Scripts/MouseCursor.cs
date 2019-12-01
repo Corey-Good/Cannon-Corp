@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/************************************************************************/
+/* Author:  */
+/* Date Created: */
+/* Last Modified Date: */
+/* Modified By: */
+/************************************************************************/
+
+using UnityEngine;
 
 public class MouseCursor : MonoBehaviour
 {
