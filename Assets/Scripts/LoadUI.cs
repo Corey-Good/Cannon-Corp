@@ -28,6 +28,7 @@ public class LoadUI : MonoBehaviour
     public Texture2D cursorImage;
     public GameObject dangerPanel;
 
+   
     private void Awake()
     {
         // Set the player's health to full on load
@@ -63,6 +64,7 @@ public class LoadUI : MonoBehaviour
         }
 
         playerScore.text = score.ToString("0"); // 0 converts the float to a string with no decimal value
+
 
         // Update the player health bar and reload bars
         reloadBar.value = PlayerMovement.reloadProgress;

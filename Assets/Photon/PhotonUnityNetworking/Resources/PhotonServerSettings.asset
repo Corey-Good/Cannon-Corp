@@ -33,5 +33,6 @@ MonoBehaviour:
   - DestroyRpc
   - RespawnCharacter
   - ChatMessage
+  - UpdateTable
   DisableAutoOpenWizard: 1
   ShowSettings: 1
