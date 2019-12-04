@@ -49,6 +49,7 @@ public class LoadUI : MonoBehaviour
         }
     }
 
+
     public void FixedUpdate()
     {
         if (SceneManager.GetActiveScene().name == "SM")
