@@ -736,6 +736,7 @@ GameObject:
   - component: {fileID: 210072869}
   - component: {fileID: 210072868}
   - component: {fileID: 210072867}
+  - component: {fileID: 210072871}
   m_Layer: 0
   m_Name: ObjectDrop
   m_TagString: Untagged
@@ -773,7 +774,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 64a86e065dc9e7e4b81c61ec22e0ef7a, type: 2}
+  - {fileID: 2100000, guid: 5f54188613178804781707349303ee37, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -809,12 +810,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210072866}
   m_LocalRotation: {x: -0.50000006, y: -0.49999994, z: -0.50000006, w: 0.49999994}
-  m_LocalPosition: {x: 6.3887863, y: 12.97, z: 206.26003}
-  m_LocalScale: {x: 3000.0017, y: 1600.0013, z: 100.00004}
-  m_Children: []
+  m_LocalPosition: {x: 6.3887863, y: 12.97, z: 213.91}
+  m_LocalScale: {x: 3800, y: 1600.0013, z: 100.00004}
+  m_Children:
+  - {fileID: 780454224}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &210072871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210072866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bec2642318fa4246afef6b9bc42f59e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centerSpawn: {fileID: 780454223}
 --- !u!1 &259976368
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +2562,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769310141}
   m_CullTransparentMesh: 0
+--- !u!1 &780454223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780454224}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &780454224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780454223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0.1085}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 210072870}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &786767440
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,7 +2939,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853564651}
   m_LocalRotation: {x: -0.7071069, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 232.37, y: 12.47, z: 1}
+  m_LocalPosition: {x: 248.2, y: 12.47, z: 1}
   m_LocalScale: {x: 1000.00024, y: 1600.0001, z: 99.99998}
   m_Children: []
   m_Father: {fileID: 817023207}
@@ -3928,12 +3973,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0477ddb0697f74da394178a5da7c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardButton: {fileID: 824214417}
   backwardButton: {fileID: 567145610}
-  leftButton: {fileID: 1798160848}
-  rightButton: {fileID: 1428783922}
   fireButton: {fileID: 493909907}
+  forwardButton: {fileID: 824214417}
+  leftButton: {fileID: 1798160848}
   lookingForKey: 0
+  rightButton: {fileID: 1428783922}
 --- !u!114 &1198754496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4421,14 +4466,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38252001831f3864b8591f5385c832c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: {fileID: 702652609}
-  playerScore: {fileID: 183449614}
-  healthBar: {fileID: 1009795055}
-  reloadBar: {fileID: 1672408763}
-  timer: {fileID: 1119773843}
-  gameOverPanel: {fileID: 699240515}
   cursorImage: {fileID: 2800000, guid: 6f3dc04b7d1ccbe4e90fcd19f7a39d12, type: 3}
   dangerPanel: {fileID: 630211510}
+  gameOverPanel: {fileID: 699240515}
+  healthBar: {fileID: 1009795055}
+  playerName: {fileID: 702652609}
+  playerScore: {fileID: 183449614}
+  reloadBar: {fileID: 1672408763}
+  timer: {fileID: 1119773843}
 --- !u!114 &1437786810
 MonoBehaviour:
   m_ObjectHideFlags: 0

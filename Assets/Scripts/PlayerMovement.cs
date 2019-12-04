@@ -210,6 +210,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             TurretRotation();
         }
     }
+
     private Color GetRandomColor()
     {
         List<Color> colors = new List<Color>() { Color.blue, Color.green, Color.red, Color.yellow, Color.cyan, Color.gray, Color.magenta, Color.white };
