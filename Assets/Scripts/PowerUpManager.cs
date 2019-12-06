@@ -18,7 +18,7 @@ public class PowerUpManager : MonoBehaviour
     public void FixedUpdate()
     {
         time += Time.deltaTime;
-        if (time > 8.0f)
+        if (time > 5.0f)
         {
             SpawnRandomPowerUp();
             time = 0.0f;
@@ -28,7 +28,7 @@ public class PowerUpManager : MonoBehaviour
     private void SpawnRandomPowerUp()
     {
         int randomNumber = Random.Range(0, 4);
-        Debug.Log(randomNumber);
+        //Debug.Log(randomNumber);
         float yValue = 1.0f;
         if (randomNumber == 1)
         {

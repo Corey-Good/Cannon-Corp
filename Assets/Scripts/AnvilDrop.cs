@@ -20,7 +20,7 @@ public class AnvilDrop : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        if (anvils.Count > 15)
+        if (anvils.Count > 20)
         {
             foreach (GameObject anvil in anvils)
             {
@@ -29,7 +29,7 @@ public class AnvilDrop : MonoBehaviour
             anvils.RemoveRange(0, anvils.Count);
         }
 
-        if (time >= 0.85f)
+        if (time >= 0.65f)
         {
             time = 0.0f;
             anvil = PhotonNetwork.Instantiate("Anvil", centerSpawn.transform.position + new Vector3(Random.Range(-15.0f, 16.0f), 0.0f, Random.Range(-36.0f, 36.0f)), centerSpawn.transform.rotation);

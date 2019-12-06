@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     public static float reloadMultiplier = 1.0f;
     public static float reloadProgress;
     public static float rotateMultiplier = 1.0f;
+    public string username; 
     public GameObject baseObject;
     public GameObject bulletSpawnLocation;
     public GameObject headObject;
@@ -185,9 +186,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private void Awake()
     {
         reloadProgress = 1.0f;
-        //PhotonView view = baseObject.GetPhotonView();
-        //playerViewId =  view.ViewID;
-        // Debug.Log(playerViewId);
+        username = NameGenerator.UserName;
     }
 
     private void FixedUpdate()
@@ -217,4 +216,5 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
         return colors[Random.Range(0, colors.Count)];
     }
+
 }
