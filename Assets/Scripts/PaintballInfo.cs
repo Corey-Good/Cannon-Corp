@@ -5,13 +5,13 @@ using UnityEngine;
 public class PaintballInfo : MonoBehaviourPun
 {
     public GameObject objectName; // Name of the object using the PaintballInfo script
-    
 
     public static Hashtable paintballInfo = new Hashtable()
     {
         { "playerName",      NameGenerator.UserName},
         { "paintballDamage", CharacterInfo.info[CharacterMenu.currentModelIndex]["bulletDamage"]}
     };
+
 
     public string GetName()
     {
@@ -25,7 +25,8 @@ public class PaintballInfo : MonoBehaviourPun
             if (collisionInfo.collider.tag == "Player")
             {
                 LoadUI.score += 10;
-                photonView.RPC("UpdateTable", RpcTarget.All, 10, "hello");
+                
+                HighScore.UpdateTable("eddie", 10);
             }
             GameObject splatter = PhotonNetwork.Instantiate("Splatter", objectName.transform.position, Quaternion.Euler(-90, 0, 0));
             Renderer rend = splatter.GetComponent<Renderer>();
