@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     public static int playerViewId;
     public static float reloadMultiplier = 1.0f;
     public static float reloadProgress;
-    public static float rotateMultiplier = 1.0f;
+    public static float rotateMultiplier = 8.0f;
     public GameObject baseObject;
     public GameObject bulletSpawnLocation;
     public GameObject headObject;
@@ -83,10 +83,28 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
         if (Input.GetKey(forwardbutton))
         {
             baseObject.transform.position += transform.forward * Time.deltaTime * movementForce * movementMultiplier;
+            // Rotate model left and right
+            if (Input.GetKey(rightbutton))
+            {
+                baseObject.transform.Rotate(Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
+            }
+            else if (Input.GetKey(leftbutton))
+            {
+                baseObject.transform.Rotate(-Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
+            }
         }
         else if (Input.GetKey(backwardbutton))
         {
             baseObject.transform.position += -transform.forward * Time.deltaTime * movementForce * movementMultiplier;
+            // Rotate model left and right
+            if (Input.GetKey(rightbutton))
+            {
+                baseObject.transform.Rotate(Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
+            }
+            else if (Input.GetKey(leftbutton))
+            {
+                baseObject.transform.Rotate(-Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
+            }
         }
         else
         {
@@ -96,15 +114,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             }
         }
 
-        // Rotate model left and right
-        if (Input.GetKey(rightbutton))
-        {
-            baseObject.transform.Rotate(Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
-        }
-        else if (Input.GetKey(leftbutton))
-        {
-            baseObject.transform.Rotate(-Vector3.up * rotateSpeed * rotateMultiplier * Time.deltaTime);
-        }
+
 
         // Decrease health, for testing purposes
         if (Input.GetKey("h"))
@@ -192,23 +202,17 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
     private void FixedUpdate()
     {
-        FixedJoint fixedJoint = headObject.GetComponent<FixedJoint>();
-        if (fixedJoint != null && SceneManager.GetActiveScene().name != "Obstacle")
-        {
-            Destroy(fixedJoint);
-            Debug.Log("Removing the Fixed Joint");
-        }
         SetKeyBindings();
 
-        if (photonView.IsMine && !PauseMenu.GameIsPaused)
-        {
+        //if (photonView.IsMine && !PauseMenu.GameIsPaused)
+        //{
             PhotonView view = baseObject.GetPhotonView();
             playerViewId = view.ViewID;
             MovePlayer();
             FireMechanism();
 
             TurretRotation();
-        }
+        //}
     }
     private Color GetRandomColor()
     {
