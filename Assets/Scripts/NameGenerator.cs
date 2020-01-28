@@ -5,6 +5,7 @@
 /* Modified By: */
 /************************************************************************/
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,35 +15,57 @@ public class NameGenerator : MonoBehaviour
     static public string UserName;
     public Text PlayerName;
 
-    private List<string> allNames = new List<string> { "Oswald_13",
-        "Dr_Radkins",
-        "Panda_King",
-        "MinecraftBob1",
-        "Big Kahuna",
-        "Phantom Mystery",
-        "Whispering Life",
-        "Ships of Justice",
-        "Demons of Blasphemy",
-        "Mystery and Tombs",
-        "Clans and History",
-        "Crystalpiece",
-        "Evoville",
-        "Dataheart",
-        "Farrealm",
-        "Storm Siren",
-        "Bullet Crossing",
-        "Maze and Force",
-        "Valor and Misery",
-        "Crossborne",
-        "Bladespace",
-        "Maze and Force",
-        "Alphastar",
-        "Attack of Logic"};
+    #region list of names
+    string[] 
+        nameAdj = new string[] 
+        {
+            "Great ", "Sneaky ", "Tenacious ", "Notorious ", "Slippery ", "Bodacious ", "THE ", "The Only ", "Ambitious ", "Courageous ", "Gregarious ", "Practical ", "Witty ", ""
+        },
+        nameTitle = new string[] 
+        {
+            "Sir ", "Knight ", "Honourable ", "Admiral ", "Master ", "Private ", "Specialist ", "Corporal ", "Sergeant ", "Major ", "Captain ", "" 
+        },
+        nameBody = new string[] 
+        {
+            "Lee", "Grant", "Sherman", "Abrams", "Bradley", "Patton", "Chaffee", "Jackson", "Pershing" 
+        };
+    List<string> allNames = new List<string>();
+    #endregion list of names
+
+    private void Awake()
+    {
+        GenerateAllNames();
+    }
 
     public void randomName()
-    {
-        int randomNumber = Random.Range(0, 23);
-        PlayerName.text = allNames[randomNumber];
+    {       
+
+        var random_number = new System.Random();
+        string random_name =  allNames[random_number.Next(0, allNames.Count)];
+        allNames.Remove(random_name);
+        Debug.Log(allNames.Count);
+
+        PlayerName.text = random_name;
         UserName = PlayerName.text;
+
+        if(allNames.Count < 2)
+        {
+            allNames.Clear();
+            GenerateAllNames();
+        }
+    }
+
+    public void GenerateAllNames()
+    {
+        for (int i = 0; i <= nameAdj.Length - 1; i++)
+        {
+            for (int j = 0; j <= nameTitle.Length - 1; j++)
+            {
+                for (int k = 0; k <= nameBody.Length - 1; k++)
+                {
+                    allNames.Add(nameAdj[i] + nameTitle[j] + nameBody[k]);
+                }
+            }
+        }
     }
 }
