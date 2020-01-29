@@ -43,16 +43,9 @@ public class NameGenerator : MonoBehaviour
         var random_number = new System.Random();
         string random_name =  allNames[random_number.Next(0, allNames.Count)];
         allNames.Remove(random_name);
-        Debug.Log(allNames.Count);
 
         PlayerName.text = random_name;
         UserName = PlayerName.text;
-
-        if(allNames.Count < 2)
-        {
-            allNames.Clear();
-            GenerateAllNames();
-        }
     }
 
     public void GenerateAllNames()
