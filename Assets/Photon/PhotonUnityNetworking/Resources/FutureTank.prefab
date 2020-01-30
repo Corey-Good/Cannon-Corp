@@ -277,10 +277,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseObject: {fileID: 2545945380744510970}
-  headObject: {fileID: 8059697209315222640}
   bulletSpawnLocation: {fileID: 5724038725179223961}
+  headObject: {fileID: 8059697209315222640}
   tankCamera: {fileID: 5937004319768822562}
   turretObject: {fileID: 8059697209315222641}
+  tankExplosion: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
+    type: 3}
 --- !u!114 &6837134784443840515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,10 +541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f637737fe67b7d447abf60a7684f05a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2545945380744510970}
-  target: {fileID: 8059697208972092080}
   cameraTransform: {fileID: 3370366612242024298}
+  player: {fileID: 2545945380744510970}
   tankCamera: {fileID: 5937004319768822562}
+  target: {fileID: 8059697208972092080}
 --- !u!114 &2779419013074545078
 MonoBehaviour:
   m_ObjectHideFlags: 0

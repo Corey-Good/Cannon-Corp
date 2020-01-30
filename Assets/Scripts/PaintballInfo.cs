@@ -31,9 +31,9 @@ public class PaintballInfo : MonoBehaviourPun
             {
                 LoadUI.score += 10;
             }
-            GameObject splatter = PhotonNetwork.Instantiate("Splatter", objectName.transform.position, Quaternion.Euler(-90, 0, 0));
-            Renderer rend = splatter.GetComponent<Renderer>();
-            rend.material.color = PlayerMovement.bulletColor;
+            //GameObject splatter = PhotonNetwork.Instantiate("Splatter", objectName.transform.position, Quaternion.Euler(-90, 0, 0));
+            //Renderer rend = splatter.GetComponent<Renderer>();
+            //rend.material.color = PlayerMovement.bulletColor;
             if (collisionInfo.collider.tag != "Player")
                 PhotonNetwork.Destroy(objectName);
         }

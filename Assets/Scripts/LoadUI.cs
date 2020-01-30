@@ -25,7 +25,7 @@ public class LoadUI : MonoBehaviour
     public Slider reloadBar;
     public Text timer;
     private float alpha = 0.0f;
-    private bool isGameOver = false;
+    public  bool isGameOver = false;
     private int minute;
     private Image panel;
     private int second;
@@ -44,15 +44,6 @@ public class LoadUI : MonoBehaviour
             timer.text = stopwatchTime.ToString("0.00s");
         }
 
-        //Cursor.visible = true;
-        //if (Input.GetKey(KeyCode.Escape))
-        //{
-        //    Cursor.lockState = CursorLockMode.Locked;
-        //}
-        //else
-        //{
-        //    Cursor.lockState = CursorLockMode.None;
-        //}
         playerScore.text = score.ToString("0"); // 0 converts the float to a string with no decimal value
 
         // Update the player health bar and reload bars

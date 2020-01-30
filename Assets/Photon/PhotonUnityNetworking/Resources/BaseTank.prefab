@@ -131,6 +131,8 @@ MonoBehaviour:
   headObject: {fileID: 5930129108071091481}
   tankCamera: {fileID: 7665375878861294314}
   turretObject: {fileID: 5930129108071091486}
+  tankExplosion: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
+    type: 3}
 --- !u!114 &6176343321340850341
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class NameGenerator : MonoBehaviour
         },
         nameBody = new string[] 
         {
-            "Lee", "Grant", "Sherman", "Abrams", "Bradley", "Patton", "Chaffee", "Jackson", "Pershing" 
+            "Lee", "Grant", "Sherman", "Abrams", "Bradley", "Patton", "Chaffee", "Jackson", "Pershing"
         };
     List<string> allNames = new List<string>();
     #endregion list of names

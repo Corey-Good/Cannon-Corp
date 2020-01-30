@@ -8,6 +8,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyController : MonoBehaviourPunCallbacks
@@ -62,7 +63,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
     {
         if (roomName == "FreeForAll")
         {
-            PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.LoadLevel(1); 
         }
         else if (roomName == "SharksAndMinnows")
         {

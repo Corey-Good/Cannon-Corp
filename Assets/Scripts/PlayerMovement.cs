@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     public static int playerViewId;
     public static float reloadMultiplier = 1.0f;
     public static float reloadProgress;
-    public static float rotateMultiplier = 8.0f;
+    public static float rotateMultiplier = 5.0f;
     public GameObject baseObject;
     public GameObject bulletSpawnLocation;
     public GameObject headObject;
@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private string rightbutton;
     private float rotateSpeed = (float)CharacterInfo.info[CharacterMenu.currentModelIndex]["rotationSpeed"];
     private float timeElapsed = 0f;
+    public GameObject tankExplosion;
 
     private Vector3 turretFinalLookDirection;
 
@@ -213,6 +214,12 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
 
             TurretRotation();
         //}
+
+        if(LoadUI.currentHealth < 0.0f)
+        {
+            gameObject.SetActive(false);
+            Instantiate(tankExplosion, transform.position, transform.rotation);
+        }
     }
     private Color GetRandomColor()
     {

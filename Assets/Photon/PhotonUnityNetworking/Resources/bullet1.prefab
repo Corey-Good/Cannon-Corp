@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1052826374619622732}
   - component: {fileID: 265935855318999542}
   - component: {fileID: 8585114978597737767}
+  - component: {fileID: 44952675627992464}
   m_Layer: 0
   m_Name: bullet1
   m_TagString: EnemyTank
@@ -179,3 +180,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: {fileID: 2717774406268365404}
+--- !u!114 &44952675627992464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2717774406268365404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4645f93a292f0f04eb96a2039730702b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 3
+  explosionEffect: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3,
+    type: 3}
