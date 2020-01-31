@@ -98,6 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76ca8337806cd34591a97ec8aea847e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseObject: {fileID: 0}
+  bulletSpawnLocation: {fileID: 0}
+  headObject: {fileID: 0}
+  tankCamera: {fileID: 0}
+  turretObject: {fileID: 0}
 --- !u!65 &393143937223793335
 BoxCollider:
   m_ObjectHideFlags: 0
